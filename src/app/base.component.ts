@@ -1,18 +1,24 @@
 import { Component, Injector } from '@angular/core';
 import { animationfadeIn } from './util/animation/animation.fade';
 import { serviceApi } from './network/service/service.api';
-import { ActivatedRoute, Router } from '@angular/router';
-import { LangChangeEvent, TranslateService } from '@ngx-translate/core';
+import { Router } from '@angular/router';
+import { TranslateModule } from '@ngx-translate/core';
 import { ServicePath } from './network/service/service.path';
-import { SamaRequestType } from './enums/sama.request.type';
 import { NetworkUtil } from './util/network.util';
 import { Location } from '@angular/common';
+import { HttpClient } from '@angular/common/http';
+import { TranslateHttpLoader } from '@ngx-translate/http-loader';
+
+// AoT requires an exported function for factories
+export function HttpLoaderFactory(httpClient: HttpClient) {
+  return new TranslateHttpLoader(httpClient);
+}
 
 @Component({
   template: '',
   animations: [animationfadeIn],
 })
-export class BaseComponent {
+export abstract class BaseComponent {
   ServicePath = ServicePath;
 
   public serviceApi: serviceApi;
@@ -40,7 +46,7 @@ export class BaseComponent {
     // this.translateService = injector.get(TranslateService);
     this.location = injector.get(Location);
 
-    // this.translateService.addLangs(['fa', 'en', 'es', 'ar', 'tr', 'ja']);
+    // this.translateService.addLangs(['fa', 'en']);
     // this.translateService.currentLang = 'fa';
     // this.translateService.setDefaultLang('fa');
   }

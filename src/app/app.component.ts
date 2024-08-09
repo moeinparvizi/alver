@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Config } from './common/config';
 import { HomeComponent } from './pages/home/home.component';
 import { RouterOutlet } from '@angular/router';
@@ -10,20 +10,12 @@ import { RouterOutlet } from '@angular/router';
   standalone: true,
   imports: [HomeComponent, RouterOutlet],
 })
-export class AppComponent {
+export class AppComponent implements OnInit {
   title = 'alver';
   protected readonly Config = Config;
 
-  // public static serviceApi: serviceApi;
-
   constructor() {
-    // AppComponent.serviceApi = serviceApi;
-    // AppComponent.serviceApi
-    //   .getMyLoginInfo()
-    //   .subscribe((res: DataResponse<any>) => {
-    //     if (res.success) {
-    //       Config.siteName = res.data?.Title;
-    //     }
-    //   });
   }
+
+  ngOnInit(): void {}
 }

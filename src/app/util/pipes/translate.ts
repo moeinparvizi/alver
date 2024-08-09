@@ -1,14 +1,13 @@
-import {Pipe, PipeTransform} from "@angular/core";
-import {TranslateService} from "@ngx-translate/core";
-import {Config} from "../../common/config";
-import { ListResponse } from "../../models/data.response";
-import { serviceApi } from "../../network/service/service.api";
+import { Pipe, PipeTransform } from '@angular/core';
+import { TranslateService } from '@ngx-translate/core';
+import { Config } from '../../common/config';
+import { serviceApi } from '../../network/service/service.api';
 
 @Pipe({
   name: 'translate',
-  pure: false
+  pure: false,
 })
-export class SamaTranslatePipe implements PipeTransform {
+export class TranslatePipe implements PipeTransform {
 
   constructor(private translateService: TranslateService, private serviceApi: serviceApi) {
   }
