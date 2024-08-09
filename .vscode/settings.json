@@ -1,0 +1,26 @@
+{
+  "workbench.colorCustomizations": {
+    "activityBar.background": "#0C2378",
+    "titleBar.activeBackground": "#1031A9",
+    "titleBar.activeForeground": "#FBFCFF"
+  }
+}
+{
+  "[html]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode",
+    "editor.codeActionsOnSave": {
+      "source.fixAll.eslint": true
+    },
+    "editor.formatOnSave": false
+  },
+  "[typescript]": {
+    // "editor.defaultFormatter": "esbenp.prettier-vscode",
+    "editor.defaultFormatter": "dbaeumer.vscode-eslint",
+    "editor.codeActionsOnSave": {
+      "source.fixAll.eslint": true
+    },
+    "editor.formatOnSave": false
+  },
+},
+"editor.suggest.snippetsPreventQuickSuggestions": false,
+"editor.inlineSuggest.enabled": true
