@@ -1,1 +1,44 @@
-<header>header</header>
+<header class="w-full">
+  <div
+    class="flex justify-center items-center w-full border-solid border-b border-gray h-12 py-2">
+    <div
+      class="top-header container flex gap-3 flex-row-reverse justify-center md:justify-between w-full text-gray">
+      <div>
+        <ul class="flex gap-3 flex-row-reverse">
+          <li class="hover:text-black">
+            <a href="#">درباره ما</a>
+          </li>
+          <li class="hover:text-black">
+            <a href="#">حق نشر</a>
+          </li>
+        </ul>
+      </div>
+
+      <div class="flex gap-3 [&>a]:cursor-pointer hover:[&>a]:text-black">
+        <a href="#"><i class="bi bi-telegram"></i></a>
+        <a href="#"><i class="bi bi-whatsapp"></i></a>
+        <a href="#"><i class="bi bi-instagram"></i></a>
+      </div>
+    </div>
+  </div>
+
+  <nav
+    class="w-full flex justify-center items-center h-20 bg-primary transition-all"
+    [ngClass]="isSticky ? 'fixed-nav' : ''">
+    <div class="container">
+      <mat-drawer #drawer class="example-sidenav" mode="side">
+        <p>Auto-resizing sidenav</p>
+        @if (showFiller) {
+        <p>Lorem, ipsum dolor sit amet consectetur.</p>
+        }
+        <button (click)="showFiller = !showFiller" mat-raised-button>
+          Toggle extra text
+        </button>
+      </mat-drawer>
+
+      <button type="button" mat-button (click)="drawer.toggle()">
+        Toggle sidenav
+      </button>
+    </div>
+  </nav>
+</header>

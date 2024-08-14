@@ -29,6 +29,9 @@ $alver-theme: mat.define-theme(
   @include mat.all-component-themes($alver-theme);
 }
 
+// icons
+@import '../node_modules/bootstrap-icons/font/bootstrap-icons.css';
+
 // Comment out the line below if you want to use the pre-defined typography utility classes.
 // For more information: https://material.angular.io/guide/typography#using-typography-styles-in-your-application.
 // @include mat.typography-hierarchy($alver-theme);
@@ -41,8 +44,19 @@ $alver-theme: mat.define-theme(
 @tailwind components;
 @tailwind utilities;
 
+// fonts
+@font-face {
+  font-family: iransans;
+  src: url('../src/assets/fonts/IRANSansXRegular.ttf');
+}
+
+
 * {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
+}
+
+html {
+  font-family: iransans;
 }
