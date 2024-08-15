@@ -23,9 +23,24 @@
   </div>
 
   <nav
-    class="w-full flex justify-center items-center h-20 bg-primary transition-all"
+    class="w-full flex justify-end md:justify-center items-center h-20 bg-primary transition-all"
     [ngClass]="isSticky ? 'fixed-nav' : ''">
-    <div class="container">
+    <ul class="flex justify-between items-center gap-2" dir="rtl">
+      <li>
+        <button mat-button class="custom-button" [matMenuTriggerFor]="megaMenu">
+          Mega Menu
+        </button>
+      </li>
+      <li>test</li>
+      <li>test</li>
+    </ul>
+
+    <mat-menu #megaMenu="matMenu" class="mega-menu p-5"> test </mat-menu>
+
+    <mat-drawer-container
+      dir="rtl"
+      class="example-container md:hidden"
+      autosize>
       <mat-drawer #drawer class="example-sidenav" mode="side">
         <p>Auto-resizing sidenav</p>
         @if (showFiller) {
@@ -34,11 +49,30 @@
         <button (click)="showFiller = !showFiller" mat-raised-button>
           Toggle extra text
         </button>
+
+        <button
+          type="button"
+          class="button-menu button-menu-close"
+          mat-button
+          (click)="drawer.toggle()">
+          <i class="bi bi-x-lg"></i>
+        </button>
       </mat-drawer>
 
-      <button type="button" mat-button (click)="drawer.toggle()">
-        Toggle sidenav
-      </button>
-    </div>
+      <div class="example-sidenav-content">
+        <button
+          class="button-menu button-menu-open"
+          type="button"
+          mat-button
+          (click)="drawer.toggle()">
+          <!-- <i class="bi bi-list"></i> -->
+          @if (drawer.opened) {
+          <i class="bi bi-x-lg"></i>
+          } @else {
+          <i class="bi bi-list"></i>
+          }
+        </button>
+      </div>
+    </mat-drawer-container>
   </nav>
 </header>
