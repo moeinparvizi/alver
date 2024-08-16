@@ -5,11 +5,12 @@ module.exports = {
     extend: {
       colors: {
         primary: '#1da1f2',
-        secondary: '#14171a',
-        accent: '#ffad1f',
-        white: '#ffffff',
-        black: '#000000',
-        gray: '#74706B',
+        secondary: '#2B2D42',
+        accent: '#EF233C',
+        yellow: '#ffba08',
+        white: '#EDF2F4',
+        black: '#0b090a',
+        gray: '#8D99AE',
       },
     },
   },

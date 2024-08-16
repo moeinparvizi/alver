@@ -1,11 +1,12 @@
-.custom-button {
-  background-color: mat-color($my-primary); // Use primary color from theme
-  color: white;
-  border-radius: 4px;
-  padding: 8px 16px;
-  border: none;
-}
+// colors
+@import '../colors/light';
 
-.custom-button:hover {
-  background-color: mat-color($my-accent); // Use accent color on hover
+::ng-deep .menu-primary.mat-mdc-menu-panel {
+  box-shadow:
+    0 5px 5px -3px $primary-low,
+    0 8px 10px 1px $primary-low,
+    0 3px 14px 2px $primary-low;
+  background-color: $white !important;
+  color: $black;
+  width: 100wv !important;
 }

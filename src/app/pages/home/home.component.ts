@@ -15,13 +15,4 @@ export class HomeComponent extends BaseComponent implements OnInit {
   override ngOnInit(): void {
     super.ngOnInit();
   }
-
-  onHandleNvigateToProducts(): void {
-    this.router.navigate(['products']);
-  }
-  onHandleNvigateToProduct(): void {
-    this.router.navigate(['product', 1, 'test'], {
-      queryParams: { id: 1, name: 'test' },
-    });
-  }
 }

@@ -8,6 +8,8 @@ import { NetworkUtil } from './util/network.util';
 import { Location } from '@angular/common';
 import { HttpClient } from '@angular/common/http';
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';
+import { MatDialog } from '@angular/material/dialog';
+import { Dialog } from '@angular/cdk/dialog';
 
 // AoT requires an exported function for factories
 export function HttpLoaderFactory(httpClient: HttpClient) {
@@ -23,6 +25,8 @@ export abstract class BaseComponent {
 
   public serviceApi: serviceApi;
   public router: Router;
+  public matDialog: MatDialog;
+  public dialog: Dialog;
   // public translateService: TranslateService;
   public location: Location;
   //   tableProperties: any = {
@@ -43,6 +47,8 @@ export abstract class BaseComponent {
   protected constructor(injector: Injector) {
     this.serviceApi = injector.get(serviceApi);
     this.router = injector.get(Router);
+    this.matDialog = injector.get(MatDialog);
+    this.dialog = injector.get(Dialog);
     // this.translateService = injector.get(TranslateService);
     this.location = injector.get(Location);
 

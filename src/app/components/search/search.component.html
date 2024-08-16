@@ -1,0 +1,28 @@
+<!-- // serach bar -->
+<div class="p-5" dir="rtl">
+  <div
+    class="border-none outline-none px-2 rounded-md bg-primary text-white flex items-center gap-1">
+    <label for="search" class="text-white">
+      <i class="bi bi-search"></i>
+    </label>
+    <input
+      id="search"
+      class="bg-primary placeholder:text-white p-2 h-full focus:outline-none w-full"
+      placeholder="test"
+      [(ngModel)]="value"
+      type="text" />
+  </div>
+  @if (value) {
+    <div class="" style="border: 1px solid red">
+      <!-- @for (item of services; track $index | search: value) { -->
+      <div *ngFor="let item of res | search: value">{{ item.name }}</div>
+      <!-- } -->
+    </div>
+  }
+
+  <!-- <button
+    (click)="onNoClick()"
+    class="mt-7 bg-slate-900 text-white p-2 rounded-t-md w-24">
+    close
+  </button> -->
+</div>

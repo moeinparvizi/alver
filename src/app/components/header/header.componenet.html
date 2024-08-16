@@ -1,6 +1,5 @@
 <header class="w-full">
-  <div
-    class="flex justify-center items-center w-full border-solid border-b border-gray h-12 py-2">
+  <div class="flex justify-center items-center w-full h-12 py-2">
     <div
       class="top-header container flex gap-3 flex-row-reverse justify-center md:justify-between w-full text-gray">
       <div>
@@ -23,56 +22,104 @@
   </div>
 
   <nav
-    class="w-full flex justify-end md:justify-center items-center h-20 bg-primary transition-all"
+    class="w-full h-20 bg-primary flex justify-center transition-all"
     [ngClass]="isSticky ? 'fixed-nav' : ''">
-    <ul class="flex justify-between items-center gap-2" dir="rtl">
-      <li>
-        <button mat-button class="custom-button" [matMenuTriggerFor]="megaMenu">
-          Mega Menu
-        </button>
-      </li>
-      <li>test</li>
-      <li>test</li>
-    </ul>
+    <div
+      class="container w-full h-full flex justify-end md:justify-center items-center relative">
+      <ul class="hidden justify-between items-center gap-2 md:flex" dir="rtl">
+        <li>
+          <button
+            mat-flat-button
+            color="primary"
+            (click)="onHandleNvigateToHome()">
+            خانه
+          </button>
+        </li>
+        <li>
+          <button
+            (click)="onHandleNvigateToProducts()"
+            mat-flat-button
+            color="primary">
+            محصولات
+          </button>
+        </li>
+        <li>
+          <button
+            mat-flat-button
+            color="primary"
+            [matMenuTriggerFor]="megaMenu">
+            دسته بندی
 
-    <mat-menu #megaMenu="matMenu" class="mega-menu p-5"> test </mat-menu>
-
-    <mat-drawer-container
-      dir="rtl"
-      class="example-container md:hidden"
-      autosize>
-      <mat-drawer #drawer class="example-sidenav" mode="side">
-        <p>Auto-resizing sidenav</p>
-        @if (showFiller) {
-        <p>Lorem, ipsum dolor sit amet consectetur.</p>
-        }
-        <button (click)="showFiller = !showFiller" mat-raised-button>
-          Toggle extra text
+            <mat-menu #megaMenu="matMenu" class="menu-primary">
+              <button mat-menu-item>Item 2</button>
+            </mat-menu>
+          </button>
+        </li>
+      </ul>
+      <dir class="absolute top-1/2 left-0 -translate-y-1/2">
+        <button mat-button (click)="onShowSearchBox()">
+          <i class="bi bi-search text-white"></i>
         </button>
+      </dir>
 
-        <button
-          type="button"
-          class="button-menu button-menu-close"
-          mat-button
-          (click)="drawer.toggle()">
-          <i class="bi bi-x-lg"></i>
-        </button>
-      </mat-drawer>
+      <!-- // mobile -->
+      <mat-drawer-container
+        dir="rtl"
+        class="sidenav-container md:hidden"
+        style="@media (min-width: 768px) {display: none !important}"
+        autosize>
+        <mat-drawer #drawer class="sidenav" mode="side">
+          <dir class="flex flex-col w-2/3 gap-3">
+            <button mat-button (click)="onHandleNvigateToHome()">خانه</button>
 
-      <div class="example-sidenav-content">
-        <button
-          class="button-menu button-menu-open"
-          type="button"
-          mat-button
-          (click)="drawer.toggle()">
-          <!-- <i class="bi bi-list"></i> -->
-          @if (drawer.opened) {
-          <i class="bi bi-x-lg"></i>
-          } @else {
-          <i class="bi bi-list"></i>
-          }
-        </button>
-      </div>
-    </mat-drawer-container>
+            <button (click)="showExtra = !showExtra" mat-button>
+              دسته بندی @if(showExtra) {
+              <i class="bi bi-caret-up-fill"></i>
+              } @else {
+              <i class="bi bi-caret-down-fill"></i>
+              }
+            </button>
+            @if (showExtra) {
+            <ul class="text-gray w-full list-none flex justify-center">
+              <li>
+                <button mat-button style="color: rgba(0, 0, 0, 0.534)">
+                  item2
+                </button>
+              </li>
+            </ul>
+            }
+            <button (click)="onHandleNvigateToProducts()" mat-button>
+              محصولات
+            </button>
+            <button (click)="onHandleNvigateToProducts()" mat-button>
+              محصولات
+            </button>
+          </dir>
+
+          <button
+            type="button"
+            class="button-menu button-menu-close"
+            mat-button
+            (click)="drawer.toggle()">
+            <i class="bi bi-x-lg"></i>
+          </button>
+        </mat-drawer>
+
+        <div class="sidenav-content">
+          <button
+            class="button-menu button-menu-open"
+            type="button"
+            mat-button
+            (click)="drawer.toggle()">
+            <!-- <i class="bi bi-list"></i> -->
+            @if (drawer.opened) {
+            <i class="bi bi-x-lg"></i>
+            } @else {
+            <i class="bi bi-list"></i>
+            }
+          </button>
+        </div>
+      </mat-drawer-container>
+    </div>
   </nav>
 </header>

@@ -1,113 +1,69 @@
-$dark-primary-text: rgba(black, 0.87);
-$light-primary-text: white;
+$dark-text: rgba(black, 0.87);
+$light-text: white;
 
-$wfs-blue-palette: (
-  50: #eaeef3,
-  100: #cad6e0,
-  200: #a7bacc,
-  300: #849eb7,
-  400: #698aa7,
-  500: #4f7598,
-  600: #486d90,
-  700: #3f6285,
-  800: #36587b,
-  900: #26456a,
-  A100: #add1ff,
-  A200: #7ab5ff,
-  A400: #4798ff,
-  A700: #2e8aff,
-  contrast: (
-    50: $dark-primary-text,
-    100: $dark-primary-text,
-    200: $dark-primary-text,
-    300: $dark-primary-text,
-    400: $dark-primary-text,
-    500: $light-primary-text,
-    600: $light-primary-text,
-    700: $light-primary-text,
-    800: $light-primary-text,
-    900: $light-primary-text,
-    A100: $dark-primary-text,
-    A200: $dark-primary-text,
-    A400: $dark-primary-text,
-    A700: $light-primary-text,
-  )
-);
-
-
-// Define your custom primary color palette.
-$custom-primary-palette: (
+$primary-palette: (
   50: #e3f2fd,
   100: #bbdefb,
   200: #90caf9,
   300: #64b5f6,
   400: #42a5f5,
-  500: #2196f3,
-  600: #1e88e5,
+  500: #1da1f2,
+  600: #2196f3,
   700: #1976d2,
   800: #1565c0,
   900: #0d47a1,
   contrast: (
-    50: #000,
-    100: #000,
-    200: #000,
-    300: #fff,
-    400: #fff,
-    500: #fff,
-    600: #fff,
-    700: #fff,
-    800: #fff,
-    900: #fff,
+    50: $dark-text,
+    100: $dark-text,
+    200: $dark-text,
+    300: $dark-text,
+    400: $dark-text,
+    500: $light-text,
+    600: $light-text,
+    700: $light-text,
+    800: $light-text,
+    900: $light-text,
   ),
 );
 
-// Define your custom accent and warn palettes (optional).
-$custom-accent-palette: (
-  50: #fce4ec,
-  100: #f8bbd0,
-  200: #f48fb1,
-  300: #f06292,
-  400: #ec407a,
-  500: #e91e63,
-  600: #d81b60,
-  700: #c2185b,
-  800: #ad1457,
-  900: #880e4f,
+$accent-palette: (
+  500: #2b2d42,
   contrast: (
-    50: #000,
-    100: #000,
-    200: #000,
-    300: #fff,
-    400: #fff,
-    500: #fff,
-    600: #fff,
-    700: #fff,
-    800: #fff,
-    900: #fff,
+    500: $light-text,
   ),
 );
 
-$custom-warn-palette: (
-  50: #ffebee,
-  100: #ffcdd2,
-  200: #ef9a9a,
-  300: #e57373,
-  400: #ef5350,
-  500: #f44336,
-  600: #e53935,
-  700: #d32f2f,
-  800: #c62828,
-  900: #b71c1c,
+$warn-palette: (
+  500: #ef233c,
   contrast: (
-    50: #000,
-    100: #000,
-    200: #000,
-    300: #fff,
-    400: #fff,
-    500: #fff,
-    600: #fff,
-    700: #fff,
-    800: #fff,
-    900: #fff,
+    500: $light-text,
+  ),
+);
+
+$yellow-palette: (
+  500: #ffba08,
+  contrast: (
+    500: $dark-text,
+  ),
+);
+
+$white-palette: (
+  500: #EDF2F4,
+  contrast: (
+    500: $dark-text,
+  ),
+);
+
+$black-palette: (
+  500: #0b090a,
+  contrast: (
+    500: $light-text,
+  ),
+);
+
+$gray-palette: (
+  500: #8D99AE,
+  contrast: (
+    500: $light-text,
   ),
 );

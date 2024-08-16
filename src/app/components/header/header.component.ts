@@ -11,6 +11,9 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatDrawer, MatSidenavModule } from '@angular/material/sidenav';
 import { MatGridListModule } from '@angular/material/grid-list';
 import { MatMenuModule } from '@angular/material/menu';
+import { FormsModule } from '@angular/forms';
+import { SearchPipe } from '../../util/pipes/search.pipe';
+import { SearchComponent } from '../search/search.component';
 
 @Component({
   selector: 'app-header',
@@ -21,40 +24,15 @@ import { MatMenuModule } from '@angular/material/menu';
     MatButtonModule,
     MatGridListModule,
     MatMenuModule,
+    FormsModule,
+    SearchPipe
   ],
   styleUrl: './header.component.scss',
   templateUrl: './header.componenet.html',
 })
 export class HeaderComponent extends BaseComponent implements OnInit {
   isSticky = false;
-  showFiller = false;
-
-  menuSections = [
-    {
-      title: 'Section 1',
-      items: [
-        { name: 'Item 1', link: '#' },
-        { name: 'Item 2', link: '#' },
-        { name: 'Item 3', link: '#' },
-      ]
-    },
-    {
-      title: 'Section 2',
-      items: [
-        { name: 'Item 4', link: '#' },
-        { name: 'Item 5', link: '#' },
-        { name: 'Item 6', link: '#' },
-      ]
-    },
-    {
-      title: 'Section 3',
-      items: [
-        { name: 'Item 7', link: '#' },
-        { name: 'Item 8', link: '#' },
-        { name: 'Item 9', link: '#' },
-      ]
-    },
-  ];
+  showExtra = false;
 
   @ViewChild('drawer') drawer!: MatDrawer;
 
@@ -75,5 +53,26 @@ export class HeaderComponent extends BaseComponent implements OnInit {
     } else {
       this.isSticky = false;
     }
+  }
+
+  onHandleNvigateToProducts(): void {
+    this.router.navigate(['products']);
+  }
+
+  onHandleNvigateToHome(): void {
+    this.router.navigate(['home']);
+  }
+
+  onHandleNvigateToProduct(): void {
+    this.router.navigate(['product', 1, 'test'], {
+      queryParams: { id: 1, name: 'test' },
+    });
+  }
+
+  onShowSearchBox() {
+    this.matDialog.open(SearchComponent, {
+      height: 'auto',
+      width: '100%'
+    });
   }
 }
