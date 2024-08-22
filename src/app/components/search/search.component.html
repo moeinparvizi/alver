@@ -2,8 +2,8 @@
 <div class="p-5" dir="rtl">
   <div
     class="border-none outline-none px-2 rounded-md bg-primary text-white flex items-center gap-1">
-    <label for="search" class="text-white">
-      <i class="bi bi-search"></i>
+    <label for="search">
+      <i class="bi bi-search header-icon-i"></i>
     </label>
     <input
       id="search"
@@ -11,6 +11,7 @@
       placeholder="test"
       [(ngModel)]="value"
       type="text" />
+    <span class="text-slate-200">ctrl+k</span>
   </div>
   @if (value) {
     <div class="" style="border: 1px solid red">

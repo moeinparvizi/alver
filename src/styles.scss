@@ -50,3 +50,9 @@ $theme: mat.m2-define-light-theme(
 html {
   font-family: iransans;
 }
+
+@layer components {
+  .header-icon-i {
+    @apply text-white text-xl;
+  }
+}
