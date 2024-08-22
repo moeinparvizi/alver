@@ -56,3 +56,13 @@ html {
     @apply text-white text-xl;
   }
 }
+
+.custom-snackbar {
+  // .mat-mdc-snack-bar-container .mat-mdc-snackbar-surface
+  --mdc-snackbar-container-color: #2196f3;
+  --mat-snack-bar-button-color: rgb(34, 0, 0);
+  .mat-mdc-snack-bar-container .mat-mdc-snackbar-surface {
+    background-color: !important; /* Blue background */
+    color: white !important; /* White text */
+  }
+}
