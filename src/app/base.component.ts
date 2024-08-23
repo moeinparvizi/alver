@@ -1,3 +1,4 @@
+import { GlobalsService } from './services/globals.service';
 import { Component, Injector } from '@angular/core';
 import { animationfadeIn } from './util/animation/animation.fade';
 import { serviceApi } from './network/service/service.api';
@@ -29,36 +30,20 @@ export abstract class BaseComponent {
   public router: Router;
   public matDialog: MatDialog;
   public dialog: Dialog;
-  // public translateService: TranslateService;
   public location: Location;
   public snakeBar: SnackbarService
-  //   tableProperties: any = {
-  //   offset: 0,
-  //   limit: 7,
-  //   order: undefined,
-  //   requestType: SamaRequestType.PAGINATE,
-  //   pageLength: 0,
-  //   limitOptions: [7, 14, 28],
-  //   onSortChanged: (event: any) => {
-  //     this.onSortChanged(event);
-  //   },
-  //   pageChanged: (event: any) => {
-  //     this.pageChanged(event);
-  //   }
-  // };
+  public GlobalsService: GlobalsService;
 
   protected constructor(injector: Injector) {
     this.serviceApi = injector.get(serviceApi);
     this.router = injector.get(Router);
     this.matDialog = injector.get(MatDialog);
     this.dialog = injector.get(Dialog);
-    // this.translateService = injector.get(TranslateService);
     this.location = injector.get(Location);
     this.snakeBar = injector.get(SnackbarService)
+    this.GlobalsService = injector.get(GlobalsService);
 
-    // this.translateService.addLangs(['fa', 'en']);
-    // this.translateService.currentLang = 'fa';
-    // this.translateService.setDefaultLang('fa');
+    this.GlobalsService.setUserToken(localStorage.getItem("token"));
   }
 
   ngOnInit(): void {}

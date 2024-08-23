@@ -18,6 +18,10 @@ export class serviceApi {
     return this.http.post(Constant.getApp() + ServicePath.CHECK_TOKEN, body);
   }
 
+  public test(body: CheckTokenBody) {
+    return this.http.post(Constant.getApp() + ServicePath.CHECK_TOKEN, body);
+  }
+
   //   public getMyLoginInfo(): Observable<any> {
   //   return this.http.post(ServicePath.GET_LOGIN_INFO, {});
   // }

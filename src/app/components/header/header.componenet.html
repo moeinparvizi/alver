@@ -64,9 +64,19 @@
         <button (click)="onShowSearchBox()">
           <i class="bi bi-cart header-icon-i"></i>
         </button>
-        <button (click)="onShowSearchBox()">
+        @if (token) {
+        <button [matMenuTriggerFor]="menu">
           <i class="bi bi-person header-icon-i"></i>
         </button>
+        <mat-menu #menu="matMenu">
+          <button mat-menu-item (click)="onPrifileClicked()">مشخصات کاربر</button>
+          <button mat-menu-item>سفارشات</button>
+        </mat-menu>
+        } @else {
+        <button (click)="onNavigationToLogIn()">
+          <i class="bi bi-person header-icon-i"></i>
+        </button>
+        }
       </dir>
 
       <!-- // mobile -->

@@ -14,8 +14,7 @@ export class AppComponent implements OnInit {
   title = 'alver';
   protected readonly Config = Config;
 
-  constructor() {
-  }
+  constructor() {}
 
   ngOnInit(): void {}
 }

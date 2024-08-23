@@ -34,6 +34,7 @@ import { MatDialogRef } from '@angular/material/dialog';
 export class HeaderComponent extends BaseComponent implements OnInit {
   isSticky = false;
   showExtra = false;
+  token: string | null;
 
   @ViewChild('drawer') drawer!: MatDrawer;
 
@@ -43,6 +44,7 @@ export class HeaderComponent extends BaseComponent implements OnInit {
 
   constructor(injector: Injector) {
     super(injector);
+    this.token = this.GlobalsService.getUserToken();
   }
 
   @HostListener('window:scroll', [])
@@ -83,11 +85,11 @@ export class HeaderComponent extends BaseComponent implements OnInit {
   }
 
   onShowSearchBox() {
-      if (!SearchComponent.isOpenDialog) {
+    if (!SearchComponent.isOpenDialog) {
       SearchComponent.isOpenDialog = true;
       this.dialogRef = this.matDialog.open(SearchComponent, {
         height: 'auto',
-        width: '100%'
+        width: '100%',
       });
 
       this.dialogRef.afterClosed().subscribe(() => {
@@ -95,5 +97,11 @@ export class HeaderComponent extends BaseComponent implements OnInit {
         this.dialogRef = null;
       });
     }
+  }
+
+  onPrifileClicked() {}
+
+  onNavigationToLogIn() {
+    this.router.navigate(['/register']);
   }
 }

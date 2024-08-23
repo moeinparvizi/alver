@@ -40,7 +40,8 @@ export class LoginSignupComponent extends BaseComponent implements OnInit {
     super(injector);
     this.mobile = '';
     this.token = '';
-    this.mobileRegex = /^(?:(?:(?:\+?|00)(98))|(0))?((?:90|91|92|93|99)[0-9]{8})$/;
+    this.mobileRegex =
+      /^(?:(?:(?:\+?|00)(98))|(0))?((?:90|91|92|93|99)[0-9]{8})$/;
   }
 
   override ngOnInit(): void {
@@ -50,7 +51,8 @@ export class LoginSignupComponent extends BaseComponent implements OnInit {
   onSubmitClicked() {
     console.log(this.mobile);
     if (!this.userId) {
-      if (this.mobile && this.mobileRegex.test(this.mobile)) {
+      // if (this.mobile && this.mobileRegex.test(this.mobile)) {
+      if (this.mobile) {
         this.isLoading = true;
         this.serviceApi
           .registriation({
@@ -80,7 +82,8 @@ export class LoginSignupComponent extends BaseComponent implements OnInit {
       }
     } else {
       if (this.res.status === 200) {
-        if (this.token && this.token.length === 6) {
+        // if (this.token && this.token.length === 6) {
+        if (this.token) {
           this.isLoading = true;
           this.serviceApi
             .checkToken({
@@ -88,10 +91,10 @@ export class LoginSignupComponent extends BaseComponent implements OnInit {
               user_id: this.userId,
             })
             .subscribe((response: TokenResponse) => {
-              localStorage.setItem('token', response.token || '');
               this.isLoading = false;
               if (response.token) {
-                this.router.navigate(["/home"]);
+                localStorage.setItem('token', response.token || '');
+                this.router.navigate(['']);
               }
             });
         } else {
