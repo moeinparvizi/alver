@@ -91,7 +91,7 @@ export class LoginSignupComponent extends BaseComponent implements OnInit {
               localStorage.setItem('token', response.token || '');
               this.isLoading = false;
               if (response.token) {
-                // this.router.navigate(["/home"]);
+                this.router.navigate(["/home"]);
               }
             });
         } else {
