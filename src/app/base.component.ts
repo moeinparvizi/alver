@@ -9,6 +9,7 @@ import { HttpClient } from '@angular/common/http';
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 import { MatDialog } from '@angular/material/dialog';
 import { Dialog } from '@angular/cdk/dialog';
+import { SnackbarService } from './services/snakebar/snackbar.service';
 
 
 // AoT requires an exported function for factories
@@ -30,6 +31,7 @@ export abstract class BaseComponent {
   public dialog: Dialog;
   // public translateService: TranslateService;
   public location: Location;
+  public snakeBar: SnackbarService
   //   tableProperties: any = {
   //   offset: 0,
   //   limit: 7,
@@ -52,6 +54,7 @@ export abstract class BaseComponent {
     this.dialog = injector.get(Dialog);
     // this.translateService = injector.get(TranslateService);
     this.location = injector.get(Location);
+    this.snakeBar = injector.get(SnackbarService)
 
     // this.translateService.addLangs(['fa', 'en']);
     // this.translateService.currentLang = 'fa';

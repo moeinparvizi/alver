@@ -1,16 +1,26 @@
 import { Component, Injector, OnInit } from '@angular/core';
 import { BaseComponent } from '../../base.component';
-import { catchError } from 'rxjs/operators';
-import { throwError } from 'rxjs';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { LoginResponse, TokenResponse } from '../../models/data.response';
-import { SpinnerComponent } from "../../components/spinner/spinner.component";
+import { SpinnerComponent } from '../../components/spinner/spinner.component';
+import { MatCardModule } from '@angular/material/card';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatInputModule } from '@angular/material/input';
+import { MatButtonModule } from '@angular/material/button';
 
 @Component({
   selector: 'app-login-signup',
   standalone: true,
-  imports: [CommonModule, FormsModule, SpinnerComponent],
+  imports: [
+    CommonModule,
+    FormsModule,
+    SpinnerComponent,
+    MatCardModule,
+    MatFormFieldModule,
+    MatInputModule,
+    MatButtonModule,FormsModule, MatFormFieldModule, MatInputModule
+  ],
   templateUrl: './login-signup.component.html',
   styleUrl: './login-signup.component.scss',
 })
@@ -18,14 +28,14 @@ export class LoginSignupComponent extends BaseComponent implements OnInit {
   errorMessage: string | null = null;
   mobile: string;
   res: LoginResponse = {};
-  userId: number| undefined;
+  userId: number | undefined;
   token: string;
   isLoading = false;
 
   constructor(injector: Injector) {
     super(injector);
     this.mobile = '';
-    this.token = ''
+    this.token = '';
   }
 
   override ngOnInit(): void {
@@ -33,6 +43,7 @@ export class LoginSignupComponent extends BaseComponent implements OnInit {
   }
 
   onSubmitClicked() {
+    console.log(this.mobile);
     if (!this.userId) {
       if (this.mobile) {
         this.isLoading = true;
@@ -55,23 +66,37 @@ export class LoginSignupComponent extends BaseComponent implements OnInit {
             },
           });
       } else {
-        console.log('fill mobile number fields');
+        this.snakeBar.show(
+          'پر کردن شماره موبایل اجباری میباشد',
+          'بستن',
+          3000,
+          'custom-snackbar'
+        );
       }
     } else {
       if (this.res.status === 200) {
         this.isLoading = true;
-        this.serviceApi
-          .checkToken({
-            token: this.token,
-            user_id: this.userId,
-          })
-          .subscribe((response: TokenResponse) => {
-            localStorage.setItem('token', response.token || '');
-            this.isLoading = false;
-            if (response.token) {
-              // this.router.navigate(["/home"]);
-            }
-          });
+        if (this.token) {
+          this.serviceApi
+            .checkToken({
+              token: this.token,
+              user_id: this.userId,
+            })
+            .subscribe((response: TokenResponse) => {
+              localStorage.setItem('token', response.token || '');
+              this.isLoading = false;
+              if (response.token) {
+                // this.router.navigate(["/home"]);
+              }
+            });
+        } else {
+          this.snakeBar.show(
+            'لطفا کد اس ام اس شده به شماره موبایل خود را وارد کنید',
+            'بستن',
+            3000,
+            'custom-snackbar'
+          );
+        }
       }
     }
   }

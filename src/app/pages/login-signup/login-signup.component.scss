@@ -1,0 +1,33 @@
+// @import url('/src/assets/colors/_light.scss');
+
+.login {
+  direction: rtl;
+  height: 100vh;
+
+  input {
+    outline: none;
+    border: none;
+    padding: 8px;
+    border-radius: 12px;
+    // border: 1px solid $primary;
+  }
+
+  & > div {
+    padding: 24px;
+    box-shadow: 0px 0px 67px -12px rgba(0, 0, 0, 0.75);
+    border-radius: 12px;
+  }
+  .button {
+    // display: flex;
+    // justify-content: flex-end;
+    width: 100%;
+  }
+  @media only screen and (max-width: 625px) {
+    & > div {
+      box-shadow: none;
+      border-radius: 0;
+      width: 100%;
+      height: 100%;
+    }
+  }
+}

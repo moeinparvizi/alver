@@ -11,7 +11,6 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { SearchPipe } from '../../util/pipes/search.pipe';
-import { SnackbarService } from '../../services/snakebar/snackbar.service';
 
 @Component({
   selector: 'app-search',
@@ -47,7 +46,6 @@ export class SearchComponent
   constructor(
     injector: Injector,
     private matDialogRef: MatDialogRef<SearchComponent>,
-    private snackbarService: SnackbarService
   ) {
     super(injector);
   }
@@ -56,7 +54,7 @@ export class SearchComponent
     super.ngOnInit();
     // sould be run service
 
-    this.snackbarService.show(
+    this.snakeBar.show(
       'شما میتوانید عملیات جستجو را باز کنید : ctrl + k',
       'بستن',
       3000,
