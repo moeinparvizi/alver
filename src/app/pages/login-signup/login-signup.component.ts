@@ -19,7 +19,10 @@ import { MatButtonModule } from '@angular/material/button';
     MatCardModule,
     MatFormFieldModule,
     MatInputModule,
-    MatButtonModule,FormsModule, MatFormFieldModule, MatInputModule
+    MatButtonModule,
+    FormsModule,
+    MatFormFieldModule,
+    MatInputModule,
   ],
   templateUrl: './login-signup.component.html',
   styleUrl: './login-signup.component.scss',
@@ -31,11 +34,13 @@ export class LoginSignupComponent extends BaseComponent implements OnInit {
   userId: number | undefined;
   token: string;
   isLoading = false;
+  mobileRegex: RegExp;
 
   constructor(injector: Injector) {
     super(injector);
     this.mobile = '';
     this.token = '';
+    this.mobileRegex = /^(?:(?:(?:\+?|00)(98))|(0))?((?:90|91|92|93|99)[0-9]{8})$/;
   }
 
   override ngOnInit(): void {
@@ -45,7 +50,7 @@ export class LoginSignupComponent extends BaseComponent implements OnInit {
   onSubmitClicked() {
     console.log(this.mobile);
     if (!this.userId) {
-      if (this.mobile) {
+      if (this.mobile && this.mobileRegex.test(this.mobile)) {
         this.isLoading = true;
         this.serviceApi
           .registriation({
@@ -67,7 +72,7 @@ export class LoginSignupComponent extends BaseComponent implements OnInit {
           });
       } else {
         this.snakeBar.show(
-          'پر کردن شماره موبایل اجباری میباشد',
+          'لطفا از صحیح بودن شماره وارد شده اطمینان حاصل فرمایید',
           'بستن',
           3000,
           'custom-snackbar'
@@ -75,8 +80,8 @@ export class LoginSignupComponent extends BaseComponent implements OnInit {
       }
     } else {
       if (this.res.status === 200) {
-        this.isLoading = true;
-        if (this.token) {
+        if (this.token && this.token.length === 6) {
+          this.isLoading = true;
           this.serviceApi
             .checkToken({
               token: this.token,
@@ -91,7 +96,7 @@ export class LoginSignupComponent extends BaseComponent implements OnInit {
             });
         } else {
           this.snakeBar.show(
-            'لطفا کد اس ام اس شده به شماره موبایل خود را وارد کنید',
+            'لطفا از صحیح بودن کد وارد شده اطمینان حاصل فرمایید',
             'بستن',
             3000,
             'custom-snackbar'

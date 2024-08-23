@@ -5,28 +5,41 @@
       ثبت نام / ورود
     </h6>
     <div class="flex flex-col gap-5">
-      <div>
-        <input
-          id="mobileNumber"
-          type="text"
-          [(ngModel)]="mobile"
-          matInput
-          class="w-full"
-          required
-          placeholder="09107215381" />
+      <div dir="rtl">
+        <mat-form-field class="w-full" color="primary" appearance="outline">
+          <mat-label>شماره موبایل</mat-label>
+          <input
+            #inputControl="ngModel"
+            [(ngModel)]="mobile"
+            required
+            [type]="'text'"
+            matInput
+            placeholder="09107215381"
+            title="شماره موبایل" />
+          @if (inputControl.errors?.['required']) {
+            <mat-error>{{ 'این فیلد اجباری است' }}</mat-error>
+          }
+        </mat-form-field>
       </div>
 
-      <div>
-        @if (userId) {
-          <input
-            id="checkToken"
-            type="text"
-            [(ngModel)]="token"
-            matInput
-            class="w-full"
-            placeholder="666666" />
-        }
-      </div>
+      @if (userId) {
+        <div dir="rtl" class="w-full">
+          <mat-form-field class="w-full" color="primary" appearance="outline">
+            <mat-label>کد تایید</mat-label>
+            <input
+              #inputControl="ngModel"
+              [(ngModel)]="token"
+              required
+              [type]="'text'"
+              matInput
+              placeholder="328497"
+              title="کد تایید" />
+            @if (inputControl.errors?.['required']) {
+              <mat-error>{{ 'این فیلد اجباری است' }}</mat-error>
+            }
+          </mat-form-field>
+        </div>
+      }
 
       @if (errorMessage) {
         <div>{{ errorMessage }}</div>
