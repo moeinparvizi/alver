@@ -1,45 +1,22 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Observable } from 'rxjs';
-import { LoginResponse, Query } from '../../models/service.model';
 import { ServicePath } from './service.path';
+import { Constant } from '../../common/constant';
+import { CheckTokenBody, LoginBody } from '../../models/service.model';
 
 @Injectable({
   providedIn: 'root',
 })
 export class serviceApi {
-  // constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient) {}
 
-  // reformatQuery(queries: Query[], useAndMark = false): string {
-  //   const filledValues = queries.filter((query: Query) => {
-  //     return query.value !== undefined && query.value !== null;
-  //   });
+  public registriation(body: LoginBody) {
+    return this.http.post(Constant.getApp() + ServicePath.LOGIN, body);
+  }
 
-  //   const concatQueries = filledValues.map((query: Query) => {
-  //     return `${query.key}=${query.value}`;
-  //   });
-
-  //   if (concatQueries.length > 0) {
-  //     return (useAndMark ? '&' : '?') + concatQueries.join('&');
-  //   }
-
-  //   return '';
-  // }
-
-  // sample api
-
-  // public login(number: string, password: string, captcha: string): Observable<LoginResponse> {
-  //   return this.http.post<LoginResponse>(ServicePath.LOGIN + this.reformatQuery([{
-  //     key: 'number',
-  //     value: number
-  //   }, {
-  //     key: 'password',
-  //     value: password
-  //   }, {
-  //     key: 'captcha',
-  //     value: captcha
-  //   }]), {});
-  // }
+  public checkToken(body: CheckTokenBody) {
+    return this.http.post(Constant.getApp() + ServicePath.CHECK_TOKEN, body);
+  }
 
   //   public getMyLoginInfo(): Observable<any> {
   //   return this.http.post(ServicePath.GET_LOGIN_INFO, {});

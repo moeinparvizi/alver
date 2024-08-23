@@ -1,0 +1,31 @@
+<!-- <form (ngSubmit)="onSubmitClicked()"> -->
+<div>
+  <label for="mobileNumber">Mobile Number:</label>
+  <input
+    id="mobileNumber"
+    type="text"
+    [(ngModel)]="mobile"
+    required
+    placeholder="Enter your mobile number" />
+
+  @if (userId) {
+    <input
+      id="checkToken"
+      type="text"
+      [(ngModel)]="token"
+      placeholder="please enter your token" />
+  }
+</div>
+
+<button mat-button (click)="onSubmitClicked()">
+  @if (isLoading) {
+    <app-spinner [isLoading]="isLoading" />
+  } @else {
+    ثبت
+  }
+</button>
+<!-- </form> -->
+
+@if (errorMessage) {
+  <div>{{ errorMessage }}</div>
+}

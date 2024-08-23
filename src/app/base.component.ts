@@ -2,7 +2,6 @@ import { Component, Injector } from '@angular/core';
 import { animationfadeIn } from './util/animation/animation.fade';
 import { serviceApi } from './network/service/service.api';
 import { Router } from '@angular/router';
-import { TranslateModule } from '@ngx-translate/core';
 import { ServicePath } from './network/service/service.path';
 import { NetworkUtil } from './util/network.util';
 import { Location } from '@angular/common';
@@ -10,7 +9,7 @@ import { HttpClient } from '@angular/common/http';
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 import { MatDialog } from '@angular/material/dialog';
 import { Dialog } from '@angular/cdk/dialog';
-import { MatSnackBar } from '@angular/material/snack-bar';
+
 
 // AoT requires an exported function for factories
 export function HttpLoaderFactory(httpClient: HttpClient) {
@@ -20,6 +19,7 @@ export function HttpLoaderFactory(httpClient: HttpClient) {
 @Component({
   template: '',
   animations: [animationfadeIn],
+  providers: [serviceApi]
 })
 export abstract class BaseComponent {
   ServicePath = ServicePath;

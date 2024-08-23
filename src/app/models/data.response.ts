@@ -7,11 +7,14 @@ export class DataResponse<T> {
   count?: number;
 }
 
-export class ListResponse<T> {
-  filters?: any;
+export interface LoginResponse {
+  detail?: string;
+  user_id?: number;
+  status?: number
+}
 
-  data?: [T];
-  message?: string;
-  success?: boolean;
-  count?: number;
+export interface TokenResponse {
+  detail?: string;
+  status?: number
+  token?: string;
 }

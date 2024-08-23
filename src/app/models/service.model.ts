@@ -4,13 +4,11 @@ export interface Query {
 }
 
 
-export interface LoginResponse {
-  token: string;
-  user: {
-    id: number;
-    password: string;
-    number: string;
-  };
-  status: string;
+export interface LoginBody {
+  mobile: string;
 }
 
+export interface CheckTokenBody {
+  token: string;
+  user_id: number;
+}

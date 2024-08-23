@@ -1,6 +1,8 @@
 import { Routes } from '@angular/router';
 import { MasterLayoutComponent } from './layout/master/master.layout';
 import { RouteUtil } from './util/route.util';
+import { LoginSignupComponent } from './pages/login-signup/login-signup.component';
+import { HomeComponent } from './pages/home/home.component';
 
 export const routes: Routes = [
   {
@@ -21,12 +23,16 @@ export const routes: Routes = [
       import('./pages/products/products.routes').then(c => c.routes),
   },
   {
+    path: RouteUtil.REGISTER,
+    component: LoginSignupComponent,
+  },
+  {
     path: RouteUtil.NOT_FOUND,
     component: MasterLayoutComponent,
     loadChildren: () =>
       import('./pages/NotFound/NotFound.routes').then(c => c.routes),
   },
-  { path: '', redirectTo: '/home', pathMatch: 'full' }, // Optional: redirect root path to the example component
+  // { path: RouteUtil.HOME, component: HomeComponent }, // Optional: redirect root path to the example component
   // { path: 'products', component: ProductsComponent },
   // { path: 'product/:id', component: ProductComponent },
   // { path: 'product/:id/:name', component: ProductComponent },
