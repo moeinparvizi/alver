@@ -1,8 +1,10 @@
 import {
   Component,
+  ElementRef,
   Injector,
   OnDestroy,
   OnInit,
+  ViewChild,
   ViewEncapsulation,
 } from '@angular/core';
 import { BaseComponent } from '../../base.component';
@@ -11,6 +13,7 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { SearchPipe } from '../../util/pipes/search.pipe';
+import { timer } from 'rxjs';
 
 @Component({
   selector: 'app-search',
@@ -41,11 +44,13 @@ export class SearchComponent
 
   static isOpenDialog = false;
 
+  showHint = true;
+
   value = '';
 
   constructor(
     injector: Injector,
-    private matDialogRef: MatDialogRef<SearchComponent>,
+    private matDialogRef: MatDialogRef<SearchComponent>
   ) {
     super(injector);
   }
@@ -54,16 +59,19 @@ export class SearchComponent
     super.ngOnInit();
     // sould be run service
 
-    this.snakeBar.show(
-      'شما میتوانید عملیات جستجو را باز کنید : ctrl + k',
-      'بستن',
-      3000,
-      'custom-snackbar'
-    );
+    // this.snakeBar.show(
+    //   'شما میتوانید عملیات جستجو را باز کنید : ctrl + k',
+    //   'بستن',
+    //   3000,
+    //   'custom-snackbar'
+    // );
+
+    timer(4000).subscribe(() => {
+      this.showHint = false;
+    });
   }
 
   ngOnDestroy(): void {
-    // This gets called when the dialog is closed
     SearchComponent.isOpenDialog = false;
   }
 
