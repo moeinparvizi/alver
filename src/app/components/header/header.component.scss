@@ -107,3 +107,7 @@
   justify-content: center;
   gap: 18px;
 }
+
+::ng-deep .cdk-overlay-backdrop {
+  pointer-events: none;
+}

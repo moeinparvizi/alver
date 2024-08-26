@@ -30,6 +30,12 @@ export class serviceApi {
     });
   }
 
+  public logOut(): Observable<any> {
+    return this.http.get(Constant.getApp() + ServicePath.LOGOUT, {
+      headers: this.httpHeader,
+    });
+  }
+
   //   public getMyLoginInfo(): Observable<any> {
   //   return this.http.post(ServicePath.GET_LOGIN_INFO, {});
   // }

@@ -18,3 +18,9 @@ export interface TokenResponse {
   status?: number
   token?: string;
 }
+export interface LogOutResponse {
+  detail?: string;
+  status?: number
+}
+
+

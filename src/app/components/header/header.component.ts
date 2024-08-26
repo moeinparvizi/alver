@@ -10,11 +10,13 @@ import { CommonModule } from '@angular/common';
 import { MatButtonModule } from '@angular/material/button';
 import { MatDrawer, MatSidenavModule } from '@angular/material/sidenav';
 import { MatGridListModule } from '@angular/material/grid-list';
-import { MatMenuModule } from '@angular/material/menu';
+import { MatMenuModule, MatMenuTrigger } from '@angular/material/menu';
 import { FormsModule } from '@angular/forms';
 import { SearchPipe } from '../../util/pipes/search.pipe';
 import { SearchComponent } from '../search/search.component';
 import { MatDialogRef } from '@angular/material/dialog';
+import { LogOutResponse } from '../../models/data.response';
+import { SpinnerComponent } from '../spinner/spinner.component';
 
 @Component({
   selector: 'app-header',
@@ -27,6 +29,7 @@ import { MatDialogRef } from '@angular/material/dialog';
     MatMenuModule,
     FormsModule,
     SearchPipe,
+    SpinnerComponent,
   ],
   styleUrl: './header.component.scss',
   templateUrl: './header.componenet.html',
@@ -35,8 +38,10 @@ export class HeaderComponent extends BaseComponent implements OnInit {
   isSticky = false;
   showExtra = false;
   token: string | null;
+  isLoading = false;
 
   @ViewChild('drawer') drawer!: MatDrawer;
+  @ViewChild('test') menuTrigger!: MatMenuTrigger;
 
   private dialogRef: MatDialogRef<SearchComponent> | null = null;
 
@@ -103,5 +108,36 @@ export class HeaderComponent extends BaseComponent implements OnInit {
 
   onNavigationToLogIn() {
     this.router.navigate(['/register']);
+  }
+
+  onLogOutClicked() {
+    this.isLoading = true;
+    this.serviceApi.logOut().subscribe({
+      next: (response: LogOutResponse) => {
+        if (response.status === 200) {
+          this.isLoading = false;
+          localStorage.removeItem('token');
+          localStorage.removeItem('userId');
+          location.reload();
+          this.router.navigate(['']);
+        } else {
+          this.snakeBar.show(
+            'خطا در ارتباط با سرور لطفا دوباره تلاش کنید',
+            'بستن',
+            3000,
+            'custom-snackbar'
+          );
+        }
+      },
+      error: () => {
+        this.isLoading = false;
+      },
+    });
+  }
+
+  onMenuCloseClicked() {
+    if (this.isLoading) {
+      this.menuTrigger.openMenu();
+    }
   }
 }
