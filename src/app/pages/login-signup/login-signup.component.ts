@@ -69,6 +69,14 @@ export class LoginSignupComponent extends BaseComponent implements OnInit {
               console.log('Login successful', response);
               this.res = response;
               this.userId = response?.user_id;
+              localStorage.setItem(
+                'userId',
+                this.userId ? String(this.userId) : ''
+              );
+              this.isLoading = false;
+            },
+            error: (error: string) => {
+              console.log(error);
               this.isLoading = false;
             },
           });
@@ -90,12 +98,18 @@ export class LoginSignupComponent extends BaseComponent implements OnInit {
               token: this.token,
               user_id: this.userId,
             })
-            .subscribe((response: TokenResponse) => {
-              this.isLoading = false;
-              if (response.token) {
-                localStorage.setItem('token', response.token || '');
-                this.router.navigate(['']);
-              }
+            .subscribe({
+              next: (response: TokenResponse) => {
+                this.isLoading = false;
+                if (response.token) {
+                  localStorage.setItem('token', response.token || '');
+                  this.router.navigate(['']);
+                }
+              },
+              error: (error: string) => {
+                console.log(error);
+                this.isLoading = false;
+              },
             });
         } else {
           this.snakeBar.show(

@@ -3,7 +3,6 @@ export interface Query {
   value: string | number | boolean | null | undefined;
 }
 
-
 export interface LoginBody {
   mobile: string;
 }
@@ -11,4 +10,8 @@ export interface LoginBody {
 export interface CheckTokenBody {
   token: string;
   user_id: number;
+}
+
+export interface IsLogIn {
+  is_login: boolean;
 }

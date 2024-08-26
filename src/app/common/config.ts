@@ -4,4 +4,6 @@ export class Config {
   public static siteName?: string;
 
   public static token?: string;
+
+  public static userId?: string;
 }

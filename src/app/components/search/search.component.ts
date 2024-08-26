@@ -1,10 +1,8 @@
 import {
   Component,
-  ElementRef,
   Injector,
   OnDestroy,
   OnInit,
-  ViewChild,
   ViewEncapsulation,
 } from '@angular/core';
 import { BaseComponent } from '../../base.component';

@@ -1,25 +1,33 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { ServicePath } from './service.path';
 import { Constant } from '../../common/constant';
 import { CheckTokenBody, LoginBody } from '../../models/service.model';
+import { Observable } from 'rxjs';
+import { Config } from '../../common/config';
 
 @Injectable({
   providedIn: 'root',
 })
 export class serviceApi {
+  private httpHeader: HttpHeaders = new HttpHeaders({
+    Authorization: `Bearer ${localStorage.getItem("token")}`,
+  });
+
   constructor(private http: HttpClient) {}
 
-  public registriation(body: LoginBody) {
+  public registriation(body: LoginBody): Observable<any> {
     return this.http.post(Constant.getApp() + ServicePath.LOGIN, body);
   }
 
-  public checkToken(body: CheckTokenBody) {
+  public checkToken(body: CheckTokenBody): Observable<any> {
     return this.http.post(Constant.getApp() + ServicePath.CHECK_TOKEN, body);
   }
 
-  public test(body: CheckTokenBody) {
-    return this.http.post(Constant.getApp() + ServicePath.CHECK_TOKEN, body);
+  public isLogIn(): Observable<any> {
+    return this.http.get(Constant.getApp() + ServicePath.IS_LOGIN, {
+      headers: this.httpHeader,
+    });
   }
 
   //   public getMyLoginInfo(): Observable<any> {
