@@ -49,7 +49,6 @@ export class LoginSignupComponent extends BaseComponent implements OnInit {
   }
 
   onSubmitClicked() {
-    console.log(this.mobile);
     if (!this.userId) {
       // if (this.mobile && this.mobileRegex.test(this.mobile)) {
       if (this.mobile) {
@@ -66,7 +65,6 @@ export class LoginSignupComponent extends BaseComponent implements OnInit {
           // )
           .subscribe({
             next: (response: LoginResponse) => {
-              console.log('Login successful', response);
               this.res = response;
               this.userId = response?.user_id;
               localStorage.setItem(
@@ -76,7 +74,6 @@ export class LoginSignupComponent extends BaseComponent implements OnInit {
               this.isLoading = false;
             },
             error: (error: string) => {
-              console.log(error);
               this.isLoading = false;
             },
           });
@@ -103,11 +100,11 @@ export class LoginSignupComponent extends BaseComponent implements OnInit {
                 this.isLoading = false;
                 if (response.token) {
                   localStorage.setItem('token', response.token || '');
+                  this.GlobalsService.isLoggedIn = true;
                   this.router.navigate(['']);
                 }
               },
               error: (error: string) => {
-                console.log(error);
                 this.isLoading = false;
               },
             });

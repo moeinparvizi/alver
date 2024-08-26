@@ -1,9 +1,10 @@
+import { GlobalsService } from './services/globals.service';
 import { serviceApi } from './network/service/service.api';
 import { Component, OnInit } from '@angular/core';
 import { Config } from './common/config';
 import { HomeComponent } from './pages/home/home.component';
 import { RouterOutlet } from '@angular/router';
-import { SpinnerComponent } from "./components/spinner/spinner.component";
+import { SpinnerComponent } from './components/spinner/spinner.component';
 
 @Component({
   selector: 'app-root',
@@ -18,7 +19,10 @@ export class AppComponent implements OnInit {
   public static serviceApi: serviceApi;
   isLoading = false;
 
-  constructor(private serviceApi: serviceApi) {}
+  constructor(
+    private serviceApi: serviceApi,
+    private GlobalsService: GlobalsService
+  ) {}
 
   ngOnInit(): void {
     this.isLoading = true;
@@ -26,6 +30,7 @@ export class AppComponent implements OnInit {
       this.serviceApi.isLogIn().subscribe({
         next: () => {
           this.isLoading = false;
+          this.GlobalsService.isLoggedIn = true;
         },
         error: () => {
           this.isLoading = false;

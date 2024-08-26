@@ -20,11 +20,9 @@ export class ProductComponent extends BaseComponent implements OnInit {
     super.ngOnInit();
 
     this.activeRoute.queryParams.subscribe(param => {
-      console.log(param);
 
       this.param = param;
     });
 
-    console.log(this.param);
   }
 }
