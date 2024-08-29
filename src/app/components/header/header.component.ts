@@ -72,7 +72,7 @@ export class HeaderComponent extends BaseComponent implements OnInit {
   }
 
   onHandleNvigateToHome(): void {
-    this.router.navigate(['home']);
+    this.router.navigate(['']);
   }
 
   onHandleNvigateToProduct(): void {
