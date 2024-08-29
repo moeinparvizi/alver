@@ -1,11 +1,11 @@
 import { Component, Injector, OnInit } from '@angular/core';
 import { BaseComponent } from '../../base.component';
+import { MatButtonModule } from '@angular/material/button';
 
 @Component({
   selector: 'app-not-found',
   standalone: true,
-  imports: [],
-  template: `<p>NotFount works!</p>`,
+  imports: [MatButtonModule],
   styleUrl: './NotFound.component.scss',
   templateUrl: './NotFound.component.html',
 })
