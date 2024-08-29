@@ -1,12 +1,11 @@
 .not-found {
-  width: 100vw;
   display: flex;
   justify-content: center;
   align-items: center;
-  font-family: 'Poppins', sans-serif;
   position: relative;
-  left: 6vmin;
   text-align: center;
+  margin-left: 30px;
+  padding: 12px;
 }
 
 .cog-wheel1,
@@ -127,7 +126,6 @@ h1 {
   color: #092532;
 }
 
-
 /* Animation for the first cog */
 @keyframes rotateCog1 {
   0% {
@@ -160,7 +158,8 @@ h1 {
 
 /* Animation for the paragraph */
 @keyframes blinkText {
-  0%, 100% {
+  0%,
+  100% {
     opacity: 0;
   }
   50% {
