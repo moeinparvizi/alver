@@ -1,0 +1,43 @@
+@import '../../../assets/colors/_light.scss';
+
+.owl-theme .owl-nav {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.owl-theme .owl-nav [class*='owl-'] {
+  width: 50px;
+  height: 50px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 50%;
+  font-size: 30px;
+  color: $primary;
+  transition: all 0.4s;
+
+  &:hover {
+    background: $primary;
+  }
+}
+
+.owl-carousel {
+  position: relative;
+
+  .owl-nav {
+    position: absolute;
+    top: 50%;
+    width: 100%;
+    transform: translateY(-50%);
+  }
+
+  .owl-dots {
+    position: absolute;
+    bottom: 10px;
+    width: 100%;
+  }
+}
+.owl-theme .owl-dots .owl-dot.active span,
+.owl-theme .owl-dots .owl-dot:hover span {
+  background: $primary;
+}
