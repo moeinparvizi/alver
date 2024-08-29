@@ -26,6 +26,8 @@ $theme: mat.m2-define-light-theme(
   @include mat.all-component-themes($theme);
 }
 
+@import 'assets/colors/light';
+
 // icons
 @import '../node_modules/bootstrap-icons/font/bootstrap-icons.css';
 
@@ -60,9 +62,9 @@ html {
 .custom-snackbar {
   direction: rtl;
   // .mat-mdc-snack-bar-container .mat-mdc-snackbar-surface
-  --mdc-snackbar-container-color: #2196f3;
+  --mdc-snackbar-container-color: $white;
   --mat-snack-bar-button-color: rgb(34, 0, 0);
   .mat-mdc-snack-bar-container .mat-mdc-snackbar-surface {
-    color: white !important; /* White text */
+    color: $secondary !important; /* White text */
   }
 }

@@ -53,8 +53,6 @@ export abstract class BaseComponent {
   ngAfterContentInit(): void {}
 
   public executeLoader(): void {
-    // this.tableProperties.offset = 0;
-
     if (NetworkUtil.isInternetConnected()) {
       this.loadOnline();
     } else {
@@ -69,22 +67,6 @@ export abstract class BaseComponent {
   public loadOnline(): void {}
 
   public loadOffline(): void {}
-
-  //   pageChanged(event: any) {
-  //   this.tableProperties.limit = event.pageSize;
-  // }
-
-  // onSortChanged(event: any) {
-  //   if (event.direction !== '') {
-  //     this.tableProperties.order = {
-  //       Field: event.active,
-  //       Type: event.direction.toUpperCase()
-  //     };
-  //   } else {
-  //     this.tableProperties.order = undefined;
-  //   }
-  //   this.tableProperties.offset = 0;
-  // }
 
   onBackPressed() {
     this.location.back();

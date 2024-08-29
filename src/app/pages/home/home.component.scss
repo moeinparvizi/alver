@@ -1,0 +1,29 @@
+.home-shops {
+  ::ng-deep .owl-theme .owl-nav {
+    display: none;
+    visibility: hidden;
+  }
+
+  ::ng-deep .owl-dots {
+    display: none !important;
+    visibility: hidden !important;
+  }
+
+  ::ng-deep .owl-carousel .owl-stage {
+    display: flex;
+    gap: 24px;
+    padding: 12px;
+  }
+
+  ::ng-deep .owl-carousel.owl-drag .owl-item {
+    width: auto !important;
+  }
+
+  ::ng-deep .mdc-button .mdc-button__label {
+    display: flex;
+    // padding: 12px;
+    gap: 12px;
+    width: 100%;
+    justify-content: space-between;
+  }
+}
