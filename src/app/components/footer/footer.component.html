@@ -1,13 +1,12 @@
 <!-- Footer container -->
 <footer
   class="text-center border-t border-slate-300 mt-5 text-surface/75 lg:text-left text-secondary"
-  style="height: 200vh"
   dir="rtl">
   <!-- Main container div: holds the entire content of the footer, including four sections (TW Elements, Products, Useful links, and Contact), with responsive styling and appropriate padding/margins. -->
   <div class="mx-6 py-10 text-center md:text-left">
     <div class="grid-1 grid gap-8 md:grid-cols-2 lg:grid-cols-4">
       <!-- TW Elements section -->
-      <div class="text-right">
+      <div class="text-right [&>p>a]:cursor-pointer">
         <h6
           class="mb-4 flex items-center justify-center font-semibold uppercase md:justify-start text-primary">
           الور
@@ -40,7 +39,7 @@
         </p>
       </div>
       <!-- Contact section -->
-      <div>
+      <div class="[&>p>a]:cursor-pointer">
         <!-- section -->
         <h6
           class="mb-4 flex justify-center font-semibold uppercase md:justify-start text-primary">
@@ -49,22 +48,22 @@
         <p
           class="mb-4 flex gap-2 items-center justify-center md:justify-start text-gray hover:text-secondary">
           <i class="bi bi-house-door-fill"></i>
-          تهران
+          <a href=""> تهران </a>
         </p>
         <p
           class="mb-4 gap-2 flex items-center justify-center md:justify-start text-gray hover:text-secondary">
           <i class="bi bi-envelope-fill"></i>
-          info&#64;cexample.com
+          <a href="mailto:info@example.com">info&#64;example.com</a>
         </p>
         <p
           class="mb-4 gap-2 flex items-center justify-center md:justify-start text-gray hover:text-secondary">
           <i class="bi bi-phone-fill"></i>
-          09107215381
+          <a href="tel:+989192222222" dir="ltr">0919 22 22 222</a>
         </p>
         <p
           class="flex gap-2 items-center justify-center md:justify-start text-gray hover:text-secondary">
           <i class="bi bi-telephone-fill"></i>
-          021 5674329
+          <a href="tel:+989192222222" dir="ltr"> 021 5674329 </a>
         </p>
       </div>
 
