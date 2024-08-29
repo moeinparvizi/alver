@@ -22,11 +22,48 @@
   </div>
 
   <nav
-    class="w-full h-20 bg-primary flex justify-center transition-all p-2"
+    class="w-full h-20 flex justify-center transition-all p-2"
     [ngClass]="isSticky ? 'fixed-nav' : ''">
     <div
-      class="container w-full h-full flex justify-end md:justify-center items-center relative">
-      <ul class="hidden justify-between items-center gap-2 md:flex" dir="rtl">
+      class="container w-full h-full flex justify-end md:justify-center items-center relative"
+      [ngClass]="isSticky ? '' : '!justify-between'"
+      [ngStyle]="isSticky ? {} : { 'direction': 'rtl' }">
+      <figure [ngClass]="isSticky ? 'hidden' : ''">
+        <img src="assets/images/alver-logo.png" width="80px" alt="logo" />
+      </figure>
+
+      <ul
+        *ngIf="!isSticky"
+        class="hidden justify-between items-center gap-2 md:flex"
+        dir="rtl">
+        <li>
+          <button mat-button color="primary" (click)="onHandleNvigateToHome()">
+            خانه
+          </button>
+        </li>
+        <li>
+          <button
+            (click)="onHandleNvigateToProducts()"
+            mat-button
+            color="primary">
+            محصولات
+          </button>
+        </li>
+        <li>
+          <button mat-button color="primary" [matMenuTriggerFor]="megaMenu">
+            دسته بندی
+
+            <mat-menu #megaMenu="matMenu" class="menu-primary">
+              <button mat-menu-item>Item 2</button>
+            </mat-menu>
+          </button>
+        </li>
+      </ul>
+
+      <ul
+        *ngIf="isSticky"
+        class="hidden justify-between items-center gap-2 md:flex"
+        dir="rtl">
         <li>
           <button
             mat-flat-button
@@ -56,8 +93,10 @@
           </button>
         </li>
       </ul>
+
       <dir
-        class="absolute flex gap-1 top-1/2 left-0 -translate-y-1/2 header-icons">
+        class="!hidden md:!flex items-center h-full gap-5 header-icons"
+        [ngClass]="isSticky ? '' : '[&>button>i]:text-primary'">
         <button class="!p-0" (click)="onShowSearchBox()">
           <i class="bi bi-search header-icon-i"></i>
         </button>
@@ -91,7 +130,7 @@
         </mat-menu>
         } @else {
         <button (click)="onNavigationToLogIn()">
-          <i class="bi bi-person header-icon-i"></i>
+          <i class="bi bi-person header-icon-i text-primary"></i>
         </button>
         }
       </dir>
@@ -99,8 +138,13 @@
       <!-- // mobile -->
       <mat-drawer-container
         dir="rtl"
-        class="sidenav-container md:hidden"
-        style="@media (min-width: 768px) {display: none !important}"
+        class="sidenav-container !bg-primary !rounded-full p-2 mt-2 md:!hidden"
+        style="
+          @media (min-width: 768px) {
+            display: none !important;
+            visibility: hidden;
+          }
+        "
         autosize>
         <mat-drawer #drawer class="sidenav" mode="side">
           <dir class="flex flex-col w-2/3 gap-3">
@@ -125,9 +169,22 @@
             <button (click)="onHandleNvigateToProducts()" mat-button>
               محصولات
             </button>
+            @if(token) {
             <button (click)="onHandleNvigateToProducts()" mat-button>
-              محصولات
+              مشخصات
             </button>
+            <button (click)="onHandleNvigateToProducts()" mat-button>
+              سفارشات
+            </button>
+            <button (click)="onLogOutClicked()" mat-button color="warn">
+              خروج
+            </button>
+            } @else {
+            <button (click)="onNavigationToLogIn()" mat-button color="primary">
+              ورود
+            </button>
+
+            }
           </dir>
 
           <button
@@ -158,7 +215,7 @@
 </header>
 
 <button
-  class="rounded-full bg-primary transition-all hover:bg-sky-700 absolute bottom-2 right-4 w-14 h-14 flex justify-center items-center text-white text-xl font-bold"
+  class="rounded-full bg-primary transition-all hover:bg-sky-700 fixed bottom-2 right-4 w-14 h-14 flex justify-center items-center text-white text-xl font-bold"
   (click)="scrollToTop()">
   <i class="bi bi-chevron-up"></i>
 </button>

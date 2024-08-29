@@ -1,5 +1,6 @@
 // customize
 @import '../../../assets/styles/custom-theme.scss';
+@import url('../../../assets/colors/_light.scss');
 
 // functions
 @mixin glass-background($bg) {
@@ -20,6 +21,29 @@
   // margin: 8px;
   // border-radius: 8px;
   height: 50px;
+  z-index: 99999;
+  // background-color: $primary;
+
+  @media only screen and (min-width: 768px) {
+    background-color: $primary !important;
+    direction: rtl;
+    & > div {
+      justify-content: space-between;
+    }
+
+    mat-drawer-container {
+      border: 1px solid red;
+      visibility: none;
+      display: none;
+    }
+  }
+
+  // @media only screen and (max-width: 768px) {
+  //   & > div {
+  //     justify-content: space-between;
+  //     direction: rtl;
+  //   }
+  // }
 }
 
 .mega-menu {
