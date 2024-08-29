@@ -61,10 +61,19 @@ html {
 
 .custom-snackbar {
   direction: rtl;
-  // .mat-mdc-snack-bar-container .mat-mdc-snackbar-surface
-  --mdc-snackbar-container-color: $white;
-  --mat-snack-bar-button-color: rgb(34, 0, 0);
+  z-index: 99999;
+
   .mat-mdc-snack-bar-container .mat-mdc-snackbar-surface {
-    color: $secondary !important; /* White text */
+    color: $black !important; /* White text */
+  }
+
+  .mat-mdc-snack-bar-handset,
+  .mat-mdc-snack-bar-container,
+  .mat-mdc-snack-bar-label {
+    background-color: white !important;
+  }
+
+  .mdc-snackbar__label {
+    color: $gray !important;
   }
 }
