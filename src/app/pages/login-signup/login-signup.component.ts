@@ -50,8 +50,8 @@ export class LoginSignupComponent extends BaseComponent implements OnInit {
 
   onSubmitClicked() {
     if (!this.userId) {
-      // if (this.mobile && this.mobileRegex.test(this.mobile)) {
-      if (this.mobile) {
+      if (this.mobile && this.mobileRegex.test(this.mobile)) {
+      // if (this.mobile) {
         this.isLoading = true;
         this.serviceApi
           .registriation({
@@ -94,8 +94,8 @@ export class LoginSignupComponent extends BaseComponent implements OnInit {
       }
     } else {
       if (this.res.status === 200) {
-        // if (this.token && this.token.length === 6) {
-        if (this.token) {
+        if (this.token && this.token.length === 6) {
+        // if (this.token) {
           this.isLoading = true;
           this.serviceApi
             .checkToken({
