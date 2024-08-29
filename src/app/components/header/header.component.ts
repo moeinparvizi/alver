@@ -146,4 +146,8 @@ export class HeaderComponent extends BaseComponent implements OnInit {
       this.menuTrigger.openMenu();
     }
   }
+
+  scrollToTop() {
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  }
 }
