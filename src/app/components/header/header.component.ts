@@ -131,6 +131,12 @@ export class HeaderComponent extends BaseComponent implements OnInit {
       },
       error: () => {
         this.isLoading = false;
+        this.snakeBar.show(
+          'خطا در ارتباط با سرور لطفا دوباره تلاش کنید',
+          'بستن',
+          3000,
+          'custom-snackbar'
+        );
       },
     });
   }

@@ -75,6 +75,13 @@ export class LoginSignupComponent extends BaseComponent implements OnInit {
             },
             error: (error: string) => {
               this.isLoading = false;
+
+              this.snakeBar.show(
+                'خطا در ارتباط با سرور لطفا دوباره تلاش کنید',
+                'بستن',
+                3000,
+                'custom-snackbar'
+              );
             },
           });
       } else {
@@ -106,6 +113,13 @@ export class LoginSignupComponent extends BaseComponent implements OnInit {
               },
               error: (error: string) => {
                 this.isLoading = false;
+
+                this.snakeBar.show(
+                  'خطا در ارتباط با سرور لطفا دوباره تلاش کنید',
+                  'بستن',
+                  3000,
+                  'custom-snackbar'
+                );
               },
             });
         } else {
