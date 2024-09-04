@@ -12,7 +12,12 @@ import { CardComponent } from '../../components/card/card.component';
   templateUrl: './home.component.html',
   styleUrl: './home.component.scss',
   standalone: true,
-  imports: [SliderImagesComponent, CarouselModule, MatButtonModule, CardComponent],
+  imports: [
+    SliderImagesComponent,
+    CarouselModule,
+    MatButtonModule,
+    CardComponent,
+  ],
 })
 export class HomeComponent extends BaseComponent implements OnInit {
   customOptions: OwlOptions = {

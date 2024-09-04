@@ -12,8 +12,8 @@ import { SpinnerComponent } from '../spinner/spinner.component';
   styleUrl: './card.component.scss',
 })
 export class CardComponent extends BaseComponent implements OnInit {
-  @Input() produtct?: ProductResponse;
-  @Input() isLoading = true;
+  @Input() product?: ProductResponse;
+  @Input() isLoading?: boolean;
 
   constructor(inject: Injector) {
     super(inject);
@@ -28,6 +28,10 @@ export class CardComponent extends BaseComponent implements OnInit {
   }
 
   onNavigateToProductDetail() {
-    alert(this.produtct?.id)
+    if (this.product?.id) {
+      this.router.navigate(['/product-detail', this.product.id]);
+    } else {
+      alert('Product ID not found');
+    }
   }
 }
