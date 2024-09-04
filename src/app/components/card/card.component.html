@@ -1,0 +1,19 @@
+<div
+  (click)="onNavigateToProductDetail()"
+  class="card-container cursor-pointer transition-all rounded-md bg-white shadow-md p-3 hover:shadow-2xl flex items-center flex-col w-60 h-72">
+  <figure
+    class="m-0 p-0 rounded-md overflow-hidden flex justify-center items-center w-56 h-56">
+    @if (!isLoading) {
+      <img class="w-full" [src]="produtct?.image" alt="" />
+    } @else {
+      <app-spinner [isLoading]="true"></app-spinner>
+    }
+  </figure>
+
+  <div class="flex flex-col gap-5 w-full p-2">
+    <h4 class="text-primary text-right p-2">
+      {{ produtct?.name }}
+    </h4>
+    <span class="text-gray text-left">{{ produtct?.price }}</span>
+  </div>
+</div>

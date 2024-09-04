@@ -23,9 +23,17 @@
     <span class="text-slate-200">ctrl+k</span>
   </div>
   @if (value) {
-    <div class="" style="border: 1px solid red">
+    <div
+      class="flex justify-center gap-5 flex-wrap w-full p-2"
+      style="height: 80vh; overflow-y: scroll">
       <!-- @for (item of services; track $index | search: value) { -->
-      <div *ngFor="let item of res | search: value">{{ item.name }}</div>
+      <!-- <div *ngFor="let item of res | search: value" > -->
+      <app-card
+        *ngFor="let item of res | search: value"
+        class="inline-block"
+        [isLoading]="isLoading"
+        [produtct]="item"></app-card>
+      <!-- </div> -->
       <!-- } -->
     </div>
   }

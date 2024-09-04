@@ -1,3 +1,5 @@
+import { ProductsResponse } from './data.response';
+
 export interface Query {
   key: string;
   value: string | number | boolean | null | undefined;
@@ -14,4 +16,9 @@ export interface CheckTokenBody {
 
 export interface IsLogIn {
   is_login: boolean;
+}
+
+export interface GetProducts {
+  products: ProductsResponse[];
+  status: number;
 }

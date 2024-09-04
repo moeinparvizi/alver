@@ -12,11 +12,19 @@ import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { SearchPipe } from '../../util/pipes/search.pipe';
 import { timer } from 'rxjs';
+import { GetProducts } from '../../models/service.model';
+import { CardComponent } from '../card/card.component';
 
 @Component({
   selector: 'app-search',
   standalone: true,
-  imports: [MatFormFieldModule, FormsModule, CommonModule, SearchPipe],
+  imports: [
+    MatFormFieldModule,
+    FormsModule,
+    CommonModule,
+    SearchPipe,
+    CardComponent,
+  ],
   templateUrl: './search.component.html',
   styleUrl: './search.component.scss',
   encapsulation: ViewEncapsulation.None,
@@ -25,26 +33,15 @@ export class SearchComponent
   extends BaseComponent
   implements OnInit, OnDestroy
 {
-  res = [
-    {
-      id: 1,
-      name: 'test',
-    },
-    {
-      id: 2,
-      name: 'moein',
-    },
-    {
-      id: 3,
-      name: 'jafar',
-    },
-  ];
-
   static isOpenDialog = false;
 
   showHint = true;
 
+  res?: any[];
+
   value = '';
+
+  isLoading = true;
 
   constructor(
     injector: Injector,
@@ -55,7 +52,18 @@ export class SearchComponent
 
   override ngOnInit() {
     super.ngOnInit();
-    // sould be run service
+    // sould be run serviced
+    this.isLoading = true;
+    this.serviceApi.getProducts().subscribe({
+      next: (res: GetProducts) => {
+        this.res = res.products;
+        this.isLoading = false;
+      },
+      error: (err: any) => {
+        this.isLoading = false;
+        this.snakeBar.show('خطای سرور', 'بستن', 3000, 'custom-snackbar');
+      },
+    });
 
     // this.snakeBar.show(
     //   'شما میتوانید عملیات جستجو را باز کنید : ctrl + k',

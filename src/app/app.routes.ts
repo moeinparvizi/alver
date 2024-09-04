@@ -2,7 +2,6 @@ import { Routes } from '@angular/router';
 import { MasterLayoutComponent } from './layout/master/master.layout';
 import { RouteUtil } from './util/route.util';
 import { LoginSignupComponent } from './pages/login-signup/login-signup.component';
-import { HomeComponent } from './pages/home/home.component';
 
 export const routes: Routes = [
   {

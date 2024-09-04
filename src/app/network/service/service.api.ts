@@ -2,7 +2,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { ServicePath } from './service.path';
 import { Constant } from '../../common/constant';
-import { CheckTokenBody, LoginBody } from '../../models/service.model';
+import { CheckTokenBody, GetProducts, LoginBody } from '../../models/service.model';
 import { Observable } from 'rxjs';
 import { Config } from '../../common/config';
 
@@ -34,6 +34,10 @@ export class serviceApi {
     return this.http.get(Constant.getApp() + ServicePath.LOGOUT, {
       headers: this.httpHeader,
     });
+  }
+
+  public getProducts(): Observable<GetProducts> {
+    return this.http.get<GetProducts>(Constant.getApp() + ServicePath.GET_PRODUCTS);
   }
 
   //   public getMyLoginInfo(): Observable<any> {
