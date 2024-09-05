@@ -17,6 +17,7 @@ import { SearchComponent } from '../search/search.component';
 import { MatDialogRef } from '@angular/material/dialog';
 import { LogOutResponse } from '../../models/data.response';
 import { SpinnerComponent } from '../spinner/spinner.component';
+import { RouteUtil } from '../../util/route.util';
 
 @Component({
   selector: 'app-header',
@@ -68,11 +69,11 @@ export class HeaderComponent extends BaseComponent implements OnInit {
   }
 
   onHandleNvigateToProducts(): void {
-    this.router.navigate(['products']);
+    this.router.navigate([RouteUtil.PRODUCTS]);
   }
 
   onHandleNvigateToHome(): void {
-    this.router.navigate(['']);
+    this.router.navigate([RouteUtil.HOME]);
   }
 
   onHandleNvigateToProduct(): void {

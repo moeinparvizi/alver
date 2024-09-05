@@ -22,6 +22,14 @@ export const routes: Routes = [
       import('./pages/products/products.routes').then(c => c.routes),
   },
   {
+    path: `${RouteUtil.PRODUCT_DETAIL}/:id/:name`,
+    component: MasterLayoutComponent,
+    loadChildren: () =>
+      import('./pages/product-detail/product-detail.routes').then(
+        c => c.routes
+      ),
+  },
+  {
     path: RouteUtil.REGISTER,
     component: LoginSignupComponent,
   },
@@ -31,6 +39,7 @@ export const routes: Routes = [
     loadChildren: () =>
       import('./pages/NotFound/NotFound.routes').then(c => c.routes),
   },
+
   // { path: RouteUtil.HOME, component: HomeComponent }, // Optional: redirect root path to the example component
   // { path: 'products', component: ProductsComponent },
   // { path: 'product/:id', component: ProductComponent },
