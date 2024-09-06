@@ -2,7 +2,7 @@ import { GlobalsService } from './services/globals.service';
 import { Component, Injector } from '@angular/core';
 import { animationfadeIn } from './util/animation/animation.fade';
 import { serviceApi } from './network/service/service.api';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { ServicePath } from './network/service/service.path';
 import { NetworkUtil } from './util/network.util';
 import { Location } from '@angular/common';
@@ -33,6 +33,7 @@ export abstract class BaseComponent {
   public location: Location;
   public snakeBar: SnackbarService
   public GlobalsService: GlobalsService;
+  public ActiveRoute: ActivatedRoute;
 
   protected constructor(injector: Injector) {
     this.serviceApi = injector.get(serviceApi);
@@ -42,6 +43,7 @@ export abstract class BaseComponent {
     this.location = injector.get(Location);
     this.snakeBar = injector.get(SnackbarService)
     this.GlobalsService = injector.get(GlobalsService);
+    this.ActiveRoute = injector.get(ActivatedRoute);
 
     this.GlobalsService.setUserToken(localStorage.getItem("token"));
   }
