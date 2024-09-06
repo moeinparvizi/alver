@@ -1,10 +1,9 @@
-import { CommonModule, ɵnormalizeQueryParams } from '@angular/common';
+import { CommonModule } from '@angular/common';
 import { Component, Injector, Input, OnInit } from '@angular/core';
 import { BaseComponent } from '../../base.component';
 import { ProductResponse } from '../../models/data.response';
 import { SpinnerComponent } from '../spinner/spinner.component';
 import { RouteUtil } from '../../util/route.util';
-import { query } from '@angular/animations';
 
 @Component({
   selector: 'app-card',
@@ -15,7 +14,7 @@ import { query } from '@angular/animations';
 })
 export class CardComponent extends BaseComponent implements OnInit {
   @Input() product?: ProductResponse;
-  @Input() isLoading?: boolean;
+  isImageLoading = true;
 
   constructor(inject: Injector) {
     super(inject);
@@ -29,21 +28,15 @@ export class CardComponent extends BaseComponent implements OnInit {
     super.loadOnline();
   }
 
+  onImageLoad(): void {
+    this.isImageLoading = false;
+  }
+
   onNavigateToProductDetail() {
-    if (this.product?.id) {
-      this.router.navigate([
-        RouteUtil.PRODUCT_DETAIL,
-        this.product?.id,
-        this.product?.name,
-        // {
-        //   queryParams: {
-        //     id: this.product.id,
-        //     name: this.product.name,
-        //   },
-        // },
-      ]);
-    } else {
-      alert('Product ID not found');
-    }
+    this.router.navigate([
+      RouteUtil.PRODUCT_DETAIL,
+      this.product?.id,
+      this.product?.name,
+    ]);
   }
 }
