@@ -57,6 +57,9 @@ html {
   .header-icon-i {
     @apply text-white text-xl;
   }
+  .header-icon-i-search {
+    @apply text-primary text-xl;
+  }
 }
 
 .custom-snackbar {
@@ -107,7 +110,7 @@ html {
 @media (prefers-reduced-motion: no-preference) {
   .fade-in {
     visibility: hidden;
-    transform: translateY(-300px);
+    transform: translateY(-100px);
     scale: 0.8;
     opacity: 0;
     animation: fade-in linear forwards;
@@ -124,4 +127,8 @@ html {
       transform: translateY(0);
     }
   }
+}
+
+.mat-mdc-dialog-surface {
+  width: 100% !important;
 }
