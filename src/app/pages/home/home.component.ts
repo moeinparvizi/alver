@@ -4,8 +4,9 @@ import { SliderImagesComponent } from '../../components/slider-images/slider-ima
 import { CarouselModule } from 'ngx-owl-carousel-o';
 import { OwlOptions } from 'ngx-owl-carousel-o';
 import { MatButtonModule } from '@angular/material/button';
-import { GetProducts } from '../../models/service.model';
 import { CardComponent } from '../../components/card/card.component';
+import { GetProductsService } from '../../services/getProducts/get-products.service';
+import { SpinnerComponent } from '../../components/spinner/spinner.component';
 
 @Component({
   selector: 'app-home',
@@ -17,6 +18,7 @@ import { CardComponent } from '../../components/card/card.component';
     CarouselModule,
     MatButtonModule,
     CardComponent,
+    SpinnerComponent,
   ],
 })
 export class HomeComponent extends BaseComponent implements OnInit {
@@ -55,7 +57,10 @@ export class HomeComponent extends BaseComponent implements OnInit {
 
   isLoading = true;
 
-  constructor(injector: Injector) {
+  constructor(
+    injector: Injector,
+    private getProductsService: GetProductsService
+  ) {
     super(injector);
   }
 
@@ -66,15 +71,14 @@ export class HomeComponent extends BaseComponent implements OnInit {
 
   override loadOnline(): void {
     super.loadOnline();
-    this.isLoading = true;
-    this.serviceApi.getProducts().subscribe({
-      next: (res: GetProducts) => {
-        this.products = res.products;
-        this.isLoading = false;
+    this.getProductsService.getProducts().subscribe({
+      next: ({ products, isLoading }) => {
+        this.products = products;
+        this.isLoading = isLoading;
       },
-      error: (err: any) => {
+      error: err => {
+        console.error('Error fetching products:', err);
         this.isLoading = false;
-        this.snakeBar.show(err, 'بستن', 3000, 'custom-snackbar');
       },
     });
   }
