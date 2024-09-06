@@ -1,5 +1,5 @@
 <!-- // serach bar -->
-<div class="p-5" dir="rtl">
+<div class="p-5 !w-full" dir="rtl">
   @if (showHint) {
     <div class="flex flex-col gap-4 mb-4 text-gray">
       <div>برای باز شدن جستجو میتوانید از کلید ctrl + k استفاده کنید</div>
@@ -10,31 +10,32 @@
     </div>
   }
   <div
-    class="border-none outline-none px-2 rounded-md bg-primary text-white flex items-center gap-1">
+    class="border-none outline-none px-2 rounded-md text-primary bg-slate-300 flex items-center gap-1 !w-full">
     <label for="search">
-      <i class="bi bi-search header-icon-i"></i>
+      <i class="bi bi-search header-icon-i-search"></i>
     </label>
     <input
       id="search"
-      class="bg-primary placeholder:text-white p-2 h-full focus:outline-none w-full"
+      class="bg-slate-300 placeholder:text-gray text-primary p-2 h-full focus:outline-none w-full"
       placeholder="test"
       [(ngModel)]="value"
       type="text" />
-    <span class="text-slate-200">ctrl+k</span>
+    <span class="text-primary">ctrl+k</span>
   </div>
   @if (value) {
     <div
       class="flex justify-center gap-5 flex-wrap w-full p-2"
       style="height: 80vh; overflow-y: scroll">
-      <!-- @for (item of services; track $index | search: value) { -->
-      <!-- <div *ngFor="let item of res | search: value" > -->
       <app-card
         *ngFor="let item of res | search: value"
-        class="inline-block"
-        [isLoading]="isLoading"
+        class="inline-block fade-in"
         [product]="item"></app-card>
-      <!-- </div> -->
-      <!-- } -->
     </div>
   }
+  <!-- @else { -->
+    <!-- <div -->
+      <!-- class="flex justify-center gap-5 flex-wrap text-white w-full p-2 text-xl"> -->
+      <!-- nothing is here -->
+    <!-- </div> -->
+  <!-- } -->
 </div>

@@ -14,6 +14,7 @@ import { SearchPipe } from '../../util/pipes/search.pipe';
 import { timer } from 'rxjs';
 import { GetProducts } from '../../models/service.model';
 import { CardComponent } from '../card/card.component';
+import { GetProductsService } from '../../services/getProducts/get-products.service';
 
 @Component({
   selector: 'app-search',
@@ -41,11 +42,12 @@ export class SearchComponent
 
   value = '';
 
-  isLoading = true;
+  isLoading = false;
 
   constructor(
     injector: Injector,
-    private matDialogRef: MatDialogRef<SearchComponent>
+    private matDialogRef: MatDialogRef<SearchComponent>,
+    private getProductsService: GetProductsService
   ) {
     super(injector);
   }
@@ -53,15 +55,14 @@ export class SearchComponent
   override ngOnInit() {
     super.ngOnInit();
     // sould be run serviced
-    this.isLoading = true;
-    this.serviceApi.getProducts().subscribe({
-      next: (res: GetProducts) => {
-        this.res = res.products;
-        this.isLoading = false;
+    this.getProductsService.getProducts().subscribe({
+      next: ({ products, isLoading }) => {
+        this.res = products;
+        this.isLoading = isLoading;
       },
-      error: (err: any) => {
+      error: err => {
+        console.error('Error fetching products:', err);
         this.isLoading = false;
-        this.snakeBar.show('خطای سرور', 'بستن', 3000, 'custom-snackbar');
       },
     });
 

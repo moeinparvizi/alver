@@ -22,20 +22,25 @@ export interface LogOutResponse {
   status?: number;
 }
 
-interface ProductCategory {
+interface Category {
+  id: number;
+  name: string;
+}
+interface Company {
   id: number;
   name: string;
 }
 export interface ProductResponse {
   id: number;
+  name: string;
   price: string;
   prev_price: string;
-  category: ProductCategory;
-  name?: string;
+  category: Category;
+  company: Company;
   image: string;
-  property: any[];
+  property: any[];   // If you have specific structure for properties, define it here
   rate: number;
-  images: any[];
+  images: string[];   // Array of image URLs
   description: string;
 }
 
