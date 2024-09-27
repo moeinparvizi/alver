@@ -1,18 +1,30 @@
 import { GetProductsService } from './../../services/getProducts/get-products.service';
-import { Component, Injector, OnInit } from '@angular/core';
+import { Component, Injector, OnInit, ViewEncapsulation } from '@angular/core';
 import { BaseComponent } from '../../base.component';
 import { ProductResponse } from '../../models/data.response';
+import { MatButtonModule } from '@angular/material/button';
+import { CommonModule } from '@angular/common';
+import { FormsModule } from '@angular/forms';
+import { ImageFullscreenComponent } from '../../components/image-fullscreen/image-fullscreen.component';
+import { MatDialogModule } from '@angular/material/dialog';
 
 @Component({
   selector: 'app-product-detail',
   standalone: true,
-  imports: [],
+  imports: [MatButtonModule, CommonModule, FormsModule, MatDialogModule, ImageFullscreenComponent],
   templateUrl: './product-detail.component.html',
   styleUrl: './product-detail.component.scss',
+  encapsulation: ViewEncapsulation.None,
 })
 export class ProductDetailComponent extends BaseComponent implements OnInit {
   product?: ProductResponse;
   isLoading = true;
+  selectedLiter = 1;
+  count = 1;
+
+  mainImage?: string;
+
+  showFullScreen = false;
 
   constructor(
     injector: Injector,
@@ -45,5 +57,17 @@ export class ProductDetailComponent extends BaseComponent implements OnInit {
     });
 
     console.log(this.product);
+  }
+
+  changeMainImage(event: Event) {
+    const clickedImageSrc = (event.target as HTMLImageElement).src;
+    this.mainImage = clickedImageSrc;
+  }
+
+  openImageDialog(): void {
+    console.log(this.mainImage);
+    this.dialog.open(ImageFullscreenComponent, {
+      data: { imageUrl: this.mainImage },
+    });
   }
 }

@@ -36,12 +36,13 @@ export interface ProductResponse {
   price: string;
   prev_price: string;
   category: Category;
-  company: Company;
+  compony: Company;
   image: string;
-  property: any[];   // If you have specific structure for properties, define it here
+  property: any[]; // If you have specific structure for properties, define it here
   rate: number;
-  images: string[];   // Array of image URLs
+  images: string[]; // Array of image URLs
   description: string;
+  unit?: any[];
 }
 
 export interface ProductsResponse {
