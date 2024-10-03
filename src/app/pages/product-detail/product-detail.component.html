@@ -27,21 +27,20 @@
       </div>
 
       @if (showFullScreen) {
+        <div
+          class="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-75">
+          <img
+            [src]="mainImage ? mainImage : product?.image"
+            alt="Full Image"
+            class="max-w-full max-h-full object-contain" />
 
-      <div
-        class="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-75">
-        <img
-          [src]="mainImage ? mainImage : product?.image"
-          alt="Full Image"
-          class="max-w-full max-h-full object-contain" />
-
-        <!-- Close Button -->
-        <button
-          (click)="showFullScreen = false"
-          class="absolute top-4 right-4 text-white text-xl">
-          &times;
-        </button>
-      </div>
+          <!-- Close Button -->
+          <button
+            (click)="showFullScreen = false"
+            class="absolute top-4 right-4 text-white text-xl">
+            &times;
+          </button>
+        </div>
       }
 
       <!-- Product Details -->
@@ -94,7 +93,7 @@
                   name="liters"
                   [(ngModel)]="selectedLiter"
                   value="{{ $index }}" />
-                  {{ liter }}
+                {{ liter }}
               </label>
             }
           </div>
@@ -167,7 +166,6 @@
   </div>
 </div>
 
-
 <div>
-  <app-comments></app-comments>
+  <app-comments [productsId]="id"></app-comments>
 </div>

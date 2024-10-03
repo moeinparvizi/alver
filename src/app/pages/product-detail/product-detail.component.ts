@@ -7,12 +7,19 @@ import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { ImageFullscreenComponent } from '../../components/image-fullscreen/image-fullscreen.component';
 import { MatDialogModule } from '@angular/material/dialog';
-import { CommentsComponent } from "../../components/comments/comments.component";
+import { CommentsComponent } from '../../components/comments/comments.component';
 
 @Component({
   selector: 'app-product-detail',
   standalone: true,
-  imports: [MatButtonModule, CommonModule, FormsModule, MatDialogModule, ImageFullscreenComponent, CommentsComponent],
+  imports: [
+    MatButtonModule,
+    CommonModule,
+    FormsModule,
+    MatDialogModule,
+    ImageFullscreenComponent,
+    CommentsComponent,
+  ],
   templateUrl: './product-detail.component.html',
   styleUrl: './product-detail.component.scss',
   encapsulation: ViewEncapsulation.None,
@@ -22,6 +29,9 @@ export class ProductDetailComponent extends BaseComponent implements OnInit {
   isLoading = true;
   selectedLiter = 1;
   count = 1;
+
+  id?: number;
+  productId?: string | null;
 
   mainImage?: string;
 
@@ -43,10 +53,10 @@ export class ProductDetailComponent extends BaseComponent implements OnInit {
   override loadOnline(): void {
     super.loadOnline();
 
-    const productId = this.ActiveRoute.snapshot.paramMap.get('id');
-    const id = Number(productId);
+    this.productId = this.ActiveRoute.snapshot.paramMap.get('id');
+    this.id = Number(this.productId);
 
-    this.getProductsService.getProduct(id).subscribe({
+    this.getProductsService.getProduct(this.id).subscribe({
       next: ({ product, isLoading }) => {
         this.product = product;
         this.isLoading = isLoading;
@@ -56,8 +66,6 @@ export class ProductDetailComponent extends BaseComponent implements OnInit {
         this.isLoading = false;
       },
     });
-
-    console.log(this.product);
   }
 
   changeMainImage(event: Event) {
