@@ -38,5 +38,8 @@ export class CardComponent extends BaseComponent implements OnInit {
       this.product?.id,
       this.product?.name,
     ]);
+    setTimeout(() => {
+      window.location.reload();
+    })
   }
 }

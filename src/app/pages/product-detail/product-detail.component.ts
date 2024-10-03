@@ -7,11 +7,12 @@ import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { ImageFullscreenComponent } from '../../components/image-fullscreen/image-fullscreen.component';
 import { MatDialogModule } from '@angular/material/dialog';
+import { CommentsComponent } from "../../components/comments/comments.component";
 
 @Component({
   selector: 'app-product-detail',
   standalone: true,
-  imports: [MatButtonModule, CommonModule, FormsModule, MatDialogModule, ImageFullscreenComponent],
+  imports: [MatButtonModule, CommonModule, FormsModule, MatDialogModule, ImageFullscreenComponent, CommentsComponent],
   templateUrl: './product-detail.component.html',
   styleUrl: './product-detail.component.scss',
   encapsulation: ViewEncapsulation.None,
