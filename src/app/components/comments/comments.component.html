@@ -11,48 +11,107 @@
     <div class="max-w-2xl mx-auto px-4">
       <div class="flex justify-between items-center mb-6">
         <h2 class="text-lg lg:text-2xl font-bold text-gray-900 text-gray">
-          تعداد نظرات (20)
+          تعداد نظرات ({{ comments?.count }})
         </h2>
       </div>
       <div
-        class="py-2 px-4 mb-4 bg-white rounded-lg rounded-t-lg border border-gray-200 dark:bg-gray-800 dark:border-gray-700">
+        class="py-2 px-4 mb-4 bg-white rounded-lg rounded-t-lg border border-gray">
         <label for="comment" class="sr-only">Your comment</label>
+        <input
+          type="text"
+          class="bg-white mb-5 focus:outline-none text-black"
+          placeholder="عنوان نظر"
+          [(ngModel)]="title" />
         <textarea
           id="comment"
           rows="6"
-          class="px-0 w-full text-sm text-gray-900 border-0 focus:ring-0 focus:outline-none bg-white text-black placeholder-gray-400 bg-gray-800"
+          [(ngModel)]="text"
+          class="px-0 w-full text-sm text-gray-900 border-0 focus:ring-0 focus:outline-none bg-white text-black"
           placeholder="نظر خود را با ما در ارتباط بگزارید..."
           required></textarea>
       </div>
-      <button mat-flat-button color="primary" type="submit" class="">
-        ثبت نظر
-      </button>
-      @for (comment of commnets; track $index) {
-        <article class="p-6 mb-3 mt-3 text-base bg-white rounded-lg">
-          <footer class="flex justify-between items-center mb-2">
-            <div class="flex items-center justify-between w-full">
-              <p
-                class="inline-flex items-center mr-3 text-sm text-primary font-semibold">
-                <img
-                  class="ml-3 w-16 h-16 rounded-full"
-                  src="/assets/images/user.jpg"
-                  alt="Michael Gough" />
-                Michael Gough
-              </p>
-              <p class="text-sm text-gray-600 dark:text-gray-400">
-                <time pubdate datetime="2022-02-08" title="February 8th, 2022">
-                  Feb. 8, 2022
-                </time>
-              </p>
-            </div>
-          </footer>
-          <p class="text-gray-500 dark:text-gray-400">
-            Very straight-to-point article. Really worth time reading. Thank
-            you! But tools are just the instruments for the UX designers. The
-            knowledge of the design tools are as important as the creation of
-            the design strategy.
-          </p>
-        </article>
+      <div class="flex justify-between items-center">
+        <button mat-flat-button color="primary" (click)="onSendData()">
+          ثبت نظر
+        </button>
+        <div class="star-rating">
+          <div class="star-rating">
+            <input
+              type="radio"
+              id="star5"
+              name="rating"
+              value="5"
+              (change)="onRatingChange($event)" />
+            <label for="star5" title="5 stars">&#9733;</label>
+
+            <input
+              type="radio"
+              id="star4"
+              name="rating"
+              value="4"
+              (change)="onRatingChange($event)" />
+            <label for="star4" title="4 stars">&#9733;</label>
+
+            <input
+              type="radio"
+              id="star3"
+              name="rating"
+              value="3"
+              (change)="onRatingChange($event)" />
+            <label for="star3" title="3 stars">&#9733;</label>
+
+            <input
+              type="radio"
+              id="star2"
+              name="rating"
+              value="2"
+              (change)="onRatingChange($event)" />
+            <label for="star2" title="2 stars">&#9733;</label>
+
+            <input
+              type="radio"
+              id="star1"
+              name="rating"
+              value="1"
+              (change)="onRatingChange($event)" />
+            <label for="star1" title="1 star">&#9733;</label>
+          </div>
+        </div>
+      </div>
+
+      @if (!isLoading) {
+        @for (comment of comments.data; track $index) {
+          <article class="p-6 mb-3 mt-3 text-base bg-white rounded-lg">
+            <footer class="flex justify-between items-center mb-2">
+              <div class="flex items-center justify-between w-full">
+                <p
+                  class="inline-flex items-center mr-3 text-sm text-primary font-semibold">
+                  <img
+                    class="ml-3 w-16 h-16 rounded-full"
+                    src="/assets/images/user.jpg"
+                    alt="user picture" />
+                  {{ comment.user }}
+                </p>
+                <p class="text-sm text-gray">
+                  <time
+                    pubdate
+                    datetime="2022-02-08"
+                    title="February 8th, 2022">
+                    {{ comment.date }}
+                  </time>
+                </p>
+              </div>
+            </footer>
+            <h6 class="text-black">
+              {{ comment.title }}
+            </h6>
+            <p class="text-gray">
+              {{ comment.text }}
+            </p>
+          </article>
+        }
+      } @else {
+        <app-spinner></app-spinner>
       }
     </div>
   </section>

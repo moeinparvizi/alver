@@ -40,6 +40,16 @@ export class serviceApi {
     return this.http.get<GetProducts>(Constant.getApp() + ServicePath.GET_PRODUCTS);
   }
 
+  public getComments(body: any): Observable<any> {
+    return this.http.post(Constant.getApp() + ServicePath.GET_COMMNETS, body);
+  }
+
+  public addComment(body: any): Observable<any> {
+    return this.http.post(Constant.getApp() + ServicePath.ADD_COMMNETS, body, {
+      headers: this.httpHeader,
+    });
+  }
+
   //   public getMyLoginInfo(): Observable<any> {
   //   return this.http.post(ServicePath.GET_LOGIN_INFO, {});
   // }

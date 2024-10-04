@@ -1,3 +1,29 @@
 .comments {
-  
+  .star-rating {
+    direction: rtl; /* Right to left */
+    display: inline-flex;
+  }
+
+  .star-rating input {
+    display: none; /* Hide radio buttons */
+  }
+
+  .star-rating label {
+    font-size: 2rem;
+    color: #ddd;
+    cursor: pointer;
+  }
+
+  .star-rating input:checked ~ label {
+    color: #f5b301; /* Yellow color for selected stars */
+  }
+
+  .star-rating input:hover ~ label {
+    color: #f5b301; /* Change color on hover */
+  }
+
+  .star-rating label:hover,
+  .star-rating label:hover ~ label {
+    color: #f5b301; /* Color the stars on hover */
+  }
 }

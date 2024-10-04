@@ -29,6 +29,7 @@ export class ProductDetailComponent extends BaseComponent implements OnInit {
   isLoading = true;
   selectedLiter = 1;
   count = 1;
+  rate: any;
 
   id?: number;
   productId?: string | null;
@@ -60,6 +61,8 @@ export class ProductDetailComponent extends BaseComponent implements OnInit {
       next: ({ product, isLoading }) => {
         this.product = product;
         this.isLoading = isLoading;
+        this.rate = this.product?.rate
+        this.rate = this.generateArray(this.rate)
       },
       error: err => {
         console.error('Error fetching products:', err);
@@ -78,5 +81,9 @@ export class ProductDetailComponent extends BaseComponent implements OnInit {
     this.dialog.open(ImageFullscreenComponent, {
       data: { imageUrl: this.mainImage },
     });
+  }
+
+  generateArray(num: number): number[] {
+    return Array.from({ length: num }, (_, i) => i + 1);
   }
 }
