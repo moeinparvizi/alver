@@ -65,10 +65,10 @@
         @if (isLoading) {
           <app-spinner></app-spinner>
         } @else {
-          @for (product of products?.slice(0, 6); track $index) {
+          @for (amazingProduct of amazingProducts; track $index) {
             <app-card
               class="inline-block fade-in"
-              [product]="product"></app-card>
+              [product]="amazingProduct"></app-card>
           }
         }
       </div>

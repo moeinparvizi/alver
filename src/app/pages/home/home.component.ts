@@ -54,6 +54,7 @@ export class HomeComponent extends BaseComponent implements OnInit {
   };
 
   products?: any[];
+  amazingProducts?: any[];
 
   isLoading = true;
 
@@ -66,7 +67,6 @@ export class HomeComponent extends BaseComponent implements OnInit {
 
   override ngOnInit(): void {
     super.ngOnInit();
-    this.loadOnline();
   }
 
   override loadOnline(): void {
@@ -74,6 +74,17 @@ export class HomeComponent extends BaseComponent implements OnInit {
     this.getProductsService.getProducts().subscribe({
       next: ({ products, isLoading }) => {
         this.products = products;
+        this.isLoading = isLoading;
+      },
+      error: err => {
+        console.error('Error fetching products:', err);
+        this.isLoading = false;
+      },
+    });
+
+    this.getProductsService.getAmazingProducts().subscribe({
+      next: ({ amazingProducts, isLoading }) => {
+        this.amazingProducts = amazingProducts;
         this.isLoading = isLoading;
       },
       error: err => {
