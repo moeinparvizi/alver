@@ -52,5 +52,27 @@
         }
       </div>
     </div>
+
+    <div class="mt-5">
+      <div class="flex gap-2 w-full justify-end items-center">
+        <span class="w-full bg-primary" style="height: 1px"></span>
+        <span class="rounded-full flex !w-3 !h-3 bg-primary"></span>
+        <h2 class="text-right text-secondary text-2xl w-96 md:w-72">
+          محصولات شگفت انگیز
+        </h2>
+      </div>
+      <div class="animated flex flex-wrap justify-center items-center gap-3">
+        @if (isLoading) {
+          <app-spinner></app-spinner>
+        } @else {
+          @for (product of products?.slice(0, 6); track $index) {
+            <app-card
+              class="inline-block fade-in"
+              [product]="product"></app-card>
+          }
+        }
+      </div>
+    </div>
+
   </div>
 </main>

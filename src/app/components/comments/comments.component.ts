@@ -1,22 +1,38 @@
-import { Component, Injector, Input, OnInit } from '@angular/core';
+import {
+  Component,
+  Injector,
+  Input,
+  OnChanges,
+  OnInit,
+  SimpleChanges,
+} from '@angular/core';
 import { BaseComponent } from '../../base.component';
 import { MatButtonModule } from '@angular/material/button';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { SpinnerComponent } from '../spinner/spinner.component';
+import { GenerateArrayPipe } from '../../util/pipes/generateArray.pipe';
 
 @Component({
   selector: 'app-comments',
   standalone: true,
-  imports: [MatButtonModule, CommonModule, FormsModule, SpinnerComponent],
+  imports: [
+    MatButtonModule,
+    GenerateArrayPipe,
+    CommonModule,
+    FormsModule,
+    SpinnerComponent,
+  ],
   templateUrl: './comments.component.html',
   styleUrl: './comments.component.scss',
 })
-export class CommentsComponent extends BaseComponent implements OnInit {
+export class CommentsComponent
+  extends BaseComponent
+  implements OnInit, OnChanges
+{
   @Input() productsId?: any;
 
   comments?: any;
-
   isLoading = false;
 
   title?: string;
@@ -30,6 +46,13 @@ export class CommentsComponent extends BaseComponent implements OnInit {
   override ngOnInit() {
     super.ngOnInit();
     this.loadOnline();
+  }
+
+  ngOnChanges(changes: SimpleChanges) {
+    // Check if productsId has changed
+    if (changes['productsId'] && !changes['productsId'].isFirstChange()) {
+      this.loadOnline();
+    }
   }
 
   override loadOnline(): void {

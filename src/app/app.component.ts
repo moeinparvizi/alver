@@ -1,3 +1,4 @@
+import { IsLogIn } from './models/service.model';
 import { GlobalsService } from './services/globals.service';
 import { serviceApi } from './network/service/service.api';
 import { Component, OnInit } from '@angular/core';
@@ -28,9 +29,13 @@ export class AppComponent implements OnInit {
     this.isLoading = true;
     if (localStorage.getItem('token')) {
       this.serviceApi.isLogIn().subscribe({
-        next: () => {
+        next: (data: any) => {
           this.isLoading = false;
           this.GlobalsService.isLoggedIn = true;
+          if(data.is_login == false) {
+            this.GlobalsService.isLoggedIn = false;
+            localStorage.removeItem("token");
+          }
         },
         error: () => {
           this.isLoading = false;

@@ -13,9 +13,20 @@
   </figure>
 
   <div class="flex flex-col gap-5 w-full p-2">
-    <h4 class="text-primary text-right p-2">
+    <h4 class="text-secondary text-right p-2">
       {{ product?.name }}
     </h4>
-    <span class="text-gray text-left">{{ product?.price }}</span>
+    <div class="flex gap-1 text-gray" dir="rtl">
+      <span>
+        دسته بندی :
+      </span>
+      <p>
+        {{ product?.compony?.name }}
+      </p>
+    </div>
+    <div class="flex gap-3">
+      <span class="text-primary text-left">{{ product?.price }}</span>
+      <span class="text-accent text-left line-through">{{ product?.prev_price }}</span>
+    </div>
   </div>
 </button>

@@ -1,3 +1,4 @@
+import { GenerateArrayPipe } from './../../util/pipes/generateArray.pipe';
 import { GetProductsService } from './../../services/getProducts/get-products.service';
 import { Component, Injector, OnInit, ViewEncapsulation } from '@angular/core';
 import { BaseComponent } from '../../base.component';
@@ -19,6 +20,7 @@ import { CommentsComponent } from '../../components/comments/comments.component'
     MatDialogModule,
     ImageFullscreenComponent,
     CommentsComponent,
+    GenerateArrayPipe,
   ],
   templateUrl: './product-detail.component.html',
   styleUrl: './product-detail.component.scss',
@@ -31,8 +33,7 @@ export class ProductDetailComponent extends BaseComponent implements OnInit {
   count = 1;
   rate: any;
 
-  id?: number;
-  productId?: string | null;
+  id?: any;
 
   mainImage?: string;
 
@@ -54,15 +55,19 @@ export class ProductDetailComponent extends BaseComponent implements OnInit {
   override loadOnline(): void {
     super.loadOnline();
 
-    this.productId = this.ActiveRoute.snapshot.paramMap.get('id');
-    this.id = Number(this.productId);
+    this.ActiveRoute.paramMap.subscribe(params => {
+      const id = params.get('id');
+      this.id = Number(id);
+      this.onServiceCalled();
+    });
+  }
 
+  onServiceCalled() {
     this.getProductsService.getProduct(this.id).subscribe({
       next: ({ product, isLoading }) => {
         this.product = product;
         this.isLoading = isLoading;
-        this.rate = this.product?.rate
-        this.rate = this.generateArray(this.rate)
+        this.rate = this.product?.rate;
       },
       error: err => {
         console.error('Error fetching products:', err);
@@ -81,9 +86,5 @@ export class ProductDetailComponent extends BaseComponent implements OnInit {
     this.dialog.open(ImageFullscreenComponent, {
       data: { imageUrl: this.mainImage },
     });
-  }
-
-  generateArray(num: number): number[] {
-    return Array.from({ length: num }, (_, i) => i + 1);
   }
 }
