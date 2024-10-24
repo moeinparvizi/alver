@@ -11,6 +11,8 @@ export class GetProductsService extends BaseComponent {
   products: any[] = [];
   isLoading = false;
 
+  amazingProducts: any[] = [];
+
   constructor(injector: Injector) {
     super(injector);
   }
@@ -62,5 +64,24 @@ export class GetProductsService extends BaseComponent {
         return of(null); // Return null in case of an error
       })
     );
+  }
+
+  getAmazingProducts(): Observable<any> {
+    this.isLoading = true;
+    return new Observable(observer => {
+      this.serviceApi.getAmazingProduct().subscribe({
+        next: (res: GetProducts) => {
+          this.amazingProducts = res.products;
+          this.isLoading = false;
+          observer.next({ amazingProducts: this.amazingProducts, isLoading: this.isLoading });
+          observer.complete();
+        },
+        error: (err: any) => {
+          this.isLoading = false;
+          this.snakeBar.show(err, 'بستن', 3000, 'custom-snackbar');
+          observer.error(err);
+        },
+      });
+    });
   }
 }

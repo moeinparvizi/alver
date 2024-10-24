@@ -48,7 +48,9 @@ export abstract class BaseComponent {
     this.GlobalsService.setUserToken(localStorage.getItem("token"));
   }
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    this.executeLoader()
+  }
 
   ngAfterViewInit(): void {}
 
