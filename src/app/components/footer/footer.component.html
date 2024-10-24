@@ -12,11 +12,7 @@
           الور
         </h6>
         <p class="text-secondary">
-          لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ و با استفاده
-          از طراحان گرافیک است چاپگرها و متون بلکه روزنامه و مجله در ستون و
-          سطرآنچنان که لازم است و برای شرایط فعلی تکنولوژی مورد نیاز و کاربردهای
-          متنوع با هدف بهبود ابزارهای کاربردی می باشد کتابهای زیادی در شصت و سه
-          درصد گذشته حال و آینده شناخت فراوان جامعه و متخصصان را می طلبد تا با
+          {{ info.us }}
         </p>
       </div>
       <!-- Products section -->
@@ -52,22 +48,27 @@
         <p
           class="mb-4 flex gap-2 items-center justify-center md:justify-start text-gray hover:text-secondary">
           <i class="bi bi-house-door-fill"></i>
-          <a href=""> تهران </a>
+          <a href="">{{ info.address }}</a>
         </p>
         <p
           class="mb-4 gap-2 flex items-center justify-center md:justify-start text-gray hover:text-secondary">
           <i class="bi bi-envelope-fill"></i>
-          <a href="mailto:info@example.com">info&#64;example.com</a>
+          <a [href]="'mailto:'+info.email">{{ info.email }}</a>
         </p>
         <p
           class="mb-4 gap-2 flex items-center justify-center md:justify-start text-gray hover:text-secondary">
           <i class="bi bi-phone-fill"></i>
-          <a href="tel:+989192222222" dir="ltr">0919 22 22 222</a>
+          <a [href]="'tel:'+info.mobile1" dir="ltr">{{ info.mobile1 }}</a>
+        </p>
+        <p
+          class="mb-4 gap-2 flex items-center justify-center md:justify-start text-gray hover:text-secondary">
+          <i class="bi bi-phone-fill"></i>
+          <a [href]="'tel:'+info.mobile2" dir="ltr">{{ info.mobile2 }}</a>
         </p>
         <p
           class="flex gap-2 items-center justify-center md:justify-start text-gray hover:text-secondary">
           <i class="bi bi-telephone-fill"></i>
-          <a href="tel:+989192222222" dir="ltr"> 021 5674329 </a>
+          <a [href]="'tel:'+info.phone" dir="ltr">{{ info.phone }}</a>
         </p>
       </div>
 
@@ -87,14 +88,14 @@
     class="flex items-center justify-center text-secondary border-t p-6 border-slate-200">
     <!-- Social network icons container -->
     <div class="flex justify-center">
-      <a href="#!" class="me-6 [&>svg]:h-4 [&>svg]:w-4">
-        <a href="#"><i class="bi bi-telegram"></i></a>
+      <a class="me-6 [&>svg]:h-4 [&>svg]:w-4">
+        <a [href]="info.telegram"><i class="bi bi-telegram"></i></a>
       </a>
-      <a href="#!" class="me-6 [&>svg]:h-4 [&>svg]:w-4">
-        <a href="#"><i class="bi bi-whatsapp"></i></a>
+      <a class="me-6 [&>svg]:h-4 [&>svg]:w-4">
+        <a [href]="info.whatsapp"><i class="bi bi-whatsapp"></i></a>
       </a>
-      <a href="#!" class="me-6 [&>svg]:h-4 [&>svg]:w-4">
-        <a href="#"><i class="bi bi-instagram"></i></a>
+      <a class="me-6 [&>svg]:h-4 [&>svg]:w-4">
+        <a [href]="info.instagram"><i class="bi bi-instagram"></i></a>
       </a>
     </div>
   </div>

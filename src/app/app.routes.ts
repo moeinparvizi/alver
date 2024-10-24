@@ -34,6 +34,12 @@ export const routes: Routes = [
     component: LoginSignupComponent,
   },
   {
+    path: RouteUtil.ABOUT_US,
+    component: MasterLayoutComponent,
+    loadChildren: () =>
+      import('./pages/about-us/about-us.routes').then(c => c.routes),
+  },
+  {
     path: RouteUtil.NOT_FOUND,
     component: MasterLayoutComponent,
     loadChildren: () =>

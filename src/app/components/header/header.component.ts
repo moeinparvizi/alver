@@ -124,7 +124,7 @@ export class HeaderComponent extends BaseComponent implements OnInit {
   onPrifileClicked() {}
 
   onNavigationToLogIn() {
-    this.router.navigate(['/register']);
+    this.router.navigate([RouteUtil.REGISTER]);
   }
 
   onLogOutClicked() {
@@ -168,5 +168,7 @@ export class HeaderComponent extends BaseComponent implements OnInit {
     window.scrollTo({ top: 0, behavior: 'smooth' });
   }
 
-  onAboutUsClicked() {}
+  onAboutUsClicked() {
+    this.router.navigate([RouteUtil.ABOUT_US]);
+  }
 }
