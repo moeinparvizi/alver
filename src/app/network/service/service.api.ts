@@ -5,6 +5,7 @@ import { Constant } from '../../common/constant';
 import { CheckTokenBody, GetProducts, LoginBody } from '../../models/service.model';
 import { Observable } from 'rxjs';
 import { Config } from '../../common/config';
+import { Category, CategoryResponse, ProductResponse, ProductsResponse } from '../../models/data.response';
 
 @Injectable({
   providedIn: 'root',
@@ -36,8 +37,12 @@ export class serviceApi {
     });
   }
 
-  public getProducts(): Observable<GetProducts> {
-    return this.http.get<GetProducts>(Constant.getApp() + ServicePath.GET_PRODUCTS);
+  public getProducts(): Observable<ProductsResponse> {
+    return this.http.get<ProductsResponse>(Constant.getApp() + ServicePath.GET_PRODUCTS);
+  }
+
+  public getAmazingProduct(): Observable<ProductsResponse> {
+    return this.http.get<ProductsResponse>(Constant.getApp() + ServicePath.GET_AMAZING_PRODUCTS)
   }
 
   public getComments(body: any): Observable<any> {
@@ -50,8 +55,8 @@ export class serviceApi {
     });
   }
 
-  public getAmazingProduct(): Observable<any> {
-    return this.http.get<any>(Constant.getApp() + ServicePath.GET_AMAZING_PRODUCTS)
+  public getCategories(): Observable<CategoryResponse> {
+    return this.http.get<CategoryResponse>(Constant.getApp() + ServicePath.GET_CATEGORIES)
   }
 
   //   public getMyLoginInfo(): Observable<any> {

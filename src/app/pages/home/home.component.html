@@ -11,29 +11,33 @@
           فروشگاه ها
         </h2>
       </div>
-      <owl-carousel-o [options]="customOptions">
-        @for (item of [1, 2, 3, 4, 5, 6, 7, 8]; track $index) {
-          <ng-template carouselSlide>
-            <figure class="w-52 md:w-64 overflow-hidden relative">
-              <img
-                class="w-full rounded-md"
-                src="/assets/images/car-waters.webp"
-                alt="logo" />
+      @if (isLoading) {
+        <app-spinner [isLoading]="true"></app-spinner>
+      } @else {
+        <owl-carousel-o [options]="customOptions">
+          @for (category of categories; track $index) {
+            <ng-template carouselSlide>
+              <figure class="w-52 md:w-64 overflow-hidden relative">
+                <img
+                  class="w-full rounded-md"
+                  src="{{ category.image }}"
+                  alt="logo" />
 
-              <figcaption class="absolute bottom-0">
-                <button mat-flat-button color="primary">
-                  <i class="bi bi-box-arrow-up-left"></i>
-                  <div class="text-lg">فروشگاه فلان</div>
-                </button>
-              </figcaption>
-            </figure>
-          </ng-template>
-        }
-      </owl-carousel-o>
+                <figcaption class="absolute bottom-0">
+                  <button mat-flat-button color="primary">
+                    <i class="bi bi-box-arrow-up-left"></i>
+                    <div class="text-lg">{{ category.name }}</div>
+                  </button>
+                </figcaption>
+              </figure>
+            </ng-template>
+          }
+        </owl-carousel-o>
+      }
     </div>
 
     <div class="mt-5">
-      <div class="flex gap-2 w-full justify-end items-center">
+      <div class="flex gap-2 w-full justify-end items-center mb-5">
         <span class="w-full bg-primary" style="height: 1px"></span>
         <span class="rounded-full flex !w-3 !h-3 bg-primary"></span>
         <h2 class="text-right text-secondary text-2xl w-96 md:w-60">
@@ -42,7 +46,7 @@
       </div>
       <div class="animated flex flex-wrap justify-center items-center gap-3">
         @if (isLoading) {
-          <app-spinner></app-spinner>
+          <app-spinner [isLoading]="true"></app-spinner>
         } @else {
           @for (product of products?.slice(0, 6); track $index) {
             <app-card
@@ -54,7 +58,7 @@
     </div>
 
     <div class="mt-5">
-      <div class="flex gap-2 w-full justify-end items-center">
+      <div class="flex gap-2 w-full justify-end items-center mb-5">
         <span class="w-full bg-primary" style="height: 1px"></span>
         <span class="rounded-full flex !w-3 !h-3 bg-primary"></span>
         <h2 class="text-right text-secondary text-2xl w-96 md:w-72">
@@ -63,7 +67,7 @@
       </div>
       <div class="animated flex flex-wrap justify-center items-center gap-3">
         @if (isLoading) {
-          <app-spinner></app-spinner>
+          <app-spinner [isLoading]="true"></app-spinner>
         } @else {
           @for (amazingProduct of amazingProducts; track $index) {
             <app-card
@@ -73,6 +77,5 @@
         }
       </div>
     </div>
-
   </div>
 </main>

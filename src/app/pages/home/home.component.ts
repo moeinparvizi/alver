@@ -7,6 +7,7 @@ import { MatButtonModule } from '@angular/material/button';
 import { CardComponent } from '../../components/card/card.component';
 import { GetProductsService } from '../../services/getProducts/get-products.service';
 import { SpinnerComponent } from '../../components/spinner/spinner.component';
+import { CategoryResponse } from '../../models/data.response';
 
 @Component({
   selector: 'app-home',
@@ -31,7 +32,7 @@ export class HomeComponent extends BaseComponent implements OnInit {
     touchDrag: true,
     pullDrag: false,
     dots: true,
-    navSpeed: 900,
+    navSpeed: 1000,
     navText: [
       '<i class="bi bi-chevron-compact-left flex items-center"></i>',
       '<i class="bi bi-chevron-compact-right flex items-center"></i>',
@@ -41,20 +42,21 @@ export class HomeComponent extends BaseComponent implements OnInit {
         items: 2,
       },
       400: {
-        items: 3,
+        items: 2,
       },
       740: {
-        items: 5,
+        items: 4,
       },
       940: {
-        items: 6,
+        items: 5,
       },
     },
     nav: true,
   };
 
-  products?: any[];
-  amazingProducts?: any[];
+  products?: any = [];
+  amazingProducts?: any = [];
+  categories?: any = [];
 
   isLoading = true;
 
@@ -90,6 +92,19 @@ export class HomeComponent extends BaseComponent implements OnInit {
       error: err => {
         console.error('Error fetching products:', err);
         this.isLoading = false;
+      },
+    });
+
+    this.isLoading = true
+
+    this.serviceApi.getCategories().subscribe({
+      next: (res: CategoryResponse) => {
+        this.categories = res.categories;
+        this.isLoading = false;
+      },
+      error: (err: any) => {
+        this.isLoading = false;
+        this.snakeBar.show(err, 'بستن', 3000, 'custom-snackbar');
       },
     });
   }

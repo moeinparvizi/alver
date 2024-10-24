@@ -54,8 +54,17 @@
             برند ها
 
             <mat-menu #megaMenu="matMenu" class="menu-primary">
-              <button mat-menu-item (click)="onHandleNvigateToProduct()">Item 2</button>
+              @for(company of companies; track $index) {
+              <button mat-menu-item (click)="onHandleNvigateToProduct()">
+                {{ company.name }}
+              </button>
+              }
             </mat-menu>
+          </button>
+        </li>
+        <li>
+          <button mat-button color="primary" (click)="onAboutUsClicked()">
+            درباره ما
           </button>
         </li>
       </ul>
@@ -88,8 +97,17 @@
             برند ها
 
             <mat-menu #megaMenu="matMenu" class="menu-primary">
-              <button mat-menu-item>Item 2</button>
+              @for(company of companies; track $index) {
+              <button mat-menu-item (click)="onHandleNvigateToProduct()">
+                {{ company.name }}
+              </button>
+              }
             </mat-menu>
+          </button>
+        </li>
+        <li>
+          <button (click)="onAboutUsClicked()" mat-flat-button color="primary">
+            درباره ما
           </button>
         </li>
       </ul>
@@ -157,21 +175,18 @@
               <i class="bi bi-caret-down-fill"></i>
               }
             </button>
-            @if (showExtra) {
-            <ul class="text-gray w-full list-none flex justify-center">
-              <li>
-                <button mat-button style="color: rgba(0, 0, 0, 0.534)">
-                  item2
+            <ul [@openClose]="showExtra ? 'open' : 'closed'" class="text-gray w-full list-none flex flex-col items-end justify-center">
+              <li *ngFor="let company of companies; let i = index;">
+                <button mat-button (click)="onHandleNvigateToProduct()">
+                  {{ company.name }}
                 </button>
               </li>
-            </ul>
-            }
-            <button (click)="onHandleNvigateToProducts()" mat-button>
+            </ul>            <button (click)="onHandleNvigateToProducts()" mat-button>
               فروشگاه ها
             </button>
             @if(token) {
             <button (click)="onHandleNvigateToProducts()" mat-button>
-              مشخصات
+              مشخصات کاربر
             </button>
             <button (click)="onHandleNvigateToProducts()" mat-button>
               سفارشات
@@ -183,8 +198,8 @@
             <button (click)="onNavigationToLogIn()" mat-button color="primary">
               ورود
             </button>
-
             }
+            <button (click)="onAboutUsClicked()" mat-button>درباره ما</button>
           </dir>
 
           <button

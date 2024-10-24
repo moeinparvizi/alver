@@ -15,7 +15,7 @@ import { FormsModule } from '@angular/forms';
 import { SearchPipe } from '../../util/pipes/search.pipe';
 import { SearchComponent } from '../search/search.component';
 import { MatDialogRef } from '@angular/material/dialog';
-import { LogOutResponse } from '../../models/data.response';
+import { CategoryResponse, LogOutResponse } from '../../models/data.response';
 import { SpinnerComponent } from '../spinner/spinner.component';
 import { RouteUtil } from '../../util/route.util';
 
@@ -33,13 +33,14 @@ import { RouteUtil } from '../../util/route.util';
     SpinnerComponent,
   ],
   styleUrl: './header.component.scss',
-  templateUrl: './header.componenet.html',
+  templateUrl: './header.component.html',
 })
 export class HeaderComponent extends BaseComponent implements OnInit {
   isSticky = false;
   showExtra = false;
   token: string | null;
   isLoading = false;
+  companies?: any = [];
 
   @ViewChild('drawer') drawer!: MatDrawer;
   @ViewChild('test') menuTrigger!: MatMenuTrigger;
@@ -51,6 +52,21 @@ export class HeaderComponent extends BaseComponent implements OnInit {
   constructor(injector: Injector) {
     super(injector);
     this.token = this.GlobalsService.getUserToken();
+  }
+
+  override loadOnline() {
+    super.loadOnline();
+
+    this.serviceApi.getCategories().subscribe({
+      next: (res: CategoryResponse) => {
+        this.companies = res.categories;
+        this.isLoading = false;
+      },
+      error: (err: any) => {
+        this.isLoading = false;
+        this.snakeBar.show(err, 'بستن', 3000, 'custom-snackbar');
+      },
+    });
   }
 
   @HostListener('window:scroll', [])
@@ -151,4 +167,6 @@ export class HeaderComponent extends BaseComponent implements OnInit {
   scrollToTop() {
     window.scrollTo({ top: 0, behavior: 'smooth' });
   }
+
+  onAboutUsClicked() {}
 }

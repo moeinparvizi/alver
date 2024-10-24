@@ -3,6 +3,7 @@ import { Injectable, Injector } from '@angular/core';
 import { BaseComponent } from '../../base.component';
 import { Observable, of } from 'rxjs';
 import { map, catchError } from 'rxjs/operators';
+import { ProductsResponse } from '../../models/data.response';
 
 @Injectable({
   providedIn: 'root',
@@ -28,7 +29,7 @@ export class GetProductsService extends BaseComponent {
 
     return new Observable(observer => {
       this.serviceApi.getProducts().subscribe({
-        next: (res: GetProducts) => {
+        next: (res: ProductsResponse) => {
           this.products = res.products;
           this.isLoading = false;
           observer.next({ products: this.products, isLoading: this.isLoading });
@@ -70,7 +71,7 @@ export class GetProductsService extends BaseComponent {
     this.isLoading = true;
     return new Observable(observer => {
       this.serviceApi.getAmazingProduct().subscribe({
-        next: (res: GetProducts) => {
+        next: (res: ProductsResponse) => {
           this.amazingProducts = res.products;
           this.isLoading = false;
           observer.next({ amazingProducts: this.amazingProducts, isLoading: this.isLoading });

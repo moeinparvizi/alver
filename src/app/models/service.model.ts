@@ -1,4 +1,4 @@
-import { ProductsResponse } from './data.response';
+import { Category, ProductsResponse } from './data.response';
 
 export interface Query {
   key: string;
@@ -20,5 +20,12 @@ export interface IsLogIn {
 
 export interface GetProducts {
   products: ProductsResponse[];
+  count: number;
   status: number;
+}
+
+export interface GetCategories {
+  count: number;
+  status: number;
+  categories: Category[];
 }

@@ -8,4 +8,5 @@ export class ServicePath {
   public static readonly GET_COMMENTS = 'products/comment/get/';
   public static readonly ADD_COMMENTS = 'products/comment/add/';
   public static readonly GET_AMAZING_PRODUCTS = 'products/amazing/get/';
+  public static readonly GET_CATEGORIES = 'products/category/get/';
 }

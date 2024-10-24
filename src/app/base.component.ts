@@ -11,6 +11,7 @@ import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 import { MatDialog } from '@angular/material/dialog';
 import { Dialog } from '@angular/cdk/dialog';
 import { SnackbarService } from './services/snakebar/snackbar.service';
+import { animationOpenClose } from './util/animation/animation.openClose';
 
 
 // AoT requires an exported function for factories
@@ -20,7 +21,7 @@ export function HttpLoaderFactory(httpClient: HttpClient) {
 
 @Component({
   template: '',
-  animations: [animationfadeIn],
+  animations: [animationfadeIn, animationOpenClose],
   providers: [serviceApi]
 })
 export abstract class BaseComponent {

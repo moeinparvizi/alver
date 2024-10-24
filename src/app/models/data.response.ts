@@ -22,9 +22,10 @@ export interface LogOutResponse {
   status?: number;
 }
 
-interface Category {
-  id: number;
-  name: string;
+export interface Category {
+  id?: number;
+  name?: string;
+  image?: string;
 }
 interface Company {
   id: number;
@@ -40,12 +41,19 @@ export interface ProductResponse {
   image: string;
   property: any[]; // If you have specific structure for properties, define it here
   rate: number;
-  images: string[]; // Array of image URLs
+  images: any[]; // Array of image URLs
   description: string;
   unit?: any[];
 }
 
 export interface ProductsResponse {
   products: ProductResponse[];
-  success: number;
+  count: number;
+  status: number;
+}
+
+export interface CategoryResponse {
+  count: number;
+  status: number;
+  categories: Category[];
 }
