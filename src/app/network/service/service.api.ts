@@ -59,6 +59,10 @@ export class serviceApi {
     return this.http.get<CategoryResponse>(Constant.getApp() + ServicePath.GET_CATEGORIES)
   }
 
+  public getAboutUs(): Observable<any> {
+    return this.http.get<any>(Constant.getApp() + ServicePath.GET_ABOUT_US)
+  }
+
   //   public getMyLoginInfo(): Observable<any> {
   //   return this.http.post(ServicePath.GET_LOGIN_INFO, {});
   // }
