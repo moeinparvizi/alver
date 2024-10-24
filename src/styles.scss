@@ -116,7 +116,6 @@ html {
     animation: fade-in linear forwards;
     animation-timeline: view();
     animation-range: entry 200px;
-    animation-duration: 20s;
   }
 
   @keyframes fade-in {
