@@ -41,13 +41,17 @@ export class serviceApi {
   }
 
   public getComments(body: any): Observable<any> {
-    return this.http.post(Constant.getApp() + ServicePath.GET_COMMNETS, body);
+    return this.http.post(Constant.getApp() + ServicePath.GET_COMMENTS, body);
   }
 
   public addComment(body: any): Observable<any> {
-    return this.http.post(Constant.getApp() + ServicePath.ADD_COMMNETS, body, {
+    return this.http.post(Constant.getApp() + ServicePath.ADD_COMMENTS, body, {
       headers: this.httpHeader,
     });
+  }
+
+  public getAmazingProduct(): Observable<any> {
+    return this.http.get<any>(Constant.getApp() + ServicePath.GET_AMAZING_PRODUCTS)
   }
 
   //   public getMyLoginInfo(): Observable<any> {

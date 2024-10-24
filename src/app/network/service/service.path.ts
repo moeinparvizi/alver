@@ -5,6 +5,7 @@ export class ServicePath {
   public static readonly IS_LOGIN = 'auth/is_login/';
   public static readonly LOGOUT = 'auth/logout/';
   public static readonly GET_PRODUCTS = 'products/get/';
-  public static readonly GET_COMMNETS = 'products/comment/get/';
-  public static readonly ADD_COMMNETS = 'products/comment/add/';
+  public static readonly GET_COMMENTS = 'products/comment/get/';
+  public static readonly ADD_COMMENTS = 'products/comment/add/';
+  public static readonly GET_AMAZING_PRODUCTS = 'products/amazing/get/';
 }
