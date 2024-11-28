@@ -24,7 +24,7 @@
     <div
       class="container w-full h-full flex justify-end md:justify-center items-center relative"
       [ngClass]="isSticky ? '' : '!justify-between'"
-      [ngStyle]="isSticky ? {} : { 'direction': 'rtl' }">
+      [ngStyle]="isSticky ? {} : { direction: 'rtl' }">
       <figure [ngClass]="isSticky ? 'hidden' : ''">
         <img src="assets/images/alver-logo.png" width="80px" alt="logo" />
       </figure>
@@ -43,7 +43,7 @@
             (click)="onHandleNvigateToProducts()"
             mat-button
             color="primary">
-            فروشگاه ها
+            فروشگاه
           </button>
         </li>
         <li>
@@ -51,11 +51,13 @@
             برند ها
 
             <mat-menu #megaMenu="matMenu" class="menu-primary">
-              @for(company of companies; track $index) {
-              <button mat-menu-item (click)="onHandleNvigateToProduct()">
-                {{ company.name }}
-              </button>
-              }
+              <div class="flex items-center flex-wrap">
+                @for (company of companies; track $index) {
+                  <button mat-menu-item (click)="onHandleNvigateToProduct()" class="!w-5/12">
+                    {{ company.name }}
+                  </button>
+                }
+              </div>
             </mat-menu>
           </button>
         </li>
@@ -83,7 +85,7 @@
             (click)="onHandleNvigateToProducts()"
             mat-flat-button
             color="primary">
-            فروشگاه ها
+            فروشگاه
           </button>
         </li>
         <li>
@@ -94,11 +96,13 @@
             برند ها
 
             <mat-menu #megaMenu="matMenu" class="menu-primary">
-              @for(company of companies; track $index) {
-              <button mat-menu-item (click)="onHandleNvigateToProduct()">
-                {{ company.name }}
-              </button>
-              }
+              <div class="flex justify-center items-center flex-wrap">
+                @for (company of companies; track $index) {
+                  <button mat-menu-item (click)="onHandleNvigateToProduct()">
+                    {{ company.name }}
+                  </button>
+                }
+              </div>
             </mat-menu>
           </button>
         </li>
@@ -119,34 +123,35 @@
           <i class="bi bi-cart header-icon-i"></i>
         </button>
         @if (token) {
-        <button
-          (menuClosed)="onMenuCloseClicked()"
-          #test="matMenuTrigger"
-          [matMenuTriggerFor]="menu">
-          <i class="bi bi-person header-icon-i"></i>
-        </button>
-        <mat-menu #menu="matMenu">
           <button
-            style="text-align: right"
-            mat-menu-item
-            (click)="onPrifileClicked()">
-            مشخصات کاربر
+            (menuClosed)="onMenuCloseClicked()"
+            #test="matMenuTrigger"
+            [matMenuTriggerFor]="menu">
+            <i class="bi bi-person header-icon-i"></i>
           </button>
-          <button style="text-align: right" mat-menu-item>سفارشات</button>
-          <button
-            style="color: rgb(117, 0, 0); text-align: right"
-            (click)="onLogOutClicked()"
-            mat-menu-item>
-            @if(isLoading) {
-            <app-spinner [isLoading]="isLoading"></app-spinner>
-
-            } @else { خروج }
-          </button>
-        </mat-menu>
+          <mat-menu #menu="matMenu">
+            <button
+              style="text-align: right"
+              mat-menu-item
+              (click)="onPrifileClicked()">
+              مشخصات کاربر
+            </button>
+            <button style="text-align: right" mat-menu-item>سفارشات</button>
+            <button
+              style="color: rgb(117, 0, 0); text-align: right"
+              (click)="onLogOutClicked()"
+              mat-menu-item>
+              @if (isLoading) {
+                <app-spinner [isLoading]="isLoading"></app-spinner>
+              } @else {
+                خروج
+              }
+            </button>
+          </mat-menu>
         } @else {
-        <button (click)="onNavigationToLogIn()">
-          <i class="bi bi-person header-icon-i text-primary"></i>
-        </button>
+          <button (click)="onNavigationToLogIn()">
+            <i class="bi bi-person header-icon-i text-primary"></i>
+          </button>
         }
       </dir>
 
@@ -166,35 +171,42 @@
             <button mat-button (click)="onHandleNvigateToHome()">خانه</button>
 
             <button (click)="showExtra = !showExtra" mat-button>
-              برند ها @if(showExtra) {
-              <i class="bi bi-caret-up-fill"></i>
+              برند ها
+              @if (showExtra) {
+                <i class="bi bi-caret-up-fill"></i>
               } @else {
-              <i class="bi bi-caret-down-fill"></i>
+                <i class="bi bi-caret-down-fill"></i>
               }
             </button>
-            <ul [@openClose]="showExtra ? 'open' : 'closed'" class="text-gray w-full list-none flex flex-col items-end justify-center">
-              <li *ngFor="let company of companies; let i = index;">
+            <ul
+              [@openClose]="showExtra ? 'open' : 'closed'"
+              class="text-gray w-full list-none flex flex-col items-end justify-center">
+              <li *ngFor="let company of companies; let i = index">
                 <button mat-button (click)="onHandleNvigateToProduct()">
                   {{ company.name }}
                 </button>
               </li>
-            </ul>            <button (click)="onHandleNvigateToProducts()" mat-button>
-              فروشگاه ها
-            </button>
-            @if(token) {
+            </ul>
             <button (click)="onHandleNvigateToProducts()" mat-button>
-              مشخصات کاربر
+              فروشگاه
             </button>
-            <button (click)="onHandleNvigateToProducts()" mat-button>
-              سفارشات
-            </button>
-            <button (click)="onLogOutClicked()" mat-button color="warn">
-              خروج
-            </button>
+            @if (token) {
+              <button (click)="onHandleNvigateToProducts()" mat-button>
+                مشخصات کاربر
+              </button>
+              <button (click)="onHandleNvigateToProducts()" mat-button>
+                سفارشات
+              </button>
+              <button (click)="onLogOutClicked()" mat-button color="warn">
+                خروج
+              </button>
             } @else {
-            <button (click)="onNavigationToLogIn()" mat-button color="primary">
-              ورود
-            </button>
+              <button
+                (click)="onNavigationToLogIn()"
+                mat-button
+                color="primary">
+                ورود
+              </button>
             }
             <button (click)="onAboutUsClicked()" mat-button>درباره ما</button>
           </dir>
@@ -215,9 +227,9 @@
             mat-button
             (click)="drawer.toggle()">
             @if (drawer.opened) {
-            <i class="bi bi-x-lg"></i>
+              <i class="bi bi-x-lg"></i>
             } @else {
-            <i class="bi bi-list"></i>
+              <i class="bi bi-list"></i>
             }
           </button>
         </div>
@@ -226,10 +238,10 @@
   </nav>
 </header>
 
-@if(isSticky) {
-<button
-  class="rounded-full bg-primary transition-all hover:bg-sky-700 fixed bottom-2 right-4 w-14 h-14 flex justify-center items-center text-white text-xl font-bold"
-  (click)="scrollToTop()">
-  <i class="bi bi-chevron-up"></i>
-</button>
+@if (isSticky) {
+  <button
+    class="rounded-full bg-primary transition-all hover:bg-sky-700 fixed bottom-2 right-4 w-14 h-14 flex justify-center items-center text-white text-xl font-bold"
+    (click)="scrollToTop()">
+    <i class="bi bi-chevron-up"></i>
+  </button>
 }

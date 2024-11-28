@@ -2,26 +2,29 @@
   <app-slider-images></app-slider-images>
 </div>
 <main class="flex justify-center">
-  <div class="container">
-    <div class="w-full home-shops p-2 mt-5 mb-5">
-      <div class="flex gap-2 w-full justify-end items-center">
-        <span class="w-full bg-primary" style="height: 1px"></span>
-        <span class="rounded-full flex !w-3 !h-3 bg-primary"></span>
-        <h2 class="text-right text-secondary text-2xl w-40 md:w-36">
-          فروشگاه ها
-        </h2>
-      </div>
-      @if (isLoading) {
-        <app-spinner [isLoading]="true"></app-spinner>
-      } @else {
+  @if (isLoading) {
+    <app-spinner [isLoading]="true"></app-spinner>
+  } @else {
+    <div class="container">
+      <div class="w-full home-shops p-2 mt-5 mb-5">
+        <div class="flex gap-2 w-full justify-end items-center">
+          <span class="w-full bg-primary" style="height: 1px"></span>
+          <span class="rounded-full flex !w-3 !h-3 bg-primary"></span>
+          <h2 class="text-right text-secondary text-2xl w-40 md:w-36">
+            فروشگاه ها
+          </h2>
+        </div>
         <owl-carousel-o [options]="customOptions">
           @for (category of categories; track $index) {
             <ng-template carouselSlide>
-              <figure class="w-52 md:w-64 overflow-hidden relative">
+              <figure (click)="onNavigateToProductsPage(category.id)" class="w-52 md:w-64 overflow-hidden relative">
                 <img
                   class="w-full rounded-md"
+                  [hidden]="isImageLoading"
+                  (load)="onImageLoad()"
                   src="{{ category.image }}"
                   alt="logo" />
+                <app-spinner *ngIf="isImageLoading" [isLoading]="true"></app-spinner>
 
                 <figcaption class="absolute bottom-0">
                   <button mat-flat-button color="primary">
@@ -33,49 +36,41 @@
             </ng-template>
           }
         </owl-carousel-o>
-      }
-    </div>
-
-    <div class="mt-5">
-      <div class="flex gap-2 w-full justify-end items-center mb-5">
-        <span class="w-full bg-primary" style="height: 1px"></span>
-        <span class="rounded-full flex !w-3 !h-3 bg-primary"></span>
-        <h2 class="text-right text-secondary text-2xl w-96 md:w-60">
-          محصولات پیشنهادی
-        </h2>
       </div>
-      <div class="animated flex flex-wrap justify-center items-center gap-3">
-        @if (isLoading) {
-          <app-spinner [isLoading]="true"></app-spinner>
-        } @else {
+
+      <div class="mt-5">
+        <div class="flex gap-2 w-full justify-end items-center mb-5">
+          <span class="w-full bg-primary" style="height: 1px"></span>
+          <span class="rounded-full flex !w-3 !h-3 bg-primary"></span>
+          <h2 class="text-right text-secondary text-2xl w-96 md:w-60">
+            محصولات پیشنهادی
+          </h2>
+        </div>
+        <div class="animated flex flex-wrap justify-center items-center gap-3">
           @for (product of products?.slice(0, 6); track $index) {
             <app-card
               class="inline-block fade-in"
               [product]="product"></app-card>
           }
-        }
+        </div>
       </div>
-    </div>
 
-    <div class="mt-5">
-      <div class="flex gap-2 w-full justify-end items-center mb-5">
-        <span class="w-full bg-primary" style="height: 1px"></span>
-        <span class="rounded-full flex !w-3 !h-3 bg-primary"></span>
-        <h2 class="text-right text-secondary text-2xl w-96 md:w-72">
-          محصولات شگفت انگیز
-        </h2>
-      </div>
-      <div class="animated flex flex-wrap justify-center items-center gap-3">
-        @if (isLoading) {
-          <app-spinner [isLoading]="true"></app-spinner>
-        } @else {
+      <div class="mt-5">
+        <div class="flex gap-2 w-full justify-end items-center mb-5">
+          <span class="w-full bg-primary" style="height: 1px"></span>
+          <span class="rounded-full flex !w-3 !h-3 bg-primary"></span>
+          <h2 class="text-right text-secondary text-2xl w-96 md:w-72">
+            محصولات شگفت انگیز
+          </h2>
+        </div>
+        <div class="animated flex flex-wrap justify-center items-center gap-3">
           @for (amazingProduct of amazingProducts; track $index) {
             <app-card
               class="inline-block fade-in"
               [product]="amazingProduct"></app-card>
           }
-        }
+        </div>
       </div>
     </div>
-  </div>
+  }
 </main>

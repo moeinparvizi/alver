@@ -1,1 +1,88 @@
-<h2>products</h2>
+<div class="flex justify-center">
+  <div class="container products">
+
+    <div class="flex flex-wrap-reverse">
+      <div class="w-full lg:w-3/4">
+
+        <div dir="rtl" class="flex flex-col gap-2">
+          <div class="inp-search bg-whitee rounded-xl pe-3 overflow-hidden flex justify-center items-center shadow-2xl shadow-zinc-500 text-secondary">
+            <input type="text" class="p-2 w-full h-full focus:outline-none" (keyup.enter)="onSearchClicked()" [(ngModel)]="productName" placeholder="لطفا نام محصول مورد نظر را وارد کنید">
+
+            <i (click)="onSearchClicked()" class="bi bi-search header-icon-i-search"></i>
+          </div>
+          <div class="flex gap-2 mt-4 mb-5">
+            <span class="text-secondary">ترتیب براساس : </span>
+            <mat-radio-group [(ngModel)]="orderBy" (ngModelChange)="loadOnline()" aria-label="Select an option">
+              <mat-radio-button class="custom-radio" value="">نرمال</mat-radio-button>
+              <mat-radio-button class="custom-radio" value="new">جدید ترین</mat-radio-button>
+              <mat-radio-button class="custom-radio" value="inexpensive">ارزان ترین</mat-radio-button>
+              <mat-radio-button class="custom-radio" value="expensive">گران ترین</mat-radio-button>
+            </mat-radio-group>
+          </div>
+        </div>
+
+          @if (isLoading) {
+            <app-spinner [isLoading]="true"></app-spinner>
+          } @else {
+            <div class="animated flex flex-wrap justify-center items-center gap-3">
+              @for (product of products; track $index) {
+                <app-card
+                  class="inline-block fade-in"
+                  [product]="product"></app-card>
+              }
+            </div>
+          }
+        @if(products.length === 0) {
+          <span class="text-secondary h-full w-full flex items-center justify-center">
+              چیزی پیدا نشد
+            </span>
+        }
+
+      </div>
+
+      <div class="w-full lg:w-3/12 p-4 flex flex-col gap-2">
+
+        <div class="w-full transition-all flex flex-col gap-2 bg-whitee rounded-lg p-5 shadow-2xl shadow-zinc-400 overflow-hidden hover:shadow-zinc-500" dir="rtl">
+          <span class="text-secondary text-xl">بر اساس قیمت (به تومان)</span>
+
+          <div class="flex gap-3">
+            <input class="inp-primary" type="number" [(ngModel)]="max" placeholder="حداکثر قیمت">
+            <input class="inp-primary" type="number" [(ngModel)]="min" placeholder="حداقل قیمت">
+          </div>
+        </div>
+
+        <div class="w-full transition-all flex flex-col gap-2 bg-whitee rounded-lg p-5 shadow-2xl shadow-zinc-400 overflow-hidden hover:shadow-zinc-500" dir="rtl">
+          <span class="text-secondary text-xl">بر اساس برندها</span>
+
+          <div class="flex gap-3">
+            <ul class="w-full h-96">
+              <li class="flex gap-2 mb-1">
+                <input
+                  type="checkbox"
+                  id="select-all"
+                  [checked]="areAllSelected()"
+                  (change)="onSelectAll($event)" />
+                <label for="select-all">انتخاب همه</label>
+              </li>
+              @for (category of categories; track $index) {
+                <li class="ms-3 flex gap-2 mb-1">
+                  <input
+                    type="checkbox"
+                    [id]="'cat'+$index"
+                    [value]="category.id"
+                    [checked]="selectedCategories.includes(category.id)"
+                    (change)="onCategoryChange(category.id, $event)" />
+                  <label class="flex w-full" [for]="'cat'+$index">
+                    {{ category.name }}
+                  </label>
+                </li>
+              }
+            </ul>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+  </div>
+</div>

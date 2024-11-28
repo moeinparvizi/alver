@@ -8,6 +8,7 @@ import { CardComponent } from '../../components/card/card.component';
 import { GetProductsService } from '../../services/getProducts/get-products.service';
 import { SpinnerComponent } from '../../components/spinner/spinner.component';
 import { CategoryResponse } from '../../models/data.response';
+import { NgIf } from '@angular/common';
 
 @Component({
   selector: 'app-home',
@@ -20,6 +21,7 @@ import { CategoryResponse } from '../../models/data.response';
     MatButtonModule,
     CardComponent,
     SpinnerComponent,
+    NgIf,
   ],
 })
 export class HomeComponent extends BaseComponent implements OnInit {
@@ -57,6 +59,7 @@ export class HomeComponent extends BaseComponent implements OnInit {
   products?: any = [];
   amazingProducts?: any = [];
   categories?: any = [];
+  isImageLoading = true;
 
   isLoading = true;
 
@@ -95,7 +98,7 @@ export class HomeComponent extends BaseComponent implements OnInit {
       },
     });
 
-    this.isLoading = true
+    this.isLoading = true;
 
     this.serviceApi.getCategories().subscribe({
       next: (res: CategoryResponse) => {
@@ -106,6 +109,16 @@ export class HomeComponent extends BaseComponent implements OnInit {
         this.isLoading = false;
         this.snakeBar.show(err, 'بستن', 3000, 'custom-snackbar');
       },
+    });
+  }
+
+  onImageLoad(): void {
+    this.isImageLoading = false;
+  }
+
+  onNavigateToProductsPage(categoryId: number) {
+    this.router.navigate(['products'], {
+      queryParams: { id: categoryId },
     });
   }
 }

@@ -2,10 +2,9 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { ServicePath } from './service.path';
 import { Constant } from '../../common/constant';
-import { CheckTokenBody, GetProducts, LoginBody } from '../../models/service.model';
+import { CheckTokenBody, LoginBody } from '../../models/service.model';
 import { Observable } from 'rxjs';
-import { Config } from '../../common/config';
-import { Category, CategoryResponse, ProductResponse, ProductsResponse } from '../../models/data.response';
+import { CategoryResponse, ProductsResponse } from '../../models/data.response';
 
 @Injectable({
   providedIn: 'root',
@@ -59,8 +58,16 @@ export class serviceApi {
     return this.http.get<CategoryResponse>(Constant.getApp() + ServicePath.GET_CATEGORIES)
   }
 
+  public getCompanies(): Observable<CategoryResponse> {
+    return this.http.get<CategoryResponse>(Constant.getApp() + ServicePath.GET_COMPANIES)
+  }
+
   public getAboutUs(): Observable<any> {
     return this.http.get<any>(Constant.getApp() + ServicePath.GET_ABOUT_US)
+  }
+
+  public getProductsByFilters(body: any): Observable<any> {
+    return this.http.post(Constant.getApp() + ServicePath.GET_PRODUCTS_BY_FILTERS, body);
   }
 
   //   public getMyLoginInfo(): Observable<any> {

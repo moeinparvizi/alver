@@ -1,4 +1,3 @@
-import { GetProducts } from './../../models/service.model';
 import { Injectable, Injector } from '@angular/core';
 import { BaseComponent } from '../../base.component';
 import { Observable, of } from 'rxjs';
@@ -13,6 +12,8 @@ export class GetProductsService extends BaseComponent {
   isLoading = false;
 
   amazingProducts: any[] = [];
+
+  productsByFilters: any[] = [];
 
   constructor(injector: Injector) {
     super(injector);
@@ -75,6 +76,25 @@ export class GetProductsService extends BaseComponent {
           this.amazingProducts = res.products;
           this.isLoading = false;
           observer.next({ amazingProducts: this.amazingProducts, isLoading: this.isLoading });
+          observer.complete();
+        },
+        error: (err: any) => {
+          this.isLoading = false;
+          this.snakeBar.show(err, 'بستن', 3000, 'custom-snackbar');
+          observer.error(err);
+        },
+      });
+    });
+  }
+
+  getProductsByFilters(body: any): Observable<any> {
+    this.isLoading = true;
+    return new Observable(observer => {
+      this.serviceApi.getProductsByFilters(body).subscribe({
+        next: (res: any) => {
+          this.productsByFilters = res.data;
+          this.isLoading = false;
+          observer.next({ products: this.productsByFilters, isLoading: this.isLoading });
           observer.complete();
         },
         error: (err: any) => {

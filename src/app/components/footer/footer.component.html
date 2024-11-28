@@ -12,7 +12,7 @@
           الور
         </h6>
         <p class="text-secondary">
-          {{ info.us }}
+          {{ info?.us }}
         </p>
       </div>
       <!-- Products section -->
@@ -48,27 +48,27 @@
         <p
           class="mb-4 flex gap-2 items-center justify-center md:justify-start text-gray hover:text-secondary">
           <i class="bi bi-house-door-fill"></i>
-          <a href="" class="text-right">{{ info.address }}</a>
+          <a href="" class="text-right">{{ info?.address }}</a>
         </p>
         <p
           class="mb-4 gap-2 flex items-center justify-center md:justify-start text-gray hover:text-secondary">
           <i class="bi bi-envelope-fill"></i>
-          <a [href]="'mailto:'+info.email">{{ info.email }}</a>
+          <a [href]="'mailto:'+info?.email">{{ info?.email }}</a>
         </p>
         <p
           class="mb-4 gap-2 flex items-center justify-center md:justify-start text-gray hover:text-secondary">
           <i class="bi bi-phone-fill"></i>
-          <a [href]="'tel:'+info.mobile1" dir="ltr">{{ info.mobile1 }}</a>
+          <a [href]="'tel:'+info?.mobile1" dir="ltr">{{ info?.mobile1 }}</a>
         </p>
         <p
           class="mb-4 gap-2 flex items-center justify-center md:justify-start text-gray hover:text-secondary">
           <i class="bi bi-phone-fill"></i>
-          <a [href]="'tel:'+info.mobile2" dir="ltr">{{ info.mobile2 }}</a>
+          <a [href]="'tel:'+info?.mobile2" dir="ltr">{{ info?.mobile2 }}</a>
         </p>
         <p
           class="flex gap-2 items-center justify-center md:justify-start text-gray hover:text-secondary">
           <i class="bi bi-telephone-fill"></i>
-          <a [href]="'tel:'+info.phone" dir="ltr">{{ info.phone }}</a>
+          <a [href]="'tel:'+info?.phone" dir="ltr">{{ info?.phone }}</a>
         </p>
       </div>
 
@@ -89,13 +89,13 @@
     <!-- Social network icons container -->
     <div class="flex justify-center">
       <a class="me-6 [&>svg]:h-4 [&>svg]:w-4">
-        <a [href]="info.telegram"><i class="bi bi-telegram"></i></a>
+        <a [href]="info?.telegram"><i class="bi bi-telegram"></i></a>
       </a>
       <a class="me-6 [&>svg]:h-4 [&>svg]:w-4">
-        <a [href]="info.whatsapp"><i class="bi bi-whatsapp"></i></a>
+        <a [href]="info?.whatsapp"><i class="bi bi-whatsapp"></i></a>
       </a>
       <a class="me-6 [&>svg]:h-4 [&>svg]:w-4">
-        <a [href]="info.instagram"><i class="bi bi-instagram"></i></a>
+        <a [href]="info?.instagram"><i class="bi bi-instagram"></i></a>
       </a>
     </div>
   </div>

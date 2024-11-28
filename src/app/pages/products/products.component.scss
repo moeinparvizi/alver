@@ -1,0 +1,37 @@
+@tailwind components;
+
+:host .mat-mdc-radio-group {
+  --mat-radio-label-text-color: #2b2d42 !important;
+  display: flex;
+  gap: 16px;
+}
+
+:host .mat-mdc-radio-checked {
+  --mat-radio-label-text-color: #1da1f2 !important;
+}
+
+:host ::ng-deep .mat-mdc-radio-button .mdc-radio {
+  display: none !important;
+  visibility: hidden !important;
+}
+
+.products {
+  .inp-search {
+    //padding: 0 24px;
+
+    //& > input {
+    //  border: none !important;
+    //
+    //  &:focus {
+    //    border: none !important;
+    //  }
+    //}
+  }
+}
+
+
+@layer components {
+  .inp-primary {
+    @apply p-2 w-full h-full focus:outline-none rounded-xl shadow-2xl shadow-zinc-500 focus:shadow-zinc-700 text-secondary;
+  }
+}
