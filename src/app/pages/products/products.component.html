@@ -5,8 +5,10 @@
       <div class="w-full lg:w-3/4">
 
         <div dir="rtl" class="flex flex-col gap-2">
-          <div class="inp-search bg-whitee rounded-xl pe-3 overflow-hidden flex justify-center items-center shadow-2xl shadow-zinc-500 text-secondary">
-            <input type="text" class="p-2 w-full h-full focus:outline-none" (keyup.enter)="onSearchClicked()" [(ngModel)]="productName" placeholder="لطفا نام محصول مورد نظر را وارد کنید">
+          <div
+            class="inp-search bg-whitee rounded-xl pe-3 overflow-hidden flex justify-center items-center shadow-2xl shadow-zinc-500 text-secondary">
+            <input type="text" class="p-2 w-full h-full focus:outline-none" (keyup.enter)="onSearchClicked()"
+                   [(ngModel)]="productName" placeholder="لطفا نام محصول مورد نظر را وارد کنید">
 
             <i (click)="onSearchClicked()" class="bi bi-search header-icon-i-search"></i>
           </div>
@@ -21,28 +23,30 @@
           </div>
         </div>
 
-          @if (isLoading) {
-            <app-spinner [isLoading]="true"></app-spinner>
-          } @else {
-            <div class="animated flex flex-wrap justify-center items-center gap-3">
-              @for (product of products; track $index) {
-                <app-card
-                  class="inline-block fade-in"
-                  [product]="product"></app-card>
-              }
-            </div>
-          }
-        @if(products.length === 0) {
+        @if (isLoading) {
+          <app-spinner [isLoading]="true"></app-spinner>
+        } @else {
+          <div class="animated flex flex-wrap justify-center items-center gap-3">
+            @for (product of products; track $index) {
+              <app-card
+                class="inline-block fade-in"
+                [product]="product"></app-card>
+            }
+          </div>
+        }
+        @if (products?.length === 0) {
           <span class="text-secondary h-full w-full flex items-center justify-center">
               چیزی پیدا نشد
-            </span>
+          </span>
         }
 
       </div>
 
       <div class="w-full lg:w-3/12 p-4 flex flex-col gap-2">
 
-        <div class="w-full transition-all flex flex-col gap-2 bg-whitee rounded-lg p-5 shadow-2xl shadow-zinc-400 overflow-hidden hover:shadow-zinc-500" dir="rtl">
+        <div
+          class="w-full transition-all flex flex-col gap-2 bg-whitee rounded-lg p-5 shadow-2xl shadow-zinc-400 overflow-hidden hover:shadow-zinc-500"
+          dir="rtl">
           <span class="text-secondary text-xl">بر اساس قیمت (به تومان)</span>
 
           <div class="flex gap-3">
@@ -51,7 +55,9 @@
           </div>
         </div>
 
-        <div class="w-full transition-all flex flex-col gap-2 bg-whitee rounded-lg p-5 shadow-2xl shadow-zinc-400 overflow-hidden hover:shadow-zinc-500" dir="rtl">
+        <div
+          class="w-full transition-all flex flex-col gap-2 bg-whitee rounded-lg p-5 shadow-2xl shadow-zinc-400 overflow-hidden hover:shadow-zinc-500"
+          dir="rtl">
           <span class="text-secondary text-xl">بر اساس برندها</span>
 
           <div class="flex gap-3">

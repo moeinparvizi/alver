@@ -86,9 +86,9 @@ export class HeaderComponent extends BaseComponent implements OnInit {
     this.router.navigate([RouteUtil.HOME]).then();
   }
 
-  onHandleNavigateToProduct(): void {
+  onHandleNavigateToProduct(company: any): void {
     this.router.navigate([RouteUtil.PRODUCTS, 1, 'test'], {
-      queryParams: { id: 1, name: 'test' },
+      queryParams: { id: company.id, name: company.name },
     }).then();
   }
 

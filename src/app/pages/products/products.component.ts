@@ -1,4 +1,4 @@
-import { Component, inject, Injector, OnInit } from '@angular/core';
+import { Component, Injector, OnInit } from '@angular/core';
 import { GetProductsService } from '../../services/getProducts/get-products.service';
 import { FormsModule } from '@angular/forms';
 import { MatRadioModule } from '@angular/material/radio';
@@ -9,7 +9,6 @@ import { CategoryResponse } from '../../models/data.response';
 import { CarouselModule } from 'ngx-owl-carousel-o';
 import { MatButton } from '@angular/material/button';
 import { NgIf } from '@angular/common';
-import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-products',
@@ -27,39 +26,36 @@ import { ActivatedRoute } from '@angular/router';
   styleUrl: './products.component.scss',
 })
 export class ProductsComponent extends BaseComponent implements OnInit {
-  activeRoute: ActivatedRoute = inject(ActivatedRoute);
   isLoading = false;
   products: any;
   categories?: any = [];
   companies?: any = [];
-  param: any;
 
   productName?: any;
   orderBy?: string = '';
   max?: number;
   min?: number;
-  selectedCategories?: any = [2, 3];
+  private _selectedCategories: any[] = [];
+
+  get selectedCategories(): any[] {
+    return this._selectedCategories;
+  }
+
+  set selectedCategories(value: any[]) {
+    this._selectedCategories = value;
+    this.onServiceCalled();
+  }
+
 
   constructor(
     injector: Injector,
-    private getProductsService: GetProductsService
+    private getProductsService: GetProductsService,
   ) {
     super(injector);
   }
 
   override ngOnInit(): void {
     super.ngOnInit();
-    this.ActiveRoute.queryParams.subscribe((params: any) => {
-      if (params['id']) {
-        this.selectedCategories = [];
-        this.selectedCategories.push(+params['id']);
-      }
-    });
-
-    this.activeRoute.queryParams.subscribe(param => {
-
-      this.param = param;
-    });
   }
 
   override loadOnline() {
@@ -87,7 +83,18 @@ export class ProductsComponent extends BaseComponent implements OnInit {
     //   },
     // });
 
-    this.onServiceCalled();
+    this.getParam();
+  }
+
+  getParam() {
+    this.ActiveRoute.queryParams.subscribe((params: any) => {
+      if (params['id']) {
+        this.selectedCategories = [];
+        this.selectedCategories.push(+params['id']);
+        this.onServiceCalled();
+      }
+    });
+    console.log(this.selectedCategories);
   }
 
   onCategoryChange(categoryId: number, event: Event) {
@@ -118,16 +125,7 @@ export class ProductsComponent extends BaseComponent implements OnInit {
   }
 
   onSearchClicked() {
-    // if (this.productName) {
-      this.onServiceCalled();
-    // } else {
-    //   this.snakeBar.show(
-    //     'لطفا نام محصول مورد نظر خود را وارد کنید',
-    //     'بستن',
-    //     3000,
-    //     'custom-snackbar'
-    //   );
-    // }
+    this.onServiceCalled();
   }
 
   onServiceCalled() {
@@ -152,5 +150,4 @@ export class ProductsComponent extends BaseComponent implements OnInit {
         },
       });
   }
-
 }

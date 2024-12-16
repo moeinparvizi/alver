@@ -53,7 +53,7 @@
             <mat-menu #megaMenu="matMenu" class="menu-primary">
               <div class="flex items-center flex-wrap">
                 @for (company of companies; track $index) {
-                  <button mat-menu-item (click)="onHandleNavigateToProduct()" class="!w-5/12">
+                  <button mat-menu-item (click)="onHandleNavigateToProduct(company)" class="!w-5/12">
                     {{ company.name }}
                   </button>
                 }
@@ -98,7 +98,7 @@
             <mat-menu #megaMenu="matMenu" class="menu-primary">
               <div class="flex justify-center items-center flex-wrap">
                 @for (company of companies; track $index) {
-                  <button mat-menu-item (click)="onHandleNavigateToProduct()">
+                  <button mat-menu-item (click)="onHandleNavigateToProduct(company)">
                     {{ company.name }}
                   </button>
                 }
@@ -182,7 +182,7 @@
               [@openClose]="showExtra ? 'open' : 'closed'"
               class="text-gray w-full list-none flex flex-col items-end justify-center">
               <li *ngFor="let company of companies; let i = index">
-                <button mat-button (click)="onHandleNavigateToProduct()">
+                <button mat-button (click)="onHandleNavigateToProduct(company)">
                   {{ company.name }}
                 </button>
               </li>
