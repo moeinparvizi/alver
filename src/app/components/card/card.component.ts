@@ -37,7 +37,7 @@ export class CardComponent extends BaseComponent implements OnInit {
       RouteUtil.PRODUCT_DETAIL,
       this.product?.id,
       this.product?.name,
-    ]);
+    ]).then();
     // setTimeout(() => {
     //   window.location.reload();
     // })

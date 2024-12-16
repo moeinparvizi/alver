@@ -1,4 +1,4 @@
-import { Component, Injector, OnInit } from '@angular/core';
+import { Component, inject, Injector, OnInit } from '@angular/core';
 import { GetProductsService } from '../../services/getProducts/get-products.service';
 import { FormsModule } from '@angular/forms';
 import { MatRadioModule } from '@angular/material/radio';
@@ -9,6 +9,7 @@ import { CategoryResponse } from '../../models/data.response';
 import { CarouselModule } from 'ngx-owl-carousel-o';
 import { MatButton } from '@angular/material/button';
 import { NgIf } from '@angular/common';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-products',
@@ -26,10 +27,12 @@ import { NgIf } from '@angular/common';
   styleUrl: './products.component.scss',
 })
 export class ProductsComponent extends BaseComponent implements OnInit {
+  activeRoute: ActivatedRoute = inject(ActivatedRoute);
   isLoading = false;
   products: any;
   categories?: any = [];
   companies?: any = [];
+  param: any;
 
   productName?: any;
   orderBy?: string = '';
@@ -51,6 +54,11 @@ export class ProductsComponent extends BaseComponent implements OnInit {
         this.selectedCategories = [];
         this.selectedCategories.push(+params['id']);
       }
+    });
+
+    this.activeRoute.queryParams.subscribe(param => {
+
+      this.param = param;
     });
   }
 

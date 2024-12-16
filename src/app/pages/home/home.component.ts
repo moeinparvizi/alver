@@ -119,6 +119,6 @@ export class HomeComponent extends BaseComponent implements OnInit {
   onNavigateToProductsPage(categoryId: number) {
     this.router.navigate(['products'], {
       queryParams: { id: categoryId },
-    });
+    }).then();
   }
 }

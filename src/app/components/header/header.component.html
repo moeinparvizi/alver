@@ -34,13 +34,13 @@
         class="hidden justify-between items-center gap-2 md:flex"
         dir="rtl">
         <li>
-          <button mat-button color="primary" (click)="onHandleNvigateToHome()">
+          <button mat-button color="primary" (click)="onHandleNavigateToHome()">
             خانه
           </button>
         </li>
         <li>
           <button
-            (click)="onHandleNvigateToProducts()"
+            (click)="onHandleNavigateToProducts()"
             mat-button
             color="primary">
             فروشگاه
@@ -53,7 +53,7 @@
             <mat-menu #megaMenu="matMenu" class="menu-primary">
               <div class="flex items-center flex-wrap">
                 @for (company of companies; track $index) {
-                  <button mat-menu-item (click)="onHandleNvigateToProduct()" class="!w-5/12">
+                  <button mat-menu-item (click)="onHandleNavigateToProduct()" class="!w-5/12">
                     {{ company.name }}
                   </button>
                 }
@@ -76,13 +76,13 @@
           <button
             mat-flat-button
             color="primary"
-            (click)="onHandleNvigateToHome()">
+            (click)="onHandleNavigateToHome()">
             خانه
           </button>
         </li>
         <li>
           <button
-            (click)="onHandleNvigateToProducts()"
+            (click)="onHandleNavigateToProducts()"
             mat-flat-button
             color="primary">
             فروشگاه
@@ -98,7 +98,7 @@
             <mat-menu #megaMenu="matMenu" class="menu-primary">
               <div class="flex justify-center items-center flex-wrap">
                 @for (company of companies; track $index) {
-                  <button mat-menu-item (click)="onHandleNvigateToProduct()">
+                  <button mat-menu-item (click)="onHandleNavigateToProduct()">
                     {{ company.name }}
                   </button>
                 }
@@ -133,7 +133,7 @@
             <button
               style="text-align: right"
               mat-menu-item
-              (click)="onPrifileClicked()">
+              (click)="onProfileClicked()">
               مشخصات کاربر
             </button>
             <button style="text-align: right" mat-menu-item>سفارشات</button>
@@ -168,7 +168,7 @@
         autosize>
         <mat-drawer #drawer class="sidenav !z-50" mode="side">
           <dir class="flex flex-col w-2/3 gap-3">
-            <button mat-button (click)="onHandleNvigateToHome()">خانه</button>
+            <button mat-button (click)="onHandleNavigateToHome()">خانه</button>
 
             <button (click)="showExtra = !showExtra" mat-button>
               برند ها
@@ -182,19 +182,19 @@
               [@openClose]="showExtra ? 'open' : 'closed'"
               class="text-gray w-full list-none flex flex-col items-end justify-center">
               <li *ngFor="let company of companies; let i = index">
-                <button mat-button (click)="onHandleNvigateToProduct()">
+                <button mat-button (click)="onHandleNavigateToProduct()">
                   {{ company.name }}
                 </button>
               </li>
             </ul>
-            <button (click)="onHandleNvigateToProducts()" mat-button>
+            <button (click)="onHandleNavigateToProducts()" mat-button>
               فروشگاه
             </button>
             @if (token) {
-              <button (click)="onHandleNvigateToProducts()" mat-button>
+              <button (click)="onHandleNavigateToProducts()" mat-button>
                 مشخصات کاربر
               </button>
-              <button (click)="onHandleNvigateToProducts()" mat-button>
+              <button (click)="onHandleNavigateToProducts()" mat-button>
                 سفارشات
               </button>
               <button (click)="onLogOutClicked()" mat-button color="warn">

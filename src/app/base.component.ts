@@ -53,10 +53,6 @@ export abstract class BaseComponent {
     this.executeLoader()
   }
 
-  ngAfterViewInit(): void {}
-
-  ngAfterContentInit(): void {}
-
   public executeLoader(): void {
     if (NetworkUtil.isInternetConnected()) {
       this.loadOnline();

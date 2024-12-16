@@ -47,8 +47,6 @@ export class HeaderComponent extends BaseComponent implements OnInit {
 
   private dialogRef: MatDialogRef<SearchComponent> | null = null;
 
-  // isDialogOpen = false;
-
   constructor(injector: Injector) {
     super(injector);
     this.token = this.GlobalsService.getUserToken();
@@ -77,31 +75,27 @@ export class HeaderComponent extends BaseComponent implements OnInit {
       document.body.scrollTop ||
       0;
 
-    if (offset > 300) {
-      this.isSticky = true;
-    } else {
-      this.isSticky = false;
-    }
+    this.isSticky = offset > 300;
   }
 
-  onHandleNvigateToProducts(): void {
-    this.router.navigate([RouteUtil.PRODUCTS]);
+  onHandleNavigateToProducts(): void {
+    this.router.navigate([RouteUtil.PRODUCTS]).then();
   }
 
-  onHandleNvigateToHome(): void {
-    this.router.navigate([RouteUtil.HOME]);
+  onHandleNavigateToHome(): void {
+    this.router.navigate([RouteUtil.HOME]).then();
   }
 
-  onHandleNvigateToProduct(): void {
-    this.router.navigate(['product', 1, 'test'], {
+  onHandleNavigateToProduct(): void {
+    this.router.navigate([RouteUtil.PRODUCTS, 1, 'test'], {
       queryParams: { id: 1, name: 'test' },
-    });
+    }).then();
   }
 
   @HostListener('window:keydown', ['$event'])
   handleKeyboardEvent(event: KeyboardEvent): void {
     if (event.ctrlKey && event.key === 'k') {
-      event.preventDefault(); // Prevent the default action (often focuses on the browser's address bar)
+      event.preventDefault();
       this.onShowSearchBox();
     }
   }
@@ -121,10 +115,12 @@ export class HeaderComponent extends BaseComponent implements OnInit {
     }
   }
 
-  onPrifileClicked() {}
+  onProfileClicked() {
+    console.log('Profile clicked')
+  }
 
   onNavigationToLogIn() {
-    this.router.navigate([RouteUtil.REGISTER]);
+    this.router.navigate([RouteUtil.REGISTER]).then();
   }
 
   onLogOutClicked() {
@@ -136,7 +132,7 @@ export class HeaderComponent extends BaseComponent implements OnInit {
           localStorage.removeItem('token');
           localStorage.removeItem('userId');
           location.reload();
-          this.router.navigate(['']);
+          this.router.navigate(['']).then();
         } else {
           this.snakeBar.show(
             'خطا در ارتباط با سرور لطفا دوباره تلاش کنید',
@@ -169,6 +165,6 @@ export class HeaderComponent extends BaseComponent implements OnInit {
   }
 
   onAboutUsClicked() {
-    this.router.navigate([RouteUtil.ABOUT_US]);
+    this.router.navigate([RouteUtil.ABOUT_US]).then();
   }
 }

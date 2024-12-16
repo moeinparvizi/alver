@@ -108,7 +108,7 @@ export class LoginSignupComponent extends BaseComponent implements OnInit {
                 if (response.token) {
                   localStorage.setItem('token', response.token || '');
                   this.GlobalsService.isLoggedIn = true;
-                  this.router.navigate(['']);
+                  this.router.navigate(['']).then();
                 }
               },
               error: (error: string) => {

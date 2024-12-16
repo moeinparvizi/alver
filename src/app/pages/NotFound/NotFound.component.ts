@@ -19,7 +19,7 @@ export class NotFoundComponent extends BaseComponent implements OnInit {
   }
 
   redirectToHome() {
-    this.router.navigate(['']);
+    this.router.navigate(['']).then();
   }
 
   override onBackPressed(): void {
