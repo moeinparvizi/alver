@@ -45,7 +45,7 @@
       <div class="w-full lg:w-3/12 p-4 flex flex-col gap-2">
 
         <div
-          class="w-full transition-all flex flex-col gap-2 bg-whitee rounded-lg p-5 shadow-2xl shadow-zinc-400 overflow-hidden hover:shadow-zinc-500"
+          class="w-full relative transition-all flex flex-col gap-2 bg-whitee rounded-lg p-5 shadow-2xl shadow-zinc-400 overflow-hidden hover:shadow-zinc-500"
           dir="rtl">
           <span class="text-secondary text-xl">بر اساس قیمت (به تومان)</span>
 
@@ -53,38 +53,91 @@
             <input class="inp-primary" type="number" [(ngModel)]="max" placeholder="حداکثر قیمت">
             <input class="inp-primary" type="number" [(ngModel)]="min" placeholder="حداقل قیمت">
           </div>
+
+          <i (click)="onSearchClicked()" class="bi bi-search header-icon-i-search absolute  top-1.5 left-1.5"></i>
         </div>
 
         <div
-          class="w-full transition-all flex flex-col gap-2 bg-whitee rounded-lg p-5 shadow-2xl shadow-zinc-400 overflow-hidden hover:shadow-zinc-500"
+          class="w-full transition-all flex relative overflow-y-scroll flex-col gap-2 bg-whitee rounded-lg p-5 shadow-2xl shadow-zinc-400 overflow-hidden hover:shadow-zinc-500"
+          [ngStyle]="{ height: isExpanded1 ? '500px' : '200px' }"
           dir="rtl">
-          <span class="text-secondary text-xl">بر اساس برندها</span>
+          <span class="text-secondary text-xl">بر اساس دسته‌بندی</span>
 
           <div class="flex gap-3">
-            <ul class="w-full h-96">
+            <ul class="w-full">
               <li class="flex gap-2 mb-1">
                 <input
                   type="checkbox"
-                  id="select-all"
-                  [checked]="areAllSelected()"
-                  (change)="onSelectAll($event)" />
-                <label for="select-all">انتخاب همه</label>
+                  id="select-all-categories"
+                  [checked]="areAllCategoriesSelected(categories, selectedCategories)"
+                  (change)="onSelectAllCategories(categories, $event)" />
+                <label for="select-all-categories">انتخاب همه</label>
               </li>
+
               @for (category of categories; track $index) {
+
                 <li class="ms-3 flex gap-2 mb-1">
                   <input
                     type="checkbox"
                     [id]="'cat'+$index"
                     [value]="category.id"
                     [checked]="selectedCategories.includes(category.id)"
-                    (change)="onCategoryChange(category.id, $event)" />
+                    (change)="onCategoryChange(category.id, selectedCategories, $event)" />
                   <label class="flex w-full" [for]="'cat'+$index">
                     {{ category.name }}
                   </label>
                 </li>
               }
+
             </ul>
           </div>
+
+          <button
+            class="flex items-center gap-2 text-primary font-bold mt-3 cursor-pointer absolute bottom-1.5 left-1.5"
+            (click)="toggleExpand('categories')">
+            <i [ngClass]="isExpanded1 ? 'bi bi-chevron-up' : 'bi bi-chevron-down'"></i>
+            {{ isExpanded1 ? 'کمتر' : 'بیشتر' }}
+          </button>
+        </div>
+
+        <div
+          class="w-full transition-all relative overflow-y-scroll flex flex-col gap-2 bg-whitee rounded-lg p-5 shadow-2xl shadow-zinc-400 overflow-hidden hover:shadow-zinc-500"
+          [ngStyle]="{ height: isExpanded2 ? '500px' : '200px' }"
+          dir="rtl">
+          <span class="text-secondary text-xl">بر اساس برندها</span>
+
+          <div class="flex gap-3">
+            <ul class="w-full">
+              <li class="flex gap-2 mb-1">
+                <input
+                  type="checkbox"
+                  id="select-all-companies"
+                  [checked]="areAllCompaniesSelected(companies, selectedCompanies)"
+                  (change)="onSelectAllCompanies(companies, $event)" />
+                <label for="select-all-companies">انتخاب همه</label>
+              </li>
+              @for (company of companies; track $index) {
+                <li class="ms-3 flex gap-2 mb-1">
+                  <input
+                    type="checkbox"
+                    [id]="'comp'+$index"
+                    [value]="company.id"
+                    [checked]="selectedCompanies.includes(company.id)"
+                    (change)="onCompanyChange(company.id, selectedCompanies, $event)" />
+                  <label class="flex w-full" [for]="'comp'+$index">
+                    {{ company.name }}
+                  </label>
+                </li>
+              }
+            </ul>
+          </div>
+
+          <button
+            class="flex items-center gap-2 text-primary font-bold mt-3 cursor-pointer absolute bottom-1.5 left-1.5"
+            (click)="toggleExpand('brands')">
+            <i [ngClass]="isExpanded2 ? 'bi bi-chevron-up' : 'bi bi-chevron-down'"></i>
+            {{ isExpanded2 ? 'کمتر' : 'بیشتر' }}
+          </button>
         </div>
 
       </div>

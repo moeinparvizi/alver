@@ -8,7 +8,7 @@ import { BaseComponent } from '../../base.component';
 import { CategoryResponse } from '../../models/data.response';
 import { CarouselModule } from 'ngx-owl-carousel-o';
 import { MatButton } from '@angular/material/button';
-import { NgIf } from '@angular/common';
+import { CommonModule, NgIf } from '@angular/common';
 
 @Component({
   selector: 'app-products',
@@ -21,6 +21,7 @@ import { NgIf } from '@angular/common';
     CarouselModule,
     MatButton,
     NgIf,
+    CommonModule
   ],
   templateUrl: './products.component.html',
   styleUrl: './products.component.scss',
@@ -30,12 +31,23 @@ export class ProductsComponent extends BaseComponent implements OnInit {
   products: any;
   categories?: any = [];
   companies?: any = [];
+  isExpanded1?: boolean = false;
+  isExpanded2?: boolean = false;
 
   productName?: any;
   orderBy?: string = '';
   max?: number;
   min?: number;
   private _selectedCategories: any[] = [];
+  private _selectedCompanies: any[] = [];
+
+  get selectedCompanies(): any[] {
+    return this._selectedCompanies;
+  }
+
+  set selectedCompanies(value: any[]) {
+    this._selectedCompanies = value;
+  }
 
   get selectedCategories(): any[] {
     return this._selectedCategories;
@@ -43,7 +55,6 @@ export class ProductsComponent extends BaseComponent implements OnInit {
 
   set selectedCategories(value: any[]) {
     this._selectedCategories = value;
-    this.onServiceCalled();
   }
 
 
@@ -63,25 +74,27 @@ export class ProductsComponent extends BaseComponent implements OnInit {
 
     this.serviceApi.getCategories().subscribe({
       next: (res: CategoryResponse) => {
-        this.categories = res.categories;
+        this.categories = res.categories || [];
         this.isLoading = false;
       },
       error: (err: any) => {
+        this.categories = [];
         this.isLoading = false;
         this.snakeBar.show(err, 'بستن', 3000, 'custom-snackbar');
       },
     });
 
-    // this.serviceApi.getCompanies().subscribe({
-    //   next: (res: any) => {
-    //     this.companies = res.companies;
-    //     this.isLoading = false;
-    //   },
-    //   error: (err: any) => {
-    //     this.isLoading = false;
-    //     this.snakeBar.show(err, 'بستن', 3000, 'custom-snackbar');
-    //   },
-    // });
+    this.serviceApi.getCompanies().subscribe({
+      next: (res: any) => {
+        this.companies = res.categories || [];
+        this.isLoading = false;
+      },
+      error: (err: any) => {
+        this.companies = [];
+        this.isLoading = false;
+        this.snakeBar.show(err, 'بستن', 3000, 'custom-snackbar');
+      },
+    });
 
     this.getParam();
   }
@@ -91,37 +104,45 @@ export class ProductsComponent extends BaseComponent implements OnInit {
       if (params['id']) {
         this.selectedCategories = [];
         this.selectedCategories.push(+params['id']);
-        this.onServiceCalled();
       }
+      this.onServiceCalled();
     });
-    console.log(this.selectedCategories);
   }
 
-  onCategoryChange(categoryId: number, event: Event) {
+  onCategoryChange(itemId: number, list: number[], event: Event) {
     const isChecked = (event.target as HTMLInputElement).checked;
-
-    if (isChecked) {
-      this.selectedCategories.push(categoryId);
-    } else {
-      this.selectedCategories = this.selectedCategories.filter((id: any) => id !== categoryId);
-    }
+    this._selectedCategories = isChecked
+      ? [...list, itemId]
+      : list.filter(id => id !== itemId);
     this.onServiceCalled();
   }
 
-  onSelectAll(event: Event) {
+  onCompanyChange(itemId: number, list: number[], event: Event) {
     const isChecked = (event.target as HTMLInputElement).checked;
-
-    if (isChecked) {
-      this.selectedCategories = this.categories.map((category: any) => category.id);
-    } else {
-      this.selectedCategories = [];
-    }
-
+    this._selectedCompanies = isChecked
+      ? [...list, itemId]
+      : list.filter(id => id !== itemId);
     this.onServiceCalled();
   }
 
-  areAllSelected(): boolean {
-    return this.categories.length > 0 && this.selectedCategories.length === this.categories.length;
+  onSelectAllCategories(items: any[], event: Event) {
+    const isChecked = (event.target as HTMLInputElement).checked;
+    this.selectedCategories = isChecked ? items.map(item => item.id) : [];
+    this.onServiceCalled();
+  }
+
+  onSelectAllCompanies(items: any[], event: Event) {
+    const isChecked = (event.target as HTMLInputElement).checked;
+    this.selectedCompanies = isChecked ? items.map(item => item.id) : [];
+    this.onServiceCalled();
+  }
+
+  areAllCategoriesSelected(items: any[], list: number[]): boolean {
+    return items.length > 0 && list.length === items.length;
+  }
+
+  areAllCompaniesSelected(items: any[], list: number[]): boolean {
+    return items.length > 0 && list.length === items.length;
   }
 
   onSearchClicked() {
@@ -133,7 +154,7 @@ export class ProductsComponent extends BaseComponent implements OnInit {
     this.getProductsService
       .getProductsByFilters({
         product_name: this.productName,
-        company_ids: [1, 2, 3],
+        company_ids: this.selectedCompanies,
         max_price: this.max,
         min_price: this.min,
         category_ids: this.selectedCategories,
@@ -149,5 +170,13 @@ export class ProductsComponent extends BaseComponent implements OnInit {
           this.isLoading = false;
         },
       });
+  }
+
+  toggleExpand(section: string): void {
+    if (section === 'categories') {
+      this.isExpanded1 = !this.isExpanded1;
+    } else if (section === 'brands') {
+      this.isExpanded2 = !this.isExpanded2;
+    }
   }
 }

@@ -48,7 +48,7 @@
         </li>
         <li>
           <button mat-button color="primary" [matMenuTriggerFor]="megaMenu">
-            برند ها
+            دسته بندی
 
             <mat-menu #megaMenu="matMenu" class="menu-primary">
               <div class="flex items-center flex-wrap">
@@ -93,7 +93,7 @@
             mat-flat-button
             color="primary"
             [matMenuTriggerFor]="megaMenu">
-            برند ها
+            دسته بندی
 
             <mat-menu #megaMenu="matMenu" class="menu-primary">
               <div class="flex justify-center items-center flex-wrap">
@@ -158,20 +158,21 @@
       <!-- // mobile -->
       <mat-drawer-container
         dir="rtl"
-        class="sidenav-container !bg-primary !rounded-full p-2 mt-2 md:!hidden !z-50"
+        class="sidenav-container !rounded-full p-2 mt-2 md:!hidden !z-50"
         style="
           @media (min-width: 768px) {
             display: none !important;
             visibility: hidden;
           }
         "
+        [ngClass]="drawer.opened ? 'bg-whitee' : '!bg-primary'"
         autosize>
         <mat-drawer #drawer class="sidenav !z-50" mode="side">
           <dir class="flex flex-col w-2/3 gap-3">
             <button mat-button (click)="onHandleNavigateToHome()">خانه</button>
 
             <button (click)="showExtra = !showExtra" mat-button>
-              برند ها
+              دسته بندی
               @if (showExtra) {
                 <i class="bi bi-caret-up-fill"></i>
               } @else {
@@ -215,24 +216,22 @@
             type="button"
             class="button-menu button-menu-close"
             mat-button
-            (click)="drawer.toggle()">
+            (click)="drawer.close()">
             <i class="bi bi-x-lg"></i>
           </button>
         </mat-drawer>
 
-        <div class="sidenav-content">
-          <button
-            class="button-menu button-menu-open"
-            type="button"
-            mat-button
-            (click)="drawer.toggle()">
-            @if (drawer.opened) {
-              <i class="bi bi-x-lg"></i>
-            } @else {
+        @if (!drawer.opened) {
+          <div class="sidenav-content">
+            <button
+              class="button-menu button-menu-open"
+              type="button"
+              mat-button
+              (click)="drawer.toggle()">
               <i class="bi bi-list"></i>
-            }
-          </button>
-        </div>
+            </button>
+          </div>
+        }
       </mat-drawer-container>
     </div>
   </nav>
