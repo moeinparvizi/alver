@@ -16,4 +16,5 @@ export class ServicePath {
   public static readonly ADD_CARD = 'card/add/';
   public static readonly REMOVE_A_CARD = 'card/remove/';
   public static readonly REMOVE_CARD = 'card/delete/';
+  public static readonly CARD_DETAIL_COUNT = 'card/detail/count/';
 }

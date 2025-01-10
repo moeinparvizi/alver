@@ -10,6 +10,8 @@ import { ImageFullscreenComponent } from '../../components/image-fullscreen/imag
 import { MatDialogModule } from '@angular/material/dialog';
 import { CommentsComponent } from '../../components/comments/comments.component';
 import { SpinnerComponent } from '../../components/spinner/spinner.component';
+import { Config } from '../../common/config';
+import { RouteUtil } from '../../util/route.util';
 
 @Component({
   selector: 'app-product-detail',
@@ -80,6 +82,19 @@ export class ProductDetailComponent extends BaseComponent implements OnInit {
         this.isLoading = false;
       },
     });
+
+    this.serviceApi
+      .cardDetailCount({
+        id: this.id,
+      })
+      .subscribe({
+        next: (data: any) => {
+          this.count = data.count;
+        },
+        error: (err: any) => {
+          this.snakeBar.show('خطا در سیستم', 'بستن', 3000, 'custom-snackbar');
+        },
+      });
   }
 
   changeMainImage(event: Event) {
@@ -97,22 +112,34 @@ export class ProductDetailComponent extends BaseComponent implements OnInit {
   onAddToCardAProductClicked() {
     this.addToProductButtonLoading = true;
 
-    this.serviceApi
-      .addCard({
-        id: this.id,
-      })
-      .subscribe({
-        next: (data: any) => {
-          this.addToProductButtonLoading = false;
-          if (data.success) {
-            this.loadOnline();
-          }
-        },
-        error: (err: any) => {
-          this.snakeBar.show('خطا در سیستم', 'بستن', 3000, 'custom-snackbar');
-          this.addToProductButtonLoading = false;
-        },
+    if (Config.isLoggedIn) {
+      this.serviceApi
+        .addCard({
+          id: this.id,
+        })
+        .subscribe({
+          next: (data: any) => {
+            this.addToProductButtonLoading = false;
+            if (data.success) {
+              this.loadOnline();
+            }
+          },
+          error: (err: any) => {
+            this.snakeBar.show('خطا در سیستم', 'بستن', 3000, 'custom-snackbar');
+            this.addToProductButtonLoading = false;
+          },
+        });
+
+
+      this.serviceApi.getCard().subscribe({
+        next: (res: any) => {
+          Config.basketCount = res.product.length;
+        }
       });
+    } else {
+      this.onNavigationToLogIn();
+    }
+
   }
 
   positiveClicked() {
@@ -155,5 +182,9 @@ export class ProductDetailComponent extends BaseComponent implements OnInit {
           this.snakeBar.show('خطا در سیستم', 'بستن', 3000, 'custom-snackbar');
         },
       });
+  }
+
+  onNavigationToLogIn() {
+    this.router.navigate([RouteUtil.REGISTER]).then();
   }
 }

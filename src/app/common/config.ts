@@ -8,4 +8,6 @@ export class Config {
   public static userId?: string;
 
   public static isLoggedIn?: boolean;
+
+  public static basketCount?: number;
 }

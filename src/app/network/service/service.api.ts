@@ -94,6 +94,12 @@ export class serviceApi {
     });
   }
 
+  public cardDetailCount(body: any): Observable<any> {
+    return this.http.post(Constant.getApp() + ServicePath.CARD_DETAIL_COUNT, body, {
+      headers: this.httpHeader,
+    });
+  }
+
   //   public getMyLoginInfo(): Observable<any> {
   //   return this.http.post(ServicePath.GET_LOGIN_INFO, {});
   // }

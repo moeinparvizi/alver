@@ -53,7 +53,10 @@
             <mat-menu #megaMenu="matMenu" class="menu-primary">
               <div class="flex items-center flex-wrap">
                 @for (company of companies; track $index) {
-                  <button mat-menu-item (click)="onHandleNavigateToProduct(company)" class="!w-5/12">
+                  <button
+                    mat-menu-item
+                    (click)="onHandleNavigateToProduct(company)"
+                    class="!w-5/12">
                     {{ company.name }}
                   </button>
                 }
@@ -98,7 +101,9 @@
             <mat-menu #megaMenu="matMenu" class="menu-primary">
               <div class="flex justify-center items-center flex-wrap">
                 @for (company of companies; track $index) {
-                  <button mat-menu-item (click)="onHandleNavigateToProduct(company)">
+                  <button
+                    mat-menu-item
+                    (click)="onHandleNavigateToProduct(company)">
                     {{ company.name }}
                   </button>
                 }
@@ -119,8 +124,14 @@
         <button class="!p-0" (click)="onShowSearchBox()">
           <i class="bi bi-search header-icon-i"></i>
         </button>
-        <button (click)="onBasketClicked()">
+        <button (click)="onBasketClicked()" class="relative">
           <i class="bi bi-cart header-icon-i"></i>
+          @if (Config.basketCount != undefined) {
+            <span
+              class="rounded-full bg-accent p-1 text-white absolute left-[80%] top-0 w-3 h-3 text-[10px] flex justify-center items-center">
+              {{ Config.basketCount }}
+            </span>
+          }
         </button>
         @if (token) {
           <button
@@ -195,9 +206,7 @@
               <button (click)="onHandleNavigateToProducts()" mat-button>
                 مشخصات کاربر
               </button>
-              <button (click)="onBasketClicked()" mat-button>
-                سفارشات
-              </button>
+              <button (click)="onBasketClicked()" mat-button>سفارشات</button>
               <button (click)="onLogOutClicked()" mat-button color="warn">
                 خروج
               </button>

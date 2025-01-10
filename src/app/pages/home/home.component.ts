@@ -9,6 +9,7 @@ import { GetProductsService } from '../../services/getProducts/get-products.serv
 import { SpinnerComponent } from '../../components/spinner/spinner.component';
 import { CategoryResponse } from '../../models/data.response';
 import { NgIf } from '@angular/common';
+import { Config } from '../../common/config';
 
 @Component({
   selector: 'app-home',
@@ -68,6 +69,14 @@ export class HomeComponent extends BaseComponent implements OnInit {
     private getProductsService: GetProductsService
   ) {
     super(injector);
+    if (Config.isLoggedIn) {
+      this.serviceApi.getCard().subscribe({
+        next: (res: any) => {
+          Config.basketCount = res.product.length;
+          console.log(Config.basketCount);
+        }
+      });
+    }
   }
 
   override ngOnInit(): void {

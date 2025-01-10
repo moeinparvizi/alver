@@ -18,6 +18,7 @@ import { MatDialogRef } from '@angular/material/dialog';
 import { CategoryResponse, LogOutResponse } from '../../models/data.response';
 import { SpinnerComponent } from '../spinner/spinner.component';
 import { RouteUtil } from '../../util/route.util';
+import { Config } from '../../common/config';
 
 @Component({
   selector: 'app-header',
@@ -50,6 +51,7 @@ export class HeaderComponent extends BaseComponent implements OnInit {
   constructor(injector: Injector) {
     super(injector);
     this.token = this.GlobalsService.getUserToken();
+    console.log(Config.basketCount);
   }
 
   override loadOnline() {
@@ -171,4 +173,6 @@ export class HeaderComponent extends BaseComponent implements OnInit {
   onBasketClicked() {
     this.router.navigate([RouteUtil.BASKET]).then();
   }
+
+  protected readonly Config = Config;
 }

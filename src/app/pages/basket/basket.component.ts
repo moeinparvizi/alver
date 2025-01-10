@@ -16,6 +16,7 @@ export class BasketComponent extends BaseComponent implements OnInit {
   basket?: any;
   isLoading: any;
   noProducts?: boolean;
+  sumPrice?: string;
 
   constructor(injector: Injector) {
     super(injector);
@@ -38,6 +39,8 @@ export class BasketComponent extends BaseComponent implements OnInit {
     this.serviceApi.getCard().subscribe({
       next: (res: any) => {
         this.basket = res.product;
+        this.sumPrice = res.sum_prices;
+        Config.basketCount = this.basket.length;
         this.isLoading = false;
       },
       error: (err: any) => {
