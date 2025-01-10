@@ -1,4 +1,4 @@
-import { Component, Injector, OnInit } from '@angular/core';
+import { Component, HostBinding, HostListener, Injector, OnInit } from '@angular/core';
 import { BaseComponent } from '../../base.component';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
@@ -35,6 +35,14 @@ export class LoginSignupComponent extends BaseComponent implements OnInit {
   token: string;
   isLoading = false;
   mobileRegex: RegExp;
+
+  @HostListener('window:keydown', ['$event'])
+  handleKeyboardEvent(event: KeyboardEvent): void {
+    if (event.code == 'Enter') {
+      event.preventDefault();
+      this.onSubmitClicked();
+    }
+  }
 
   constructor(injector: Injector) {
     super(injector);
@@ -133,4 +141,6 @@ export class LoginSignupComponent extends BaseComponent implements OnInit {
       }
     }
   }
+
+  protected readonly onkeyup = onkeyup;
 }

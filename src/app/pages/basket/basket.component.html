@@ -1,0 +1,113 @@
+<div class="max-w-7xl mx-auto p-4" dir="rtl">
+  <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+    <!-- سبد خرید -->
+    <div class="col-span-1 md:col-span-2 bg-white rounded-lg shadow-lg p-6">
+      <h2 class="text-2xl font-bold mb-6 text-right text-gray-800">سبد خرید</h2>
+      <ul class="space-y-4">
+        <!-- آیتم ۱ -->
+        <li
+          class="flex items-center justify-between bg-gray-50 rounded-lg shadow-md p-4 hover:shadow-lg transition *:flex *:justify-center">
+          <div class="flex items-center w-[40%] !justify-start">
+            <img
+              src="https://via.placeholder.com/60"
+              alt="محصول"
+              class="w-16 h-16 object-cover rounded-lg shadow-md" />
+            <div class="mr-4">
+              <h3 class="text-sm md:text-base font-medium text-blackGray">
+                کرم ضد ترک پا کامان حجم ۳۰۰ میل
+              </h3>
+            </div>
+          </div>
+          <div
+            class="flex items-center h-[30px] *:h-full w-[20%] *:border *:border-slate-300 *:flex *:items-center *:justify-center *:w-[30px]">
+            <button
+              class="bg-gray-100 text-gray-700 hover:bg-gray-200 flex items-center justify-center transition rounded-br-lg rounded-tr-lg">
+              +
+            </button>
+            <span class="py-2 text-gray-800 font-medium">۱</span>
+            <button
+              class="bg-gray-100 text-gray-700 hover:bg-gray-200 flex items-center justify-center transition rounded-bl-lg rounded-tl-lg">
+              −
+            </button>
+          </div>
+          <div class="w-[25%]">
+            <p class="text-sm font-medium text-primary">۲۸,۰۰۰ تومان</p>
+          </div>
+          <button
+            class="text-red-500 hover:text-red-700 transition text-xl font-bold w-[5%] flex justify-end">
+            ×
+          </button>
+        </li>
+
+        <!-- آیتم ۲ -->
+        <li
+          class="flex items-center justify-between bg-gray-50 rounded-lg shadow-md p-4 hover:shadow-lg transition *:flex *:justify-center">
+          <div class="flex items-center w-[40%] !justify-start">
+            <img
+              src="https://via.placeholder.com/60"
+              alt="محصول"
+              class="w-16 h-16 object-cover rounded-lg shadow-md" />
+            <div class="mr-4">
+              <h3 class="text-sm md:text-base font-medium text-blackGray">
+                پیراهن مردانه
+              </h3>
+            </div>
+          </div>
+          <div class="flex items-center w-[20%]">
+            <button
+              class="w-8 h-8 bg-gray-100 text-gray-700 rounded-full hover:bg-gray-200 flex items-center justify-center transition">
+              +
+            </button>
+            <span class="py-2 text-gray-800 font-medium">۱</span>
+            <button
+              class="w-8 h-8 bg-gray-100 text-gray-700 rounded-full hover:bg-gray-200 flex items-center justify-center transition">
+              −
+            </button>
+          </div>
+          <div class="w-[25%]">
+            <p class="text-sm font-medium text-primary">۱۵,۰۰۰ تومان</p>
+          </div>
+          <button
+            class="text-red-500 hover:text-red-700 transition w-[5%] text-xl font-bold">
+            ×
+          </button>
+        </li>
+      </ul>
+
+      <div class="mt-6 flex justify-center md:justify-start">
+        <button
+          mat-button
+          color="primary"
+          class=" px-5 py-3 rounded-lg hover:bg-gray-200 transition">
+          بروزرسانی سبد خرید
+        </button>
+      </div>
+    </div>
+
+    <!-- خلاصه سفارش -->
+    <div class="bg-white rounded-lg shadow-lg p-6">
+      <h2 class="text-2xl font-bold mb-6 text-right text-secondary">
+        خلاصه سفارش
+      </h2>
+      <div class="flex justify-between items-center mb-4">
+        <span class="text-gray-700">جمع جزء:</span>
+        <span class="text-blackGray font-medium">۴۳,۰۰۰ تومان</span>
+      </div>
+      <div class="flex justify-between items-center mb-4">
+        <span class="text-gray-700">تخفیف:</span>
+        <span class="text-blackGray font-medium">۰ تومان</span>
+      </div>
+      <div
+        class="flex justify-between items-center mb-6 border-t border-slate-300 pt-4">
+        <span class="font-bold text-lg text-secondary">مجموع:</span>
+        <span class="font-bold text-lg text-blackGray">۴۳,۰۰۰ تومان</span>
+      </div>
+      <button
+        mat-button
+        color="primary"
+        class="text-white w-full py-3 rounded-lg transition font-medium">
+        ادامه جهت تسویه حساب
+      </button>
+    </div>
+  </div>
+</div>
