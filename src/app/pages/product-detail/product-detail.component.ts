@@ -9,6 +9,7 @@ import { FormsModule } from '@angular/forms';
 import { ImageFullscreenComponent } from '../../components/image-fullscreen/image-fullscreen.component';
 import { MatDialogModule } from '@angular/material/dialog';
 import { CommentsComponent } from '../../components/comments/comments.component';
+import { SpinnerComponent } from '../../components/spinner/spinner.component';
 
 @Component({
   selector: 'app-product-detail',
@@ -21,6 +22,7 @@ import { CommentsComponent } from '../../components/comments/comments.component'
     ImageFullscreenComponent,
     CommentsComponent,
     GenerateArrayPipe,
+    SpinnerComponent,
   ],
   templateUrl: './product-detail.component.html',
   styleUrl: './product-detail.component.scss',
@@ -38,6 +40,8 @@ export class ProductDetailComponent extends BaseComponent implements OnInit {
   mainImage?: string;
 
   showFullScreen = false;
+
+  addToProductButtonLoading?: boolean = false;
 
   constructor(
     injector: Injector,
@@ -63,11 +67,13 @@ export class ProductDetailComponent extends BaseComponent implements OnInit {
   }
 
   onServiceCalled() {
+    this.isLoading = true;
     this.getProductsService.getProduct(this.id).subscribe({
       next: ({ product, isLoading }) => {
         this.product = product;
         this.isLoading = isLoading;
         this.rate = this.product?.rate;
+        this.isLoading = false;
       },
       error: err => {
         console.error('Error fetching products:', err);
@@ -86,5 +92,68 @@ export class ProductDetailComponent extends BaseComponent implements OnInit {
     this.dialog.open(ImageFullscreenComponent, {
       data: { imageUrl: this.mainImage },
     });
+  }
+
+  onAddToCardAProductClicked() {
+    this.addToProductButtonLoading = true;
+
+    this.serviceApi
+      .addCard({
+        id: this.id,
+      })
+      .subscribe({
+        next: (data: any) => {
+          this.addToProductButtonLoading = false;
+          if (data.success) {
+            this.loadOnline();
+          }
+        },
+        error: (err: any) => {
+          this.snakeBar.show('خطا در سیستم', 'بستن', 3000, 'custom-snackbar');
+          this.addToProductButtonLoading = false;
+        },
+      });
+  }
+
+  positiveClicked() {
+    this.addToProductButtonLoading = true;
+
+    this.serviceApi
+      .addCard({
+        id: this.id,
+      })
+      .subscribe({
+        next: (data: any) => {
+          if (data.success) {
+            this.addToProductButtonLoading = false;
+            this.onServiceCalled();
+          }
+        },
+        error: () => {
+          this.addToProductButtonLoading = false;
+          this.snakeBar.show('خطا در سیستم', 'بستن', 3000, 'custom-snackbar');
+        },
+      });
+  }
+
+  negativeClicked() {
+    this.addToProductButtonLoading = true;
+
+    this.serviceApi
+      .removeACard({
+        id: this.id,
+      })
+      .subscribe({
+        next: (data: any) => {
+          this.addToProductButtonLoading = false;
+          if (data == 'product Remove') {
+            this.onServiceCalled();
+          }
+        },
+        error: () => {
+          this.addToProductButtonLoading = false;
+          this.snakeBar.show('خطا در سیستم', 'بستن', 3000, 'custom-snackbar');
+        },
+      });
   }
 }

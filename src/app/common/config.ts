@@ -6,4 +6,6 @@ export class Config {
   public static token?: string;
 
   public static userId?: string;
+
+  public static isLoggedIn?: boolean;
 }

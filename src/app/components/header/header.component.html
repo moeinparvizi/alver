@@ -119,7 +119,7 @@
         <button class="!p-0" (click)="onShowSearchBox()">
           <i class="bi bi-search header-icon-i"></i>
         </button>
-        <button (click)="onShowSearchBox()">
+        <button (click)="onBasketClicked()">
           <i class="bi bi-cart header-icon-i"></i>
         </button>
         @if (token) {
@@ -195,7 +195,7 @@
               <button (click)="onHandleNavigateToProducts()" mat-button>
                 مشخصات کاربر
               </button>
-              <button (click)="onHandleNavigateToProducts()" mat-button>
+              <button (click)="onBasketClicked()" mat-button>
                 سفارشات
               </button>
               <button (click)="onLogOutClicked()" mat-button color="warn">

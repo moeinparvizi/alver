@@ -70,6 +70,30 @@ export class serviceApi {
     return this.http.post(Constant.getApp() + ServicePath.GET_PRODUCTS_BY_FILTERS, body);
   }
 
+  public getCard(): Observable<any> {
+    return this.http.get(Constant.getApp() + ServicePath.GET_CARD, {
+      headers: this.httpHeader
+    });
+  }
+
+  public addCard(body: any): Observable<any> {
+    return this.http.post(Constant.getApp() + ServicePath.ADD_CARD, body, {
+      headers: this.httpHeader,
+    });
+  }
+
+  public removeACard(body: any): Observable<any> {
+    return this.http.post(Constant.getApp() + ServicePath.REMOVE_A_CARD, body, {
+      headers: this.httpHeader,
+    });
+  }
+
+  public removeCard(body: any): Observable<any> {
+    return this.http.post(Constant.getApp() + ServicePath.REMOVE_CARD, body, {
+      headers: this.httpHeader,
+    });
+  }
+
   //   public getMyLoginInfo(): Observable<any> {
   //   return this.http.post(ServicePath.GET_LOGIN_INFO, {});
   // }

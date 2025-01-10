@@ -12,4 +12,8 @@ export class ServicePath {
   public static readonly GET_COMPANIES = 'products/compony/get/';
   public static readonly GET_ABOUT_US = 'info/get/';
   public static readonly GET_PRODUCTS_BY_FILTERS = 'products/filter/';
+  public static readonly GET_CARD = 'card/get/';
+  public static readonly ADD_CARD = 'card/add/';
+  public static readonly REMOVE_A_CARD = 'card/remove/';
+  public static readonly REMOVE_CARD = 'card/delete/';
 }

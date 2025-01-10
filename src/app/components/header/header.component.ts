@@ -167,4 +167,8 @@ export class HeaderComponent extends BaseComponent implements OnInit {
   onAboutUsClicked() {
     this.router.navigate([RouteUtil.ABOUT_US]).then();
   }
+
+  onBasketClicked() {
+    this.router.navigate([RouteUtil.BASKET]).then();
+  }
 }
