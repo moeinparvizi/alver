@@ -175,4 +175,8 @@ export class HeaderComponent extends BaseComponent implements OnInit {
   }
 
   protected readonly Config = Config;
+
+  onNavigateToOrders() {
+    this.router.navigate([RouteUtil.ORDERS]).then();
+  }
 }

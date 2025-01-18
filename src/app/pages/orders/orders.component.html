@@ -1,0 +1,48 @@
+<!-- Header -->
+<header dir="rtl" class="bg-white shadow-md">
+  <div class="container mx-auto px-4 py-4 flex items-center justify-between">
+    <h1 class="text-xl font-bold text-gray-700">سفارشات من</h1>
+    <button mat-button color="primary">بازگشت</button>
+  </div>
+</header>
+
+<div dir="rtl" class="bg-white shadow-md">
+  <mat-tab-group
+    [(selectedIndex)]="selectedIndex"
+    class="container mx-auto px-4 py-2">
+    <mat-tab label="در انتظار ارسال" (click)="setActiveTab('pending')">
+      <!-- Order List -->
+      <main class="container mx-auto px-4 py-6">
+        <!-- Order Item -->
+        <div class="bg-white shadow-md rounded-lg p-4 mb-4 flex flex-col gap-4">
+          <div class="flex items-center justify-between">
+            <div class="text-sm text-gray-600">
+              <p>کد سفارش: <span class="font-bold">123456</span></p>
+              <p class="mt-1">تاریخ: <span class="font-bold">۱۴۰۲/۱۰/۲۳</span></p>
+            </div>
+            <p class="text-green-600 font-bold">در حال پردازش</p>
+          </div>
+          <hr class="border-gray-300" />
+          <div class="flex items-center gap-4">
+            <img
+              src="https://via.placeholder.com/60"
+              alt="Product"
+              class="w-16 h-16 rounded" />
+            <div class="text-sm flex-grow">
+              <p class="font-bold">محصول اول</p>
+              <p class="text-gray-500">تعداد: 2</p>
+            </div>
+            <p class="text-sm font-bold">۱۰۰,۰۰۰ تومان</p>
+          </div>
+        </div>
+      </main>     </mat-tab>
+    <mat-tab label="تحویل شده" (click)="setActiveTab('delivered')">
+      <!-- محتویات تب تحویل شده -->
+    </mat-tab>
+    <mat-tab label="لغو شده" (click)="setActiveTab('canceled')">
+      <!-- محتویات تب لغو شده -->
+    </mat-tab>
+  </mat-tab-group>
+</div>
+
+

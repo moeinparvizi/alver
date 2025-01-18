@@ -147,7 +147,9 @@
               (click)="onProfileClicked()">
               مشخصات کاربر
             </button>
-            <button style="text-align: right" mat-menu-item>سفارشات</button>
+            <button (click)="onNavigateToOrders()" style="text-align: right" mat-menu-item>
+              سفارشات
+            </button>
             <button
               style="color: rgb(117, 0, 0); text-align: right"
               (click)="onLogOutClicked()"
