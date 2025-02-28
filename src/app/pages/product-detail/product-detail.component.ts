@@ -21,7 +21,6 @@ import { RouteUtil } from '../../util/route.util';
     CommonModule,
     FormsModule,
     MatDialogModule,
-    ImageFullscreenComponent,
     CommentsComponent,
     GenerateArrayPipe,
     SpinnerComponent,
@@ -36,6 +35,8 @@ export class ProductDetailComponent extends BaseComponent implements OnInit {
   selectedLiter = 1;
   count = 1;
   rate: any;
+
+  isFavorite = false;
 
   id?: any;
 
@@ -55,7 +56,7 @@ export class ProductDetailComponent extends BaseComponent implements OnInit {
   override ngOnInit(): void {
     super.ngOnInit();
 
-    this.loadOnline();
+    // this.loadOnline();
   }
 
   override loadOnline(): void {
@@ -66,6 +67,8 @@ export class ProductDetailComponent extends BaseComponent implements OnInit {
       this.id = Number(id);
       this.onServiceCalled();
     });
+
+    this.checkFavorite();
   }
 
   onServiceCalled() {
@@ -186,5 +189,54 @@ export class ProductDetailComponent extends BaseComponent implements OnInit {
 
   onNavigationToLogIn() {
     this.router.navigate([RouteUtil.REGISTER]).then();
+  }
+
+  checkFavorite() {
+    this.serviceApi.checkFavorite({ product_id: this.id }).subscribe({
+      next: (data: any) => {
+        if (data.status == 200) {
+          this.isFavorite = true;
+        }
+      },
+      error: () => {
+        this.snakeBar.show('خطا در سیستم', 'بستن', 3000, 'custom-snackbar');
+      },
+    });
+  }
+
+  toggleFavorite() {
+    if (this.isFavorite) {
+      this.removeFavorite();
+    } else {
+      this.addFavorite();
+    }
+  }
+
+  addFavorite() {
+    this.serviceApi.addFavorite({ product_id: this.id }).subscribe({
+      next: (data: any) => {
+        if (data.status == 200) {
+          this.isFavorite = true;
+          this.snakeBar.show('به علاقه‌مندی‌ها اضافه شد', 'بستن', 3000, 'custom-snackbar');
+        }
+      },
+      error: () => {
+        this.snakeBar.show('خطا در سیستم', 'بستن', 3000, 'custom-snackbar');
+      },
+    });
+  }
+
+  removeFavorite() {
+    this.serviceApi.removeFavorite({ product_id: this.id }).subscribe({
+      next: (data: any) => {
+        if (data.status == 200) {
+          this.isFavorite = false;
+          this.snakeBar.show('از علاقه‌مندی‌ها حذف شد', 'بستن', 3000, 'custom-snackbar');
+        }
+      },
+      error: () => {
+        this.snakeBar.show('خطا در سیستم', 'بستن', 3000, 'custom-snackbar');
+      },
+    });
   }
 }

@@ -51,7 +51,6 @@ export class HeaderComponent extends BaseComponent implements OnInit {
   constructor(injector: Injector) {
     super(injector);
     this.token = this.GlobalsService.getUserToken();
-    console.log(Config.basketCount);
   }
 
   override loadOnline() {
@@ -67,6 +66,15 @@ export class HeaderComponent extends BaseComponent implements OnInit {
         this.snakeBar.show(err, 'بستن', 3000, 'custom-snackbar');
       },
     });
+
+    if (Config.isLoggedIn) {
+      // this.serviceApi.getCardCount().subscribe({
+      //   next: (res: any) => {
+      //     Config.basketCount = res.product.length;
+      //     console.log('basket count ', res)
+      //   }
+      // });
+    }
   }
 
   @HostListener('window:scroll', [])
@@ -89,9 +97,11 @@ export class HeaderComponent extends BaseComponent implements OnInit {
   }
 
   onHandleNavigateToProduct(company: any): void {
-    this.router.navigate([RouteUtil.PRODUCTS, 1, 'test'], {
-      queryParams: { id: company.id, name: company.name },
-    }).then();
+    this.router
+      .navigate([RouteUtil.PRODUCTS, 1, 'test'], {
+        queryParams: { id: company.id, name: company.name },
+      })
+      .then();
   }
 
   @HostListener('window:keydown', ['$event'])
@@ -118,7 +128,7 @@ export class HeaderComponent extends BaseComponent implements OnInit {
   }
 
   onProfileClicked() {
-    console.log('Profile clicked')
+    console.log('Profile clicked');
   }
 
   onNavigationToLogIn() {
@@ -178,5 +188,9 @@ export class HeaderComponent extends BaseComponent implements OnInit {
 
   onNavigateToOrders() {
     this.router.navigate([RouteUtil.ORDERS]).then();
+  }
+
+  onNavigateToFavorites() {
+    this.router.navigate([RouteUtil.FAVORITES]).then();
   }
 }

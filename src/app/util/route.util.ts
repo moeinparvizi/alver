@@ -6,5 +6,6 @@ export class RouteUtil {
   public static readonly ABOUT_US = "about-us";
   public static readonly BASKET = "basket";
   public static readonly ORDERS = "orders";
+  public static readonly FAVORITES = "favorites";
   public static readonly NOT_FOUND = "**";
 }

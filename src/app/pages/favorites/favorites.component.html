@@ -1,0 +1,29 @@
+<div class="flex justify-center">
+  <div class="container products">
+
+    <div class="flex flex-wrap-reverse">
+      <div class="w-full lg:w-3/4">
+
+        @if (isLoading) {
+          <app-spinner [isLoading]="true"></app-spinner>
+        } @else {
+          <div class="animated flex flex-wrap justify-center items-center gap-3">
+            @for (product of products; track $index) {
+              <app-card
+                class="inline-block fade-in"
+                [product]="product"></app-card>
+            }
+          </div>
+        }
+        @if (products?.length === 0) {
+          <span class="text-secondary h-full w-full flex items-center justify-center">
+              چیزی پیدا نشد
+          </span>
+        }
+
+      </div>
+
+    </div>
+
+  </div>
+</div>

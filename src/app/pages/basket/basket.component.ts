@@ -29,7 +29,7 @@ export class BasketComponent extends BaseComponent implements OnInit {
   override loadOnline() {
     super.loadOnline();
     this.onServiceCalled();
-    console.log('token', Config.isLoggedIn)
+    console.log('token', Config.isLoggedIn);
   }
 
   onServiceCalled() {
@@ -40,7 +40,6 @@ export class BasketComponent extends BaseComponent implements OnInit {
       next: (res: any) => {
         this.basket = res.product;
         this.sumPrice = res.sum_prices;
-        Config.basketCount = this.basket.length;
         this.isLoading = false;
       },
       error: (err: any) => {
@@ -126,10 +125,20 @@ export class BasketComponent extends BaseComponent implements OnInit {
   }
 
   onNavigateToProductDetail(id: any, name: string) {
-    this.router.navigate([
-      RouteUtil.PRODUCT_DETAIL,
-      id,
-      name,
-    ]).then();
+    this.router.navigate([RouteUtil.PRODUCT_DETAIL, id, name]).then();
+  }
+
+  onConfirmCard() {
+    alert('click on confirm');
+    this.serviceApi.cardConfirm().subscribe({
+      next: (res: any) => {
+        if (res == 'Order Confirmed') {
+          this.router.navigate([RouteUtil.ORDERS]).then();
+        }
+      },
+      error: () => {
+        this.snakeBar.show('خطا در سیستم', 'بستن', 3000, 'custom-snackbar');
+      }
+    })
   }
 }

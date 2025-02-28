@@ -73,7 +73,6 @@ export class HomeComponent extends BaseComponent implements OnInit {
       this.serviceApi.getCard().subscribe({
         next: (res: any) => {
           Config.basketCount = res.product.length;
-          console.log(Config.basketCount);
         }
       });
     }

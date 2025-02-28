@@ -50,7 +50,7 @@ export abstract class BaseComponent {
   }
 
   ngOnInit(): void {
-    this.executeLoader()
+    this.executeLoader();
   }
 
   public executeLoader(): void {

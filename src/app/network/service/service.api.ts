@@ -76,6 +76,7 @@ export class serviceApi {
     });
   }
 
+
   public addCard(body: any): Observable<any> {
     return this.http.post(Constant.getApp() + ServicePath.ADD_CARD, body, {
       headers: this.httpHeader,
@@ -94,9 +95,51 @@ export class serviceApi {
     });
   }
 
+  public addFavorite(body: any): Observable<any> {
+    return this.http.post(Constant.getApp() + ServicePath.ADD_FAVORITE, body, {
+      headers: this.httpHeader,
+    });
+  }
+
+  public removeFavorite(body: any): Observable<any> {
+    return this.http.post(Constant.getApp() + ServicePath.REMOVE_FAVORITE, body, {
+      headers: this.httpHeader,
+    });
+  }
+
+  public checkFavorite(body: any): Observable<any> {
+    return this.http.post(Constant.getApp() + ServicePath.CHECK_FAVORITE, body, {
+      headers: this.httpHeader,
+    });
+  }
+
+  public getFavorite(): Observable<any> {
+    return this.http.get(Constant.getApp() + ServicePath.GET_FAVORITE, {
+      headers: this.httpHeader
+    });
+  }
+
   public cardDetailCount(body: any): Observable<any> {
     return this.http.post(Constant.getApp() + ServicePath.CARD_DETAIL_COUNT, body, {
       headers: this.httpHeader,
+    });
+  }
+
+  public cardTotalItems(): Observable<any> {
+    return this.http.get(Constant.getApp() + ServicePath.CARD_TOTAL_ITEM, {
+      headers: this.httpHeader
+    });
+  }
+
+  public cardConfirm(): Observable<any> {
+    return this.http.post(Constant.getApp() + ServicePath.CARD_CONFIRM, undefined, {
+      headers: this.httpHeader
+    });
+  }
+
+  public cardHistory(): Observable<any> {
+    return this.http.get(Constant.getApp() + ServicePath.CARD_HISTORY, {
+      headers: this.httpHeader
     });
   }
 

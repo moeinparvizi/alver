@@ -141,14 +141,11 @@
             <i class="bi bi-person header-icon-i"></i>
           </button>
           <mat-menu #menu="matMenu">
-            <button
-              style="text-align: right"
-              mat-menu-item
-              (click)="onProfileClicked()">
-              مشخصات کاربر
-            </button>
             <button (click)="onNavigateToOrders()" style="text-align: right" mat-menu-item>
               سفارشات
+            </button>
+            <button (click)="onNavigateToFavorites()" style="text-align: right" mat-menu-item>
+              علاقه مندی ها
             </button>
             <button
               style="color: rgb(117, 0, 0); text-align: right"
@@ -205,10 +202,8 @@
               فروشگاه
             </button>
             @if (token) {
-              <button (click)="onHandleNavigateToProducts()" mat-button>
-                مشخصات کاربر
-              </button>
-              <button (click)="onBasketClicked()" mat-button>سفارشات</button>
+              <button (click)="onNavigateToOrders()" mat-button>سفارشات</button>
+              <button (click)="onNavigateToFavorites()" mat-button>علاقه مندی ها</button>
               <button (click)="onLogOutClicked()" mat-button color="warn">
                 خروج
               </button>

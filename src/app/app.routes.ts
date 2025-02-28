@@ -44,6 +44,11 @@ export const routes: Routes = [
     loadChildren: () =>
       import('./pages/orders/orders.routes').then(c => c.routes),
   }, {
+    path: RouteUtil.FAVORITES,
+    component: MasterLayoutComponent,
+    loadChildren: () =>
+      import('./pages/favorites/favorites.routes').then(c => c.routes),
+  }, {
     path: RouteUtil.NOT_FOUND,
     component: MasterLayoutComponent,
     loadChildren: () =>

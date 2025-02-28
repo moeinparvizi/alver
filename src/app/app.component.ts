@@ -45,5 +45,17 @@ export class AppComponent implements OnInit {
     } else {
       this.isLoading = false;
     }
+
+    this.serviceApi.cardTotalItems().subscribe({
+      next: (res: any) => {
+        console.log(res);
+        if (res.status) {
+          Config.basketCount = res.total_items;
+        } else {
+          alert('not found')
+        }
+      },
+    });
   }
+
 }
