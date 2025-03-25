@@ -29,7 +29,6 @@ export class BasketComponent extends BaseComponent implements OnInit {
   override loadOnline() {
     super.loadOnline();
     this.onServiceCalled();
-    console.log('token', Config.isLoggedIn);
   }
 
   onServiceCalled() {
@@ -44,8 +43,6 @@ export class BasketComponent extends BaseComponent implements OnInit {
       },
       error: (err: any) => {
         this.isLoading = false;
-        this.snakeBar.show(err, 'بستن', 3000, 'custom-snackbar');
-
         if (err.error == 'No product') {
           this.snakeBar.show(
             'محصولی وجود ندارد',
@@ -129,7 +126,6 @@ export class BasketComponent extends BaseComponent implements OnInit {
   }
 
   onConfirmCard() {
-    alert('click on confirm');
     this.serviceApi.cardConfirm().subscribe({
       next: (res: any) => {
         if (res == 'Order Confirmed') {

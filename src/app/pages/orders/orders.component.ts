@@ -36,7 +36,6 @@ export class OrdersComponent extends BaseComponent implements OnInit {
     this.isLoading = true;
     this.serviceApi.cardHistory().subscribe({
       next: (res: any) => {
-        console.log('API Response:', res);
         this.isLoading = false;
         this.processOrders(res.orders || []);
       },
@@ -48,18 +47,12 @@ export class OrdersComponent extends BaseComponent implements OnInit {
   }
 
   processOrders(orders: any[]) {
-    console.log('All Orders:', orders);
     this.pendingOrders = orders.filter(order => !order.pay_date);
     this.deliveredOrders = orders.filter(order => order.pay_date);
-    this.canceledOrders = []; // اینجا باید لاجیک لغو رو تنظیم کنی
-
-    console.log('Pending Orders:', this.pendingOrders);
-    console.log('Delivered Orders:', this.deliveredOrders);
-    console.log('Canceled Orders:', this.canceledOrders);
+    this.canceledOrders = [];
   }
 
   setActiveTab(tab: string) {
-    console.log('Active Tab:', tab);
     switch (tab) {
       case 'pending':
         this.selectedIndex = 0;

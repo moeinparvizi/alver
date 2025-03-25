@@ -30,4 +30,6 @@ export class ServicePath {
   public static readonly CARD_TOTAL_ITEM = 'card/total-items'
   public static readonly CARD_CONFIRM = 'card/confirm/'
   public static readonly CARD_HISTORY = 'card/history/'
+
+  public static readonly GET_BANNERS = 'info/Banner/get'
 }

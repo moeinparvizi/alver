@@ -13,7 +13,6 @@ import { Dialog } from '@angular/cdk/dialog';
 import { SnackbarService } from './services/snakebar/snackbar.service';
 import { animationOpenClose } from './util/animation/animation.openClose';
 
-
 // AoT requires an exported function for factories
 export function HttpLoaderFactory(httpClient: HttpClient) {
   return new TranslateHttpLoader(httpClient);
@@ -65,7 +64,8 @@ export abstract class BaseComponent {
     this.executeLoader();
   }
 
-  public loadOnline(): void {}
+  public loadOnline(): void {
+  }
 
   public loadOffline(): void {}
 

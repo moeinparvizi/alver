@@ -69,13 +69,14 @@ export class HomeComponent extends BaseComponent implements OnInit {
     private getProductsService: GetProductsService
   ) {
     super(injector);
-    if (Config.isLoggedIn) {
-      this.serviceApi.getCard().subscribe({
-        next: (res: any) => {
-          Config.basketCount = res.product.length;
+
+    this.serviceApi.cardTotalItems().subscribe({
+      next: (res: any) => {
+        if (res.status) {
+          Config.basketCount = res.total_items;
         }
-      });
-    }
+      },
+    });
   }
 
   override ngOnInit(): void {

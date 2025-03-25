@@ -1,6 +1,7 @@
-import { Component, OnInit, ViewEncapsulation } from '@angular/core';
+import { Component, Injector, OnInit, ViewEncapsulation } from '@angular/core';
 import { CarouselModule } from 'ngx-owl-carousel-o';
 import { OwlOptions } from 'ngx-owl-carousel-o';
+import { BaseComponent } from '../../base.component';
 
 @Component({
   selector: 'app-slider-images',
@@ -10,7 +11,9 @@ import { OwlOptions } from 'ngx-owl-carousel-o';
   styleUrls: ['./slider-images.component.scss'],
   encapsulation: ViewEncapsulation.None,
 })
-export class SliderImagesComponent implements OnInit {
+export class SliderImagesComponent extends BaseComponent implements OnInit {
+  bannerUrls?: any;
+
   customOptions: OwlOptions = {
     loop: true,
     autoplay: true,
@@ -42,7 +45,30 @@ export class SliderImagesComponent implements OnInit {
     nav: true,
   };
 
-  constructor() {}
+  constructor(injector: Injector) {
+    super(injector);
+  }
 
-  ngOnInit() {}
+  override ngOnInit() {
+    super.ngOnInit();
+  }
+
+  override loadOnline() {
+    super.loadOnline();
+    this.serviceApi.getBanners().subscribe({
+      next: (res: any) => {
+        if (res.status) {
+          this.bannerUrls = res.banner_images;
+        }
+      },
+      error: (err: any) => {
+        this.snakeBar.show(
+          'خطا در ارتباط با سرور لطفا دوباره تلاش کنید',
+          'بستن',
+          3000,
+          'custom-snackbar'
+        );
+      }
+    });
+  }
 }

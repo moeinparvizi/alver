@@ -12,6 +12,8 @@ import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { SpinnerComponent } from '../spinner/spinner.component';
 import { GenerateArrayPipe } from '../../util/pipes/generateArray.pipe';
+import { Config } from '../../common/config';
+import { RouteUtil } from '../../util/route.util';
 
 @Component({
   selector: 'app-comments',
@@ -81,20 +83,28 @@ export class CommentsComponent
   }
 
   onSendData() {
-    this.serviceApi
-      .addComment({
-        product_id: this.productsId,
-        title: this.title,
-        text: this.text,
-        rate: this.selectedRating,
-      })
-      .subscribe({
-        next: (data: any) => {
-          this.loadOnline();
-        },
-        error: () => {
-          this.isLoading = false;
-        },
-      });
+    if (this.GlobalsService.getUserToken()) {
+      this.serviceApi
+        .addComment({
+          product_id: this.productsId,
+          title: this.title,
+          text: this.text,
+          rate: this.selectedRating,
+        })
+        .subscribe({
+          next: (data: any) => {
+            this.loadOnline();
+          },
+          error: () => {
+            this.isLoading = false;
+          },
+        });
+    } else {
+      this.onNavigationToLogIn();
+    }
+  }
+
+  onNavigationToLogIn() {
+    this.router.navigate([RouteUtil.REGISTER]).then();
   }
 }

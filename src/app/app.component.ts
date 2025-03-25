@@ -31,10 +31,10 @@ export class AppComponent implements OnInit {
         next: (data: any) => {
           this.isLoading = false;
           this.GlobalsService.isLoggedIn = true;
-          this.Config.isLoggedIn = true;
+          Config.isLoggedIn = true;
           if(data.is_login == false) {
             this.GlobalsService.isLoggedIn = false;
-            this.Config.isLoggedIn = false;
+            Config.isLoggedIn = false;
             localStorage.removeItem("token");
           }
         },
@@ -48,11 +48,8 @@ export class AppComponent implements OnInit {
 
     this.serviceApi.cardTotalItems().subscribe({
       next: (res: any) => {
-        console.log(res);
         if (res.status) {
           Config.basketCount = res.total_items;
-        } else {
-          alert('not found')
         }
       },
     });

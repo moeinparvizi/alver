@@ -11,9 +11,11 @@
           <input
             #inputControl="ngModel"
             [(ngModel)]="mobile"
+            (input)="mobile = convertPersianToEnglish(mobile)"
             required
             [type]="'text'"
             matInput
+            autofocus
             placeholder="09107215381"
             title="شماره موبایل" />
           @if (inputControl.errors?.['required']) {
@@ -29,6 +31,8 @@
             <input
               #inputControl="ngModel"
               [(ngModel)]="token"
+              (input)="token = convertPersianToEnglish(token)"
+              maxlength="6"
               required
               [type]="'text'"
               matInput

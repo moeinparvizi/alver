@@ -116,7 +116,9 @@ export class LoginSignupComponent extends BaseComponent implements OnInit {
                 if (response.token) {
                   localStorage.setItem('token', response.token || '');
                   this.GlobalsService.isLoggedIn = true;
-                  this.router.navigate(['']).then();
+                  this.router.navigate(['']).then( () => {
+                    window.location.reload();
+                  });
                 }
               },
               error: (error: string) => {
@@ -140,6 +142,13 @@ export class LoginSignupComponent extends BaseComponent implements OnInit {
         }
       }
     }
+  }
+
+  convertPersianToEnglish(input: string): string {
+    const persianNumbers = ['۰', '۱', '۲', '۳', '۴', '۵', '۶', '۷', '۸', '۹'];
+    const englishNumbers = ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9'];
+
+    return input.replace(/[۰-۹]/g, (w) => englishNumbers[persianNumbers.indexOf(w)]);
   }
 
   protected readonly onkeyup = onkeyup;

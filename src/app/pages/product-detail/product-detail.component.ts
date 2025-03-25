@@ -6,7 +6,6 @@ import { ProductResponse } from '../../models/data.response';
 import { MatButtonModule } from '@angular/material/button';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-import { ImageFullscreenComponent } from '../../components/image-fullscreen/image-fullscreen.component';
 import { MatDialogModule } from '@angular/material/dialog';
 import { CommentsComponent } from '../../components/comments/comments.component';
 import { SpinnerComponent } from '../../components/spinner/spinner.component';
@@ -45,6 +44,8 @@ export class ProductDetailComponent extends BaseComponent implements OnInit {
   showFullScreen = false;
 
   addToProductButtonLoading?: boolean = false;
+
+  imageLoaded = false;
 
   constructor(
     injector: Injector,
@@ -94,10 +95,12 @@ export class ProductDetailComponent extends BaseComponent implements OnInit {
         next: (data: any) => {
           this.count = data.count;
         },
-        error: (err: any) => {
-          this.snakeBar.show('خطا در سیستم', 'بستن', 3000, 'custom-snackbar');
-        },
+        error: (err: any) => {},
       });
+  }
+
+  onImageLoad() {
+    this.imageLoaded = true;
   }
 
   changeMainImage(event: Event) {
@@ -105,17 +108,10 @@ export class ProductDetailComponent extends BaseComponent implements OnInit {
     this.mainImage = clickedImageSrc;
   }
 
-  openImageDialog(): void {
-    console.log(this.mainImage);
-    this.dialog.open(ImageFullscreenComponent, {
-      data: { imageUrl: this.mainImage },
-    });
-  }
-
   onAddToCardAProductClicked() {
     this.addToProductButtonLoading = true;
 
-    if (Config.isLoggedIn) {
+    if (this.GlobalsService.getUserToken()) {
       this.serviceApi
         .addCard({
           id: this.id,
@@ -128,63 +124,70 @@ export class ProductDetailComponent extends BaseComponent implements OnInit {
             }
           },
           error: (err: any) => {
-            this.snakeBar.show('خطا در سیستم', 'بستن', 3000, 'custom-snackbar');
             this.addToProductButtonLoading = false;
           },
         });
 
-
-      this.serviceApi.getCard().subscribe({
+      this.serviceApi.cardTotalItems().subscribe({
         next: (res: any) => {
-          Config.basketCount = res.product.length;
-        }
+          if (res.status) {
+            Config.basketCount = res.total_items;
+          }
+        },
       });
     } else {
       this.onNavigationToLogIn();
     }
-
   }
 
   positiveClicked() {
-    this.addToProductButtonLoading = true;
+    if (this.GlobalsService.getUserToken()) {
+      this.addToProductButtonLoading = true;
 
-    this.serviceApi
-      .addCard({
-        id: this.id,
-      })
-      .subscribe({
-        next: (data: any) => {
-          if (data.success) {
+      this.serviceApi
+        .addCard({
+          id: this.id,
+        })
+        .subscribe({
+          next: (data: any) => {
+            if (data.success) {
+              this.addToProductButtonLoading = false;
+              this.onServiceCalled();
+            }
+          },
+          error: () => {
             this.addToProductButtonLoading = false;
-            this.onServiceCalled();
-          }
-        },
-        error: () => {
-          this.addToProductButtonLoading = false;
-          this.snakeBar.show('خطا در سیستم', 'بستن', 3000, 'custom-snackbar');
-        },
-      });
+            this.snakeBar.show('خطا در سیستم', 'بستن', 3000, 'custom-snackbar');
+          },
+        });
+    } else {
+      this.onNavigationToLogIn();
+    }
   }
 
   negativeClicked() {
-    this.addToProductButtonLoading = true;
+    if (this.GlobalsService.getUserToken()) {
+      this.addToProductButtonLoading = true;
 
-    this.serviceApi
-      .removeACard({
-        id: this.id,
-      })
-      .subscribe({
-        next: (data: any) => {
-          this.addToProductButtonLoading = false;
-          if (data == 'product Remove') {
-            this.onServiceCalled();
-          }
-        },
-        error: () => {
-          this.addToProductButtonLoading = false;
-          this.snakeBar.show('خطا در سیستم', 'بستن', 3000, 'custom-snackbar');
-        },
-      });
+      this.serviceApi
+        .removeACard({
+          id: this.id,
+        })
+        .subscribe({
+          next: (data: any) => {
+            this.addToProductButtonLoading = false;
+            if (data == 'product Remove') {
+              this.onServiceCalled();
+            }
+          },
+          error: () => {
+            this.addToProductButtonLoading = false;
+            this.snakeBar.show('خطا در سیستم', 'بستن', 3000, 'custom-snackbar');
+          },
+        });
+    } else {
+      this.onNavigationToLogIn();
+    }
   }
 
   onNavigationToLogIn() {
@@ -198,9 +201,6 @@ export class ProductDetailComponent extends BaseComponent implements OnInit {
           this.isFavorite = true;
         }
       },
-      error: () => {
-        this.snakeBar.show('خطا در سیستم', 'بستن', 3000, 'custom-snackbar');
-      },
     });
   }
 
@@ -213,17 +213,26 @@ export class ProductDetailComponent extends BaseComponent implements OnInit {
   }
 
   addFavorite() {
-    this.serviceApi.addFavorite({ product_id: this.id }).subscribe({
-      next: (data: any) => {
-        if (data.status == 200) {
-          this.isFavorite = true;
-          this.snakeBar.show('به علاقه‌مندی‌ها اضافه شد', 'بستن', 3000, 'custom-snackbar');
-        }
-      },
-      error: () => {
-        this.snakeBar.show('خطا در سیستم', 'بستن', 3000, 'custom-snackbar');
-      },
-    });
+    if (this.GlobalsService.getUserToken()) {
+      this.serviceApi.addFavorite({ product_id: this.id }).subscribe({
+        next: (data: any) => {
+          if (data.status == 200) {
+            this.isFavorite = true;
+            this.snakeBar.show(
+              'به علاقه‌مندی‌ها اضافه شد',
+              'بستن',
+              3000,
+              'custom-snackbar'
+            );
+          }
+        },
+        error: () => {
+          this.snakeBar.show('خطا در سیستم', 'بستن', 3000, 'custom-snackbar');
+        },
+      });
+    } else {
+      this.onNavigationToLogIn();
+    }
   }
 
   removeFavorite() {
@@ -231,7 +240,12 @@ export class ProductDetailComponent extends BaseComponent implements OnInit {
       next: (data: any) => {
         if (data.status == 200) {
           this.isFavorite = false;
-          this.snakeBar.show('از علاقه‌مندی‌ها حذف شد', 'بستن', 3000, 'custom-snackbar');
+          this.snakeBar.show(
+            'از علاقه‌مندی‌ها حذف شد',
+            'بستن',
+            3000,
+            'custom-snackbar'
+          );
         }
       },
       error: () => {

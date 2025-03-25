@@ -66,15 +66,6 @@ export class HeaderComponent extends BaseComponent implements OnInit {
         this.snakeBar.show(err, 'بستن', 3000, 'custom-snackbar');
       },
     });
-
-    if (Config.isLoggedIn) {
-      // this.serviceApi.getCardCount().subscribe({
-      //   next: (res: any) => {
-      //     Config.basketCount = res.product.length;
-      //     console.log('basket count ', res)
-      //   }
-      // });
-    }
   }
 
   @HostListener('window:scroll', [])
@@ -125,10 +116,6 @@ export class HeaderComponent extends BaseComponent implements OnInit {
         this.dialogRef = null;
       });
     }
-  }
-
-  onProfileClicked() {
-    console.log('Profile clicked');
   }
 
   onNavigationToLogIn() {
