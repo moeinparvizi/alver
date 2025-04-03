@@ -1,8 +1,7 @@
-import { Component, Injector, OnInit } from '@angular/core';
+import { AfterViewInit, Component, ElementRef, Injector, OnInit, Renderer2, ViewChild } from '@angular/core';
 import { BaseComponent } from '../../base.component';
 import { SliderImagesComponent } from '../../components/slider-images/slider-images.component';
 import { CarouselModule } from 'ngx-owl-carousel-o';
-import { OwlOptions } from 'ngx-owl-carousel-o';
 import { MatButtonModule } from '@angular/material/button';
 import { CardComponent } from '../../components/card/card.component';
 import { GetProductsService } from '../../services/getProducts/get-products.service';
@@ -26,36 +25,36 @@ import { Config } from '../../common/config';
   ],
 })
 export class HomeComponent extends BaseComponent implements OnInit {
-  customOptions: OwlOptions = {
-    loop: true,
-    autoplay: true,
-    autoplayTimeout: 4000, // Time in milliseconds between slides
+  // customOptions: OwlOptions = {
+  //   loop: true,
+  //   autoplay: true,
+  // autoplayTimeout: 4000, // Time in milliseconds between slides
 
-    mouseDrag: true,
-    touchDrag: true,
-    pullDrag: false,
-    dots: true,
-    navSpeed: 1000,
-    navText: [
-      '<i class="bi bi-chevron-compact-left flex items-center"></i>',
-      '<i class="bi bi-chevron-compact-right flex items-center"></i>',
-    ],
-    responsive: {
-      0: {
-        items: 2,
-      },
-      400: {
-        items: 2,
-      },
-      740: {
-        items: 4,
-      },
-      940: {
-        items: 5,
-      },
-    },
-    nav: true,
-  };
+  // mouseDrag: true,
+  // touchDrag: true,
+  // pullDrag: false,
+  // dots: true,
+  // navSpeed: 1000,
+  //   navText: [
+  //     '<i class="bi bi-chevron-compact-left flex items-center"></i>',
+  //     '<i class="bi bi-chevron-compact-right flex items-center"></i>',
+  //   ],
+  //   responsive: {
+  //     0: {
+  //       items: 2,
+  //     },
+  //     400: {
+  //       items: 2,
+  //     },
+  //     740: {
+  //       items: 4,
+  //     },
+  //     940: {
+  //       items: 5,
+  //     },
+  //   },
+  //   nav: true,
+  // };
 
   products?: any = [];
   amazingProducts?: any = [];
@@ -64,9 +63,12 @@ export class HomeComponent extends BaseComponent implements OnInit {
 
   isLoading = true;
 
+  @ViewChild('cardProducts') cardProducts!: ElementRef;
+
+
   constructor(
     injector: Injector,
-    private getProductsService: GetProductsService
+    private getProductsService: GetProductsService,
   ) {
     super(injector);
 
@@ -126,8 +128,10 @@ export class HomeComponent extends BaseComponent implements OnInit {
   }
 
   onNavigateToProductsPage(categoryId: number) {
-    this.router.navigate(['products'], {
-      queryParams: { id: categoryId },
-    }).then();
+    this.router
+      .navigate(['products'], {
+        queryParams: { id: categoryId },
+      })
+      .then();
   }
 }

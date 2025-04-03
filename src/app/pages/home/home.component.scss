@@ -1,4 +1,8 @@
+.images-slider {
+  mask-image: linear-gradient(black 70%, transparent);
+}
 .home-shops {
+
   ::ng-deep .owl-theme .owl-nav {
     display: none;
     visibility: hidden;
@@ -26,4 +30,43 @@
     width: 100%;
     justify-content: space-between;
   }
+
+  .card-products {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    height: 500px;
+    @media (min-width: 640px) {
+      margin-top: -70px;
+    }
+    margin-bottom: 60px;
+    overflow: hidden;
+    overflow-y: scroll;
+    align-items: center;
+    mask-image: linear-gradient(black 70%, transparent);
+    gap: 12px;
+
+    scrollbar-width: none; /* Firefox */
+    -ms-overflow-style: none; /* IE and Edge */
+
+    &::-webkit-scrollbar {
+      display: none;
+    }
+
+    .card-product {
+      border-radius: 10px;
+      overflow: hidden;
+      margin: 16px;
+      cursor: pointer;
+
+      figcaption {
+        padding-top: 4px;
+        padding-bottom: 4px;
+        width: 100%;
+        text-align: center;
+        background-color: #fff;
+      }
+    }
+  }
 }
+
