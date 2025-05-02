@@ -63,7 +63,7 @@ export class HeaderComponent extends BaseComponent implements OnInit {
       },
       error: (err: any) => {
         this.isLoading = false;
-        this.snakeBar.show(err, 'بستن', 3000, 'custom-snackbar');
+        this.showSnackBar('بستن');
       },
     });
   }
@@ -118,10 +118,6 @@ export class HeaderComponent extends BaseComponent implements OnInit {
     }
   }
 
-  onNavigationToLogIn() {
-    this.router.navigate([RouteUtil.REGISTER]).then();
-  }
-
   onLogOutClicked() {
     this.isLoading = true;
     this.serviceApi.logOut().subscribe({
@@ -133,22 +129,12 @@ export class HeaderComponent extends BaseComponent implements OnInit {
           location.reload();
           this.router.navigate(['']).then();
         } else {
-          this.snakeBar.show(
-            'خطا در ارتباط با سرور لطفا دوباره تلاش کنید',
-            'بستن',
-            3000,
-            'custom-snackbar'
-          );
+          this.showSnackBar('خطا در ارتباط با سرور لطفا دوباره تلاش کنید');
         }
       },
       error: () => {
         this.isLoading = false;
-        this.snakeBar.show(
-          'خطا در ارتباط با سرور لطفا دوباره تلاش کنید',
-          'بستن',
-          3000,
-          'custom-snackbar'
-        );
+        this.showSnackBar('خطا در ارتباط با سرور لطفا دوباره تلاش کنید');
       },
     });
   }

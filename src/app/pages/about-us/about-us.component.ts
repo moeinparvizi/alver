@@ -25,13 +25,13 @@ export class AboutUsComponent extends BaseComponent implements OnInit {
     super.loadOnline();
     this.isLoading = true;
     this.serviceApi.getAboutUs().subscribe({
-      next: (res: any) => {
+      next: (res) => {
         this.info = res.data;
         this.isLoading = false;
       },
-      error: (err: any) => {
+      error: () => {
         this.isLoading = false;
-        this.snakeBar.show(err, 'بستن', 3000, 'custom-snackbar');
+        this.showSnackBar('خطا در ارتباط با سرور لطفا دوباره تلاش کنید');
       },
     });
   }

@@ -66,13 +66,6 @@ export class SearchComponent
       },
     });
 
-    // this.snakeBar.show(
-    //   'شما میتوانید عملیات جستجو را باز کنید : ctrl + k',
-    //   'بستن',
-    //   3000,
-    //   'custom-snackbar'
-    // );
-
     timer(4000).subscribe(() => {
       this.showHint = false;
     });

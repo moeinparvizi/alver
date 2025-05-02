@@ -80,7 +80,7 @@ export class ProductsComponent extends BaseComponent implements OnInit {
       error: (err: any) => {
         this.categories = [];
         this.isLoading = false;
-        this.snakeBar.show(err, 'بستن', 3000, 'custom-snackbar');
+        this.showSnackBar('خطا در سیستم لطفا دوباره تلاش کنید')
       },
     });
 
@@ -92,7 +92,7 @@ export class ProductsComponent extends BaseComponent implements OnInit {
       error: (err: any) => {
         this.companies = [];
         this.isLoading = false;
-        this.snakeBar.show(err, 'بستن', 3000, 'custom-snackbar');
+        this.showSnackBar('خطا در سیستم لطفا دوباره تلاش کنید')
       },
     });
 

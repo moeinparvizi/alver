@@ -74,31 +74,33 @@
     </div>
 
     <!-- خلاصه سفارش -->
-    <div class="bg-white rounded-lg shadow-lg p-6">
-      <h2 class="text-2xl font-bold mb-6 text-right text-secondary">
-        خلاصه سفارش
-      </h2>
-      <div class="flex justify-between items-center mb-4">
-        <span class="text-gray-700">جمع جزء:</span>
-        <span class="text-blackGray font-medium">۴۳,۰۰۰ تومان</span>
+    @if (basket) {
+      <div class="bg-white rounded-lg shadow-lg p-6">
+        <h2 class="text-2xl font-bold mb-6 text-right text-secondary">
+          خلاصه سفارش
+        </h2>
+        <!--      <div class="flex justify-between items-center mb-4">-->
+        <!--        <span class="text-gray-700">جمع جزء:</span>-->
+        <!--        <span class="text-blackGray font-medium">۴۳,۰۰۰ تومان</span>-->
+        <!--      </div>-->
+        <!--      <div class="flex justify-between items-center mb-4">-->
+        <!--        <span class="text-gray-700">تخفیف:</span>-->
+        <!--        <span class="text-blackGray font-medium">۰ تومان</span>-->
+        <!--      </div>-->
+        <div
+          class="flex justify-between items-center mb-6 border-t border-slate-300 pt-4">
+          <span class="font-bold text-lg text-secondary">مجموع:</span>
+          <span class="font-bold text-lg text-blackGray">{{ sumPrice ? sumPrice : 0 }} تومان</span>
+        </div>
+        <button
+          mat-button
+          color="primary"
+          (click)="onConfirmCard()"
+          class="text-white w-full py-3 rounded-lg transition font-medium">
+          ثبت سفارش
+          <i class="bi bi-credit-card-fill"></i>
+        </button>
       </div>
-      <div class="flex justify-between items-center mb-4">
-        <span class="text-gray-700">تخفیف:</span>
-        <span class="text-blackGray font-medium">۰ تومان</span>
-      </div>
-      <div
-        class="flex justify-between items-center mb-6 border-t border-slate-300 pt-4">
-        <span class="font-bold text-lg text-secondary">مجموع:</span>
-        <span class="font-bold text-lg text-blackGray">{{ sumPrice ? sumPrice : 0 }} تومان</span>
-      </div>
-      <button
-        mat-button
-        color="primary"
-        (click)="onConfirmCard()"
-        class="text-white w-full py-3 rounded-lg transition font-medium">
-        ثبت سفارش
-        <i class="bi bi-credit-card-fill"></i>
-      </button>
-    </div>
+    }
   </div>
 </div>

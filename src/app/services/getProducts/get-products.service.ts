@@ -38,7 +38,7 @@ export class GetProductsService extends BaseComponent {
         },
         error: (err: any) => {
           this.isLoading = false;
-          this.snakeBar.show(err, 'بستن', 3000, 'custom-snackbar');
+          this.showSnackBar('خطا در سیستم لطفا دوباره تلاش کنید')
           observer.error(err);
         },
       });
@@ -62,7 +62,7 @@ export class GetProductsService extends BaseComponent {
       }),
       catchError(err => {
         this.isLoading = false;
-        this.snakeBar.show(err, 'بستن', 3000, 'custom-snackbar');
+        this.showSnackBar('خطا در سیستم لطفا دوباره تلاش کنید')
         return of(null); // Return null in case of an error
       })
     );
@@ -80,7 +80,7 @@ export class GetProductsService extends BaseComponent {
         },
         error: (err: any) => {
           this.isLoading = false;
-          this.snakeBar.show(err, 'بستن', 3000, 'custom-snackbar');
+          this.showSnackBar('خطا در سیستم لطفا دوباره تلاش کنید')
           observer.error(err);
         },
       });
@@ -99,7 +99,7 @@ export class GetProductsService extends BaseComponent {
         },
         error: (err: any) => {
           this.isLoading = false;
-          this.snakeBar.show(err, 'بستن', 3000, 'custom-snackbar');
+          this.showSnackBar('خطا در سیستم لطفا دوباره تلاش کنید')
           observer.error(err);
         },
       });

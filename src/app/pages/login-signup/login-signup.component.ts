@@ -84,21 +84,11 @@ export class LoginSignupComponent extends BaseComponent implements OnInit {
             error: (error: string) => {
               this.isLoading = false;
 
-              this.snakeBar.show(
-                'خطا در ارتباط با سرور لطفا دوباره تلاش کنید',
-                'بستن',
-                3000,
-                'custom-snackbar'
-              );
+              this.showSnackBar('خطا در سیستم لطفا دوباره تلاش کنید')
             },
           });
       } else {
-        this.snakeBar.show(
-          'لطفا از صحیح بودن شماره وارد شده اطمینان حاصل فرمایید',
-          'بستن',
-          3000,
-          'custom-snackbar'
-        );
+        this.showSnackBar('لطفا از صحیح بودن شماره وارد شده اطمینان حاصل فرمایید')
       }
     } else {
       if (this.res.status === 200) {
@@ -124,21 +114,11 @@ export class LoginSignupComponent extends BaseComponent implements OnInit {
               error: (error: string) => {
                 this.isLoading = false;
 
-                this.snakeBar.show(
-                  'خطا در ارتباط با سرور لطفا دوباره تلاش کنید',
-                  'بستن',
-                  3000,
-                  'custom-snackbar'
-                );
+                this.showSnackBar('خطا در سیستم لطفا دوباره تلاش کنید')
               },
             });
         } else {
-          this.snakeBar.show(
-            'لطفا از صحیح بودن کد وارد شده اطمینان حاصل فرمایید',
-            'بستن',
-            3000,
-            'custom-snackbar'
-          );
+          this.showSnackBar('لطفا از صحیح بودن کد وارد شده اطمینان حاصل فرمایید')
         }
       }
     }

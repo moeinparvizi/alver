@@ -35,12 +35,7 @@ export class FavoritesComponent extends BaseComponent implements OnInit {
         }
       },
       error: (err: any) => {
-        this.snakeBar.show(
-          'خطا در ارتباط با سرور لطفا دوباره تلاش کنید',
-          'بستن',
-          3000,
-          'custom-snackbar'
-        );
+        this.showSnackBar('خطا در سیستم لطفا دوباره تلاش کنید')
       }
     })
   }

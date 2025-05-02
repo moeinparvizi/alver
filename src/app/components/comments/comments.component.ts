@@ -103,8 +103,4 @@ export class CommentsComponent
       this.onNavigationToLogIn();
     }
   }
-
-  onNavigationToLogIn() {
-    this.router.navigate([RouteUtil.REGISTER]).then();
-  }
 }

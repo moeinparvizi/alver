@@ -3,12 +3,12 @@ import { BaseComponent } from '../../base.component';
 import { MatButton } from '@angular/material/button';
 import { RouteUtil } from '../../util/route.util';
 import { SpinnerComponent } from '../../components/spinner/spinner.component';
-import { Config } from '../../common/config';
+import { NgClass } from '@angular/common';
 
 @Component({
   selector: 'app-basket',
   standalone: true,
-  imports: [MatButton, SpinnerComponent],
+  imports: [MatButton, SpinnerComponent, NgClass],
   templateUrl: './basket.component.html',
   styleUrl: './basket.component.scss',
 })
@@ -44,30 +44,16 @@ export class BasketComponent extends BaseComponent implements OnInit {
       error: (err: any) => {
         this.isLoading = false;
         if (err.error == 'No product') {
-          this.snakeBar.show(
-            'محصولی وجود ندارد',
-            'بستن',
-            3000,
-            'custom-snackbar'
-          );
+          this.showSnackBar('محصولی وجود ندارد');
           this.basket = undefined;
           this.noProducts = true;
         }
         if (err.erorr == 'unauthenticated') {
-          this.snakeBar.show(
-            'لطفا قبل از دیدن این صفحه لاگین کنید',
-            'بستن',
-            2000,
-            'custom-snackbar'
-          );
+          this.showSnackBar('لطفا قبل از دیدن این صفحه لاگین کنید');
           setInterval(() => this.onNavigationToLogIn(), 3000);
         }
       },
     });
-  }
-
-  onNavigationToLogIn() {
-    this.router.navigate([RouteUtil.REGISTER]).then();
   }
 
   positiveClicked(id: any) {
@@ -82,7 +68,7 @@ export class BasketComponent extends BaseComponent implements OnInit {
           }
         },
         error: () => {
-          this.snakeBar.show('خطا در سیستم', 'بستن', 3000, 'custom-snackbar');
+          this.showSnackBar('خطا در سیستم لطفا دوباره تلاش کنید');
         },
       });
   }
@@ -99,7 +85,7 @@ export class BasketComponent extends BaseComponent implements OnInit {
           }
         },
         error: () => {
-          this.snakeBar.show('خطا در سیستم', 'بستن', 3000, 'custom-snackbar');
+          this.showSnackBar('خطا در سیستم لطفا دوباره تلاش کنید');
         },
       });
   }
@@ -116,7 +102,7 @@ export class BasketComponent extends BaseComponent implements OnInit {
           }
         },
         error: (err: any) => {
-          this.snakeBar.show('خطا در سیستم', 'بستن', 3000, 'custom-snackbar');
+          this.showSnackBar('خطا در سیستم لطفا دوباره تلاش کنید');
         },
       });
   }
@@ -133,8 +119,8 @@ export class BasketComponent extends BaseComponent implements OnInit {
         }
       },
       error: () => {
-        this.snakeBar.show('خطا در سیستم', 'بستن', 3000, 'custom-snackbar');
-      }
-    })
+        this.showSnackBar('خطا در سیستم لطفا دوباره تلاش کنید');
+      },
+    });
   }
 }

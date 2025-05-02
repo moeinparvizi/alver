@@ -56,18 +56,13 @@ export class SliderImagesComponent extends BaseComponent implements OnInit {
   override loadOnline() {
     super.loadOnline();
     this.serviceApi.getBanners().subscribe({
-      next: (res: any) => {
+      next: (res) => {
         if (res.status) {
           this.bannerUrls = res.banner_images;
         }
       },
-      error: (err: any) => {
-        this.snakeBar.show(
-          'خطا در ارتباط با سرور لطفا دوباره تلاش کنید',
-          'بستن',
-          3000,
-          'custom-snackbar'
-        );
+      error: () => {
+        this.showSnackBar('خطا در ارتباط با سرور لطفا دوباره تلاش کنید');
       }
     });
   }

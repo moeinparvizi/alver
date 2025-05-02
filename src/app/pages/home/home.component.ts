@@ -118,7 +118,7 @@ export class HomeComponent extends BaseComponent implements OnInit {
       },
       error: (err: any) => {
         this.isLoading = false;
-        this.snakeBar.show(err, 'بستن', 3000, 'custom-snackbar');
+        this.showSnackBar('خطا در سیستم لطفا دوباره تلاش کنید')
       },
     });
   }

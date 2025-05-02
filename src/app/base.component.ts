@@ -12,6 +12,7 @@ import { MatDialog } from '@angular/material/dialog';
 import { Dialog } from '@angular/cdk/dialog';
 import { SnackbarService } from './services/snakebar/snackbar.service';
 import { animationOpenClose } from './util/animation/animation.openClose';
+import { RouteUtil } from './util/route.util';
 
 // AoT requires an exported function for factories
 export function HttpLoaderFactory(httpClient: HttpClient) {
@@ -74,4 +75,12 @@ export abstract class BaseComponent {
   }
 
   setListeners(): void {}
+
+  onNavigationToLogIn() {
+    this.router.navigate([RouteUtil.REGISTER]).then();
+  }
+
+  showSnackBar(message: string): void {
+    this.snakeBar.show(message, 'بستن', 3000, 'custom-snackbar');
+  }
 }
