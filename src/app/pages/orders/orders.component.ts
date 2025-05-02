@@ -48,9 +48,9 @@ export class OrdersComponent extends BaseComponent implements OnInit {
   }
 
   processOrders(orders: any[]) {
-    this.pendingOrders = orders.filter(order => !order.pay_date);
-    this.deliveredOrders = orders.filter(order => order.pay_date);
-    this.canceledOrders = [];
+    this.pendingOrders = orders.filter(order => order.status_display === "در انتظار");
+    this.deliveredOrders = orders.filter(order => order.status_display === "ارسال شده");
+    this.canceledOrders = orders.filter(order => order.status_display === "کنسل شده");
   }
 
   setActiveTab(tab: string) {
