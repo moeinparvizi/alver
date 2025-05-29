@@ -41,7 +41,9 @@ export class OrdersComponent extends BaseComponent implements OnInit {
       },
       error: (err: any) => {
         this.isLoading = false;
-        this.showSnackBar('بستن');
+        if (err.status === 403) {
+          this.showSnackBar('بسˇ´®ˆ@تن');
+        }
 
       },
     });
