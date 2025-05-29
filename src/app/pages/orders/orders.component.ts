@@ -42,7 +42,7 @@ export class OrdersComponent extends BaseComponent implements OnInit {
       error: (err: any) => {
         this.isLoading = false;
         if (err.status === 403) {
-          this.showSnackBar('بسˇ´®ˆ@تن');
+          this.showSnackBar('موردی یافت نشد');
         }
 
       },
